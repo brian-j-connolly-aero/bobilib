@@ -145,7 +145,8 @@ lemmas (Section~\ref{app:kip}), not formally verified solutions. The list
 below assigns each kind of result to its class; the column
 \texttt{certificate\_class} of \texttt{instances.csv} (Section~\ref{app:data-csv})
 gives the class of each instance's result, and there a published optimum,
-used as published, counts as class~(ii). Of the \NumClassRows{} instances with a
+used as published, counts as class~(ii), except the \NumClassExactLit{} network
+optima that this package re-proves exactly (class~(i)). Of the \NumClassRows{} instances with a
 result, \NumClassExact{} are class~(i), \NumClassNumerical{} class~(ii) and
 \NumClassBenchmark{} class~(iii).
 
@@ -192,7 +193,7 @@ published theorem (Theorem~\ref{thm:brouwer}) and the \NumCliquePartCases{}
 part-size cases, each with a branch-and-bound certificate that the integer checker
 \texttt{scripts/check\_clique\_certificates.py} verifies (all pass); the solver
 verdicts on the same cases are class~(ii)\\[2pt]
-Network: the 2 optima and the 34 trees re-derived (Section~\ref{app:network}) &
+Network: the 2 published optima and the 34 trees re-derived (Section~\ref{app:network}) &
 (i) & every attack enumerated, 0/1 witnesses checked against the model,
 follower optimum at the minimiser by the DP (Proposition~\ref{prop:fire-dp}) and the
 review's brute force\\[2pt]
@@ -204,7 +205,8 @@ for \texttt{supportcase42\_0\_100} and \texttt{supportcase42\_50\_50} a unit
 direction found in exact arithmetic\\[2pt]
 HPR equal to the MIPLIB model (Section~\ref{app:general}) & (i) &
 exact rational comparison of the two models\\[2pt]
-The \NumHprOptimal{} HPR-bound optima (Table~\ref{tab:hpr}) & (ii) & MIPLIB's
+The \NumHprOptimal{} HPR-bound optima, and the confirmation of the published
+optimum of \texttt{ex10\_0\_100} (Table~\ref{tab:hpr}) & (ii) & MIPLIB's
 published floating-point optima; optimal by accepted benchmark conventions,
 not by an exact-arithmetic proof (\texttt{noswot}, \texttt{ex10} and
 \texttt{neos-1445765} safe by integrality rounding given the published bound,
@@ -222,7 +224,8 @@ of its optimum, optimistic tie-break\\[2pt]
 fail the tight test and pass BOBILib's (follower about $10^{-7}$ relative above
 its optimum); kept for the record, not used for any result\\[2pt]
 Published optima (\NumLitOptimal{}) & --- & used as published, not re-certified;
-counted as class~(ii) in \texttt{instances.csv}\\[2pt]
+counted as class~(ii) in \texttt{instances.csv}, except the \NumClassExactLit{} network
+optima, class~(i) by the re-derivation above\\[2pt]
 BOBILib's file of \texttt{general20-30-20-20-20-2} & (iii) & the example of
 Remark~\ref{rem:tolerance}; rejected by \texttt{bobi verify}\\[2pt]
 Lean lemmas (Section~\ref{app:lean-map}) & --- & machine-checked proofs about
@@ -282,16 +285,19 @@ give the same statement (Section~\ref{app:clique}). It is neither formalised nor
 reproved here. Published optima (Weninger and
 Fukasawa\cite{weninger2025fast} for KIP, Fischetti et
 al.\cite{fischetti2019interdiction} for imkp, Lozano, Bergman and
-Cire\cite{lozano2026network} for OR, MIPLIB~2017 optima\cite{gleixner2021miplib}
+Cire\cite{lozano2026network} for OR, the others of Table~\ref{tab:literature},
+MIPLIB~2017 optima\cite{gleixner2021miplib}
 for the HPR bounds) and the published lower bounds of the
-OR instances with several follower knapsacks are used as reported. For
+OR instances with several follower knapsacks are used as reported; each
+published optimum is credited to its first publication among the sources
+compiled here. For
 \NumLitWithFile{} of the \NumLitOptimal{} published optima a solution file at
 the published value is verified here; for \NumLitNoFile{}
 (\NumLitNoFileImkp{} imkp, \NumLitNoFileOr{} OR, \NumLitNoFileMiplib{}
 MIPLIB-derived, \NumLitNoFileGeneralized{} generalized) only the published value
 is used. The published OR points include values of Lefebvre and
 Schmidt\cite{lefebvre2025dantzig} that are not verified; they are taken only
-from runs that ended before the time limit, as in their own analysis
+from runs that ended before the time limit, as in most of their own analysis
 (Sections~\ref{app:mkip-or} and~\ref{app:ls}).
 
 \item \label{it:common}\textbf{Common-mode errors.} The solvers, the verifier,
@@ -333,8 +339,9 @@ bilevel-feasibility separation ran out of time. Their own analysis treats such
 rows as unsolved, so only their best-of-all-methods comparison (their Figure~6)
 is affected. This package does the same: their values count as published
 points only from runs that ended before the time limit (and, for their
-heuristic PADM, with status \texttt{Feasible}), and never as optima
-(\texttt{scripts/ls\_mkip\_points.py}; Table~\ref{tab:or-conflicts} lists the
+heuristic PADM, with status \texttt{Feasible}), and as optima only where a
+verified point confirms them (fourth item;
+\texttt{scripts/ls\_mkip\_points.py}; Table~\ref{tab:or-conflicts} lists the
 OR instances where a time-limit value would otherwise be the best published
 point).
 \item In the other direction, \LsInfeasibleVerifiedPoint{} instances with a
@@ -346,8 +353,27 @@ among its feasible points for open instances, cannot be bilevel feasible: the
 instance has none (an exact recession direction, Section~\ref{app:general}). The
 instance violates the boundedness assumption of their method.
 \item Their exact runs report \texttt{ex10\_0\_100} optimal at
-\ExTenOptimum{}, which is correct (Section~\ref{app:general}); their paper does not
-state it, so it is counted as optimal by this work, at the MIPLIB bound, not as
-published.
+\ExTenOptimum{}, from runs that ended before the time limit with the value equal
+to the bound (\texttt{results-MILP.csv}, posted 12 June 2025). Their paper does not
+name the instance and their files hold no solutions; the point of \texttt{bobi
+general} has this value, and the MIPLIB bound proves it optimal
+(Section~\ref{app:general}). The optimum is therefore counted as published,
+credited to their run file, with this package as an independent confirmation.
+The same rule credits \texttt{neos-950242\_0\_100}, which their runs also report
+optimal, to the earlier BOBILib release that listed it first. Their optima for
+\texttt{ex10\_50\_50} (no point is known) and \texttt{mine-166-5\_50\_50} (their own
+check file rejects the point) are not counted.
+\item {\sloppy Their exact runs (MILP and MILP-First) also end with status
+\texttt{Infeasible/Proved}, before the time limit and with dual-variable bounds
+$10^{20}$, on \LsInfeasibleNoFeasible{} of the \NumNoFeasible{} instances that
+have no bilevel feasible point here (\texttt{biella1\_50\_50},
+\texttt{brazil3\_0\_100}, \texttt{brazil3\_50\_50}, \texttt{core2536-691\_50\_50},
+\texttt{cost266-UUE\_50\_50}, \texttt{mad\_0\_100}, \texttt{mad\_50\_50},
+\texttt{nu25-pr12\_0\_100}, \texttt{rail507\_0\_100}, \texttt{rail507\_50\_50} and
+\texttt{trento1\_50\_50}). The status agrees with the recession directions, but
+these instances lie outside the boundedness assumption of their method, the same
+status is contradicted on the \LsInfeasibleVerifiedPoint{} instances of the second
+item, and their paper does not state these results; they are not counted as
+published.\par}
 \end{itemize}
 

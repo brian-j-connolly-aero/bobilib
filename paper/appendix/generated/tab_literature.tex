@@ -3,7 +3,7 @@
 
 {\footnotesize\sisetup{group-separator={,},group-minimum-digits=4,group-digits=integer}\setlength{\tabcolsep}{4pt}\setlength{\LTcapwidth}{\linewidth}
 \begin{longtable}{@{}p{0.6\linewidth} l S[table-format=3.0]@{}}
-\caption{Published optima for instances BOBILib lists as feasible or open, by source (sub-collection and count). The instance names follow.}\label{tab:literature}\\
+\caption{Published optima for instances BOBILib lists as feasible or open, by source (sub-collection and count). Each optimum is credited to its first publication among the sources compiled here (Section~\ref{app:data}); later proofs are named in the notes of \texttt{instances.csv}. The instance names follow.}\label{tab:literature}\\
 \toprule
 Source & Collections & {Instances} \\
 \midrule
@@ -19,13 +19,13 @@ Source & Collections & {Instances} \\
 \bottomrule
 \endlastfoot
 Weninger and Fukasawa (2025), combinatorial branch and bound & kp 336, inter-kp 25, cclw 15 & 376 \\
-Lozano, Bergman and Cire (2026), decision-diagram relaxations & or 88, miplib3 5, generalized 4 & 97 \\
+Lozano, Bergman and Cire (2026), decision-diagram relaxations & or 88, generalized 4, miplib3 4 & 96 \\
 Fischetti, Ljubi\'c, Monaci and Sinnl (2019), interdiction cuts & imkp 52 & 52 \\
+Fischetti, Ljubi\'c, Monaci and Sinnl (2017), MIX++ (caption of Table 6; online appendix, Table 9) & miplib3 3, inter-fire 2 & 5 \\
+Lefebvre and Schmidt (2025), Dantzig-Wolfe reformulation (run file \texttt{results-MILP.csv}) & miplib2017 1 & 1 \\
 earlier BOBILib release (listed optimal there) & miplib2017 1 & 1 \\
-Fischetti, Ljubi\'c, Monaci and Sinnl (2017), MIX++ & miplib3 1 & 1 \\
-V\'asquez, Lozano and van Hoeve (2025), decision diagrams & miplib3 1 & 1 \\
 \midrule
-Total &  & 528 \\
+Total &  & 531 \\
 \end{longtable}
 }
 
@@ -410,7 +410,7 @@ K5050W19.KNP\par
 K5050W20.KNP\par
 \end{multicols}}
 
-\par\medskip\noindent\textbf{Lozano, Bergman and Cire (2026), decision-diagram relaxations (97)}\par\nopagebreak\smallskip
+\par\medskip\noindent\textbf{Lozano, Bergman and Cire (2026), decision-diagram relaxations (96)}\par\nopagebreak\smallskip
 {\setlength{\multicolsep}{3pt plus 1pt}\begin{multicols}{4}
 \footnotesize\raggedright\setlength{\parindent}{0pt}\setlength{\parskip}{0pt}
 general30-30-10-20-20-8\par
@@ -506,7 +506,6 @@ OR30x100-0.75\_5.dat-100\par
 OR30x100-0.75\_6.dat-100\par
 OR30x100-0.75\_7.dat-100\par
 OR30x100-0.75\_8.dat-100\par
-p0201-0.100000\par
 p0282-0.900000\par
 p0548-0.100000\par
 p0548-0.900000\par
@@ -569,20 +568,24 @@ weish30.dat-50\par
 weish30.dat-100\par
 \end{multicols}}
 
+\par\medskip\noindent\textbf{Fischetti, Ljubi\'c, Monaci and Sinnl (2017), MIX++ (caption of Table 6; online appendix, Table 9) (5)}\par\nopagebreak\smallskip
+{\setlength{\multicolsep}{3pt plus 1pt}\begin{multicols}{5}
+\footnotesize\raggedright\setlength{\parindent}{0pt}\setlength{\parskip}{0pt}
+air03-0.100000\par
+p0201-0.100000\par
+p0282-0.500000\par
+tree-50\_1-5-5\_006\par
+tree-50\_1-5-5\_010\par
+\end{multicols}}
+
+\par\medskip\noindent\textbf{Lefebvre and Schmidt (2025), Dantzig-Wolfe reformulation (run file \texttt{results-MILP.csv}) (1)}\par\nopagebreak\smallskip
+{\setlength{\multicolsep}{3pt plus 1pt}\begin{multicols}{5}
+\footnotesize\raggedright\setlength{\parindent}{0pt}\setlength{\parskip}{0pt}
+ex10\_0\_100\par
+\end{multicols}}
+
 \par\medskip\noindent\textbf{Earlier BOBILib release (listed optimal there) (1)}\par\nopagebreak\smallskip
 {\setlength{\multicolsep}{3pt plus 1pt}\begin{multicols}{5}
 \footnotesize\raggedright\setlength{\parindent}{0pt}\setlength{\parskip}{0pt}
 neos-950242\_0\_100\par
-\end{multicols}}
-
-\par\medskip\noindent\textbf{Fischetti, Ljubi\'c, Monaci and Sinnl (2017), MIX++ (1)}\par\nopagebreak\smallskip
-{\setlength{\multicolsep}{3pt plus 1pt}\begin{multicols}{5}
-\footnotesize\raggedright\setlength{\parindent}{0pt}\setlength{\parskip}{0pt}
-air03-0.100000\par
-\end{multicols}}
-
-\par\medskip\noindent\textbf{V\'asquez, Lozano and van Hoeve (2025), decision diagrams (1)}\par\nopagebreak\smallskip
-{\setlength{\multicolsep}{3pt plus 1pt}\begin{multicols}{5}
-\footnotesize\raggedright\setlength{\parindent}{0pt}\setlength{\parskip}{0pt}
-p0282-0.500000\par
 \end{multicols}}

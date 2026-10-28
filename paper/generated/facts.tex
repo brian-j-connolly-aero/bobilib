@@ -8,8 +8,8 @@
 \newcommand{\NumBobiFeasible}{1{,}175}% BOBILib status feasible
 \newcommand{\NumBobiOpen}{419}% BOBILib status open
 \newcommand{\NumUnsolved}{1{,}594}% feasible or open in BOBILib
-\newcommand{\NumLitOptimal}{528}% already optimal in published work
-\newcommand{\NumNewOptimal}{82}% proven optimal here
+\newcommand{\NumLitOptimal}{531}% already optimal in published work
+\newcommand{\NumNewOptimal}{79}% proven optimal here
 \newcommand{\NumNoFeasible}{40}% no bilevel feasible point (here)
 \newcommand{\NumFirstPoint}{228}% verified point here where BOBILib has none (first anywhere or not)
 \newcommand{\NumUnchanged}{716}% status unchanged
@@ -34,15 +34,17 @@
 \newcommand{\NumAssignmentInstances}{24}% BOBILib assignment instances
 \newcommand{\NumGeneralInstances}{695}% BOBILib general (MIPLIB-derived and other) instances
 \newcommand{\NumLitKip}{376}% KIP optima of Weninger and Fukasawa
-\newcommand{\NumLitLozano}{97}% optima of Lozano, Bergman and Cire (all families)
+\newcommand{\NumLitLozano}{96}% optima of Lozano, Bergman and Cire (all families)
 \newcommand{\NumLitOr}{88}% OR optima of Lozano et al.
 \newcommand{\NumLitGeneralized}{4}% generalized optima of Lozano et al.
-\newcommand{\NumLitMiplibLozano}{5}% MIPLIB 3 optima of Lozano et al.
+\newcommand{\NumLitMiplibLozano}{4}% MIPLIB 3 optima of Lozano et al.
 \newcommand{\NumLitImkp}{52}% imkp optima of Fischetti et al. 2019
 \newcommand{\NumLitMkip}{140}% MKIP literature optima (OR + imkp)
-\newcommand{\NumLitMiplib}{8}% MIPLIB-derived literature optima
-\newcommand{\NumLitFischettiSeventeen}{1}% air03-0.100000
-\newcommand{\NumLitVasquez}{1}% p0282-0.500000
+\newcommand{\NumLitMiplib}{9}% MIPLIB-derived literature optima
+\newcommand{\NumLitFischettiSeventeen}{5}% Fischetti et al. 2017: air03, p0201, p0282 (Table 6) and the two network optima (online appendix, Table 9)
+\newcommand{\NumLitFischettiSeventeenMiplib}{3}% of them MIPLIB 3
+\newcommand{\NumLitVasquez}{0}% optima credited to Vasquez, Lozano and van Hoeve (their two are first published by Fischetti et al. 2017)
+\newcommand{\NumLitLefebvreSchmidt}{1}% ex10_0_100 (Lefebvre and Schmidt's run file)
 \newcommand{\NumLitEarlierRelease}{1}% neos-950242_0_100
 \newcommand{\NumKipFiles}{583}% KIP files at published optima
 \newcommand{\NumKipBobiAbove}{335}% KIP with BOBILib value above the published optimum
@@ -51,8 +53,8 @@
 \newcommand{\ImkpBobiExcessMax}{23}% largest imkp excess over the optimum, percent
 \newcommand{\NumNewKip}{16}% KIP optima proven here
 \newcommand{\NumNewClique}{57}% clique optima proven here
-\newcommand{\NumNewNetwork}{2}% network optima proven here
-\newcommand{\NumNewHpr}{7}% MIPLIB-bound optima
+\newcommand{\NumNewNetwork}{0}% network optima proven here (both are published optima)
+\newcommand{\NumNewHpr}{6}% MIPLIB-bound optima
 \newcommand{\NumNewOr}{0}% OR closure
 \newcommand{\NumRayExact}{40}% rays checked in exact arithmetic
 \newcommand{\NumRayFloat}{0}% rays checked in floating point only
@@ -67,7 +69,7 @@
 \newcommand{\NumCliqueOpen}{3}% clique still open
 \newcommand{\NumGeneralizedUnchanged}{8}% generalized unchanged
 \newcommand{\NumGeneralUnchanged}{123}% general unchanged
-\newcommand{\NumGeneralNew}{135}% general instances settled or given a first point here
+\newcommand{\NumGeneralNew}{134}% general instances settled or given a first point here
 \newcommand{\KipOpenItemsMin}{200}% fewest items among the 16
 \newcommand{\KipOpenItemsMax}{500}% most items among the 16
 \newcommand{\NumKipSubsetSum}{8}% class 6 (subset sum)
@@ -107,7 +109,7 @@
 \newcommand{\OrGapOneQuarterNow}{4.0}% median gap now, variant -100, budget 0.25
 \newcommand{\OrPairedOneQuarter}{90}% instances in that median
 \newcommand{\OrGapOneHalfLit}{34.0}% median published gap, variant -100, budget 0.50
-\newcommand{\OrGapOneHalfNow}{7.2}% median gap now, variant -100, budget 0.50
+\newcommand{\OrGapOneHalfNow}{7.1}% median gap now, variant -100, budget 0.50
 \newcommand{\OrPairedOneHalf}{90}% instances in that median
 \newcommand{\OrGapOneThreeQuarterLit}{0.14}% median published gap, variant -100, budget 0.75
 \newcommand{\OrGapOneThreeQuarterNow}{0.14}% median gap now, variant -100, budget 0.75
@@ -122,18 +124,18 @@
 \newcommand{\OrPairedZeroHalf}{59}% instances in that median
 \newcommand{\OrNoPointZeroHalf}{31}% no published point, -0, 0.50
 \newcommand{\OrFirstZeroHalf}{31}% first points among those
-\newcommand{\OrGapZeroThreeQuarterLit}{5.3}% median published gap, variant -0, budget 0.75
+\newcommand{\OrGapZeroThreeQuarterLit}{5.2}% median published gap, variant -0, budget 0.75
 \newcommand{\OrGapZeroThreeQuarterNow}{0.05}% median gap now, variant -0, budget 0.75
 \newcommand{\OrPairedZeroThreeQuarter}{62}% instances in that median
 \newcommand{\OrNoPointZeroThreeQuarter}{27}% no published point, -0, 0.75
 \newcommand{\OrFirstZeroThreeQuarter}{27}% first points among those
-\newcommand{\OrGapFiftyQuarterLit}{30.6}% median published gap, variant -50, budget 0.25
-\newcommand{\OrGapFiftyQuarterNow}{28.3}% median gap now, variant -50, budget 0.25
+\newcommand{\OrGapFiftyQuarterLit}{30.1}% median published gap, variant -50, budget 0.25
+\newcommand{\OrGapFiftyQuarterNow}{28.2}% median gap now, variant -50, budget 0.25
 \newcommand{\OrPairedFiftyQuarter}{70}% instances in that median
 \newcommand{\OrNoPointFiftyQuarter}{20}% no published point, -50, 0.25
 \newcommand{\OrFirstFiftyQuarter}{0}% first points among those
 \newcommand{\OrGapFiftyHalfLit}{41.3}% median published gap, variant -50, budget 0.50
-\newcommand{\OrGapFiftyHalfNow}{35.0}% median gap now, variant -50, budget 0.50
+\newcommand{\OrGapFiftyHalfNow}{34.9}% median gap now, variant -50, budget 0.50
 \newcommand{\OrPairedFiftyHalf}{70}% instances in that median
 \newcommand{\OrNoPointFiftyHalf}{20}% no published point, -50, 0.50
 \newcommand{\OrFirstFiftyHalf}{20}% first points among those
@@ -202,7 +204,7 @@
 \newcommand{\NetworkBobiOptimal}{70}% BOBILib optimal network instances
 \newcommand{\NumGeneralCandidates}{98}% open instances without coupling rows run through bobi general
 \newcommand{\NumGeneralFiles}{64}% verified files in results/general
-\newcommand{\NumGeneralFilesOptimal}{4}% of them optimal
+\newcommand{\NumGeneralFilesOptimal}{4}% of them optimal (three proven here, ex10_0_100 published)
 \newcommand{\NumGeneralFilesFeasible}{60}% of them feasible only
 \newcommand{\NumCoupledCandidates}{54}% open instances with coupling rows run through bobi coupled
 \newcommand{\NumCoupledAttempted}{52}% attempted
@@ -212,9 +214,9 @@
 \newcommand{\NumCoupledByHpr}{21}% coupled points at the HPR's leader values
 \newcommand{\NumCoupledByPenalty}{5}% coupled points from the penalised HPR
 \newcommand{\NumCoupledByFollow}{3}% coupled points from best-response dynamics
-\newcommand{\NumHprOptimal}{7}% points meeting the MIPLIB bound
-\newcommand{\NumHprOpen}{5}% of them open before
-\newcommand{\NumHprRoundTwo}{2}% MIPLIB-bound optima added in round two (ex10, neos-1445765)
+\newcommand{\NumHprOptimal}{6}% optima proven here by a point meeting the MIPLIB bound
+\newcommand{\NumHprOpen}{4}% of them open before
+\newcommand{\NumHprWithPublished}{7}% points meeting the MIPLIB bound, with ex10_0_100 (published optimum, confirmed here)
 \newcommand{\PigeonOptimum}{\ensuremath{-}9{,}000}% pigeon-10 optimum
 \newcommand{\TimtabOptimum}{764{,}771.99999978}% timtab1_0_100 optimum (full precision)
 \newcommand{\TimtabOptimumRounded}{764{,}772}% timtab1_0_100 optimum rounded
@@ -255,8 +257,8 @@
 \newcommand{\FamCliqueUnchanged}{3}% clique: unchanged
 \newcommand{\FamNetworkAll}{72}% network: instances
 \newcommand{\FamNetworkUnsolved}{2}% network: feasible or open in BOBILib
-\newcommand{\FamNetworkLit}{0}% network: optimal in published work
-\newcommand{\FamNetworkNew}{2}% network: proven optimal here
+\newcommand{\FamNetworkLit}{2}% network: optimal in published work
+\newcommand{\FamNetworkNew}{0}% network: proven optimal here
 \newcommand{\FamNetworkNoFeas}{0}% network: no bilevel feasible point
 \newcommand{\FamNetworkFirst}{0}% network: verified point where BOBILib has none
 \newcommand{\FamNetworkUnchanged}{0}% network: unchanged
@@ -276,8 +278,8 @@
 \newcommand{\FamAssignmentUnchanged}{0}% assignment: unchanged
 \newcommand{\FamGenPureAll}{359}% general-pure: instances
 \newcommand{\FamGenPureUnsolved}{105}% general-pure: feasible or open in BOBILib
-\newcommand{\FamGenPureLit}{8}% general-pure: optimal in published work
-\newcommand{\FamGenPureNew}{1}% general-pure: proven optimal here
+\newcommand{\FamGenPureLit}{9}% general-pure: optimal in published work
+\newcommand{\FamGenPureNew}{0}% general-pure: proven optimal here
 \newcommand{\FamGenPureNoFeas}{6}% general-pure: no bilevel feasible point
 \newcommand{\FamGenPureFirst}{14}% general-pure: verified point where BOBILib has none
 \newcommand{\FamGenPureUnchanged}{76}% general-pure: unchanged
@@ -362,7 +364,7 @@ noswot\_50\_50 & feasible & \ensuremath{-}41 & BOBILib \\
 pigeon-10\_0\_100 & open & \ensuremath{-}9{,}000 & \texttt{bobi general} \\
 timtab1\_0\_100 & open & 764{,}771.99999978 & \texttt{bobi general} \\
 pigeon-10\_50\_50 & open & \ensuremath{-}9{,}000 & \texttt{bobi coupled} \\
-ex10\_0\_100 & open & 100 & \texttt{bobi general} \\
+ex10\_0\_100$^{*}$ & open & 100 & \texttt{bobi general} \\
 neos-1445765\_0\_100 & open & \ensuremath{-}17{,}783 & \texttt{bobi general} \\
 }% rows of the paper's table of the MIPLIB-bound optima
 \newcommand{\NumFirstAnywhere}{167}% verified points here that are the first point anywhere
@@ -375,26 +377,27 @@ neos-1445765\_0\_100 & open & \ensuremath{-}17{,}783 & \texttt{bobi general} \\
 \newcommand{\NumGeneralNoCplPublishedBetter}{6}% of them: the published point is better
 \newcommand{\NumCoupledPublished}{1}% bobi coupled points where a point was published
 \newcommand{\NumOrPublishedPointFile}{52}% OR points new to BOBILib whose published point has a solution file (Lozano et al.)
-\newcommand{\NumSettledHere}{122}% settled by this work (new optima + no point)
-\newcommand{\PctSettledHere}{7.7}% settled by this work, percent of the unsolved
-\newcommand{\NumLitWithFile}{446}% published optima with a verified solution file at the optimum
+\newcommand{\NumSettledHere}{119}% settled by this work (new optima + no point)
+\newcommand{\PctSettledHere}{7.5}% settled by this work, percent of the unsolved
+\newcommand{\NumLitWithFile}{449}% published optima with a verified solution file at the optimum
+\newcommand{\NumLitWithFileNumerical}{447}% of them in class numerical (all but the two network optima re-proved exactly)
 \newcommand{\NumLitNoFile}{82}% published optima without a solution file here (value only)
 \newcommand{\NumLitNoFileImkp}{52}% of them imkp
 \newcommand{\NumLitNoFileOr}{18}% of them OR
 \newcommand{\NumLitNoFileMiplib}{8}% of them MIPLIB-derived
 \newcommand{\NumLitNoFileGeneralized}{4}% of them generalized
 \newcommand{\NumLitKnapsackMethods}{428}% published optima from knapsack interdiction methods (Weninger-Fukasawa, Fischetti et al. 2019)
-\newcommand{\NumLitOther}{3}% published optima from other sources (air03, p0282, neos-950242)
+\newcommand{\NumLitOther}{7}% published optima from other sources (Fischetti et al. 2017, Lefebvre and Schmidt, an earlier BOBILib release)
 \newcommand{\PFiveFortyEightOptimum}{48{,}853}% p0548-0.900000: published optimum used (exact follower)
 \newcommand{\PFiveFortyEightDd}{48{,}851}% p0548-0.900000: decision-diagram value, follower optimal only within BOBILib's tolerance
-\newcommand{\NumNewValueKnown}{20}% new optima where BOBILib's value was already optimal
+\newcommand{\NumNewValueKnown}{18}% new optima where BOBILib's value was already optimal
 \newcommand{\NumNewValueKnownGeneral}{2}% of them general (noswot)
 \newcommand{\NumOrEqualPublished}{72}% OR points equal to the best published point
 \newcommand{\NumOrWorsePublished}{56}% OR points worse than the best published point
 \newcommand{\NumOrLsTimeLimit}{47}% OR instances where a Lefebvre-Schmidt time-limit row has a lower nonzero value than every counted row (left out)
 \newcommand{\NumOrLsTimeLimitBest}{21}% of them: that value would be the best published point
 \newcommand{\NumOrLsTimeLimitBelowLb}{10}% of them: below Lozano, Bergman and Cire's published lower bound
-\newcommand{\NumLitOrClaimed}{87}% OR optima claimed by Lozano, Bergman and Cire (their optimal.csv)
+\newcommand{\NumLitOrClaimed}{87}% OR optima claimed by Lozano, Bergman and Cire (their optimal.csv and, for six, solved_instances.csv)
 \newcommand{\NumOrQuarterNoPointNoPub}{51}% several knapsacks, budget 25%, no point here: none published either
 \newcommand{\NumOrQuarterNoPointPub}{69}% several knapsacks, budget 25%, no point here: a published (unverified) point
 \newcommand{\NetworkRndSmall}{12}% rndgraph-25 re-derived (HiGHS at every attack)
@@ -418,9 +421,11 @@ neos-1445765\_0\_100 & open & \ensuremath{-}17{,}783 & \texttt{bobi general} \\
 \newcommand{\NumClassExact}{115}% certificate class exact (i)
 \newcommand{\NumClassNumerical}{763}% certificate class numerical (ii)
 \newcommand{\NumClassBenchmark}{0}% certificate class benchmark (iii)
-\newcommand{\NumClassExactNew}{75}% new optima, class exact
-\newcommand{\NumClassNumericalNew}{7}% new optima, class numerical (the MIPLIB-bound optima)
-\newcommand{\NumClassExactSettled}{115}% settled here with an exact certificate (new optima + rays)
+\newcommand{\NumClassExactNew}{73}% new optima, class exact
+\newcommand{\NumClassNumericalNew}{6}% new optima, class numerical (the MIPLIB-bound optima)
+\newcommand{\NumClassExactLit}{2}% published optima re-proved exactly here (class exact)
+\newcommand{\NumClassNumericalLit}{529}% published optima in class numerical
+\newcommand{\NumClassExactSettled}{113}% settled here with an exact certificate (new optima + rays)
 \newcommand{\NumTightFiles}{1{,}478}% current solution files re-checked by bobi verify --tight
 \newcommand{\NumTightPass}{1{,}478}% of them pass
 \newcommand{\NumTightSuperseded}{26}% superseded files (tolerance/ folders) re-checked
@@ -476,3 +481,8 @@ neos-1445765\_0\_100 & open & \ensuremath{-}17{,}783 & \texttt{bobi general} \\
 \newcommand{\LsInfeasibleVerifiedPoint}{90}% instances reported Infeasible/Proved in their run files although a verified point exists
 \newcommand{\LsWrongOptima}{two}% reported optima worse than a verified point
 \newcommand{\LsBadPadmName}{highschool1-aigio\_0\_100}% their PADM 'feasible' point on an instance without one
+\newcommand{\LsInfeasibleNoFeasible}{11}% instances without a bilevel feasible point on which their exact runs end Infeasible/Proved before the time limit
+\newcommand{\NumOrBetterLsTl}{9}% OR instances counted in NumOrBetter where a Lefebvre-Schmidt time-limit value is lower than this work's point
+\newcommand{\NumOrBetterLsTlBelowLb}{3}% of them: the value lies below a proven lower bound
+\newcommand{\NumOrBetterLsTlOpen}{6}% of them: ruled out by no known bound
+\newcommand{\NumOrBetterLsTlKo}{3}% of these: marked KO (not bilevel feasible) in the authors' to_check.csv

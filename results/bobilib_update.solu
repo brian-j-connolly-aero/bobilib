@@ -14,14 +14,14 @@
 # An instance can have both a =best= and a =bestdual= line. Values are printed with full precision
 # (integers without a decimal point, other values as the shortest decimal that round-trips a double).
 #
-# Counts: =opt= 610 (528 published, 82 this work), =inf= 40, =best= 693, =bestdual= 194.
+# Counts: =opt= 610 (531 published, 79 this work), =inf= 40, =best= 693, =bestdual= 194.
 # Sources of the published optima (instances.csv, column 'source'; full references in README.md):
 #   WeningerFukasawa2025: 376
-#   LozanoBergmanCire2026: 97
+#   LozanoBergmanCire2026: 96
 #   FischettiEtAl2019: 52
+#   FischettiEtAl2017: 5
+#   LefebvreSchmidt2025: 1
 #   BOBILibEarlierRelease: 1
-#   FischettiEtAl2017: 1
-#   VasquezLozanoVanHoeve2025: 1
 #   this work: every other line; the certificate of each is named in instances.csv (column 'certificate').
 #
 # Every =inf= line (40) rests on a recession direction checked in exact rational arithmetic.

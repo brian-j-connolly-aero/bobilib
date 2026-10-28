@@ -4,10 +4,18 @@ and what remains open. Writes results/summary.json and prints a table.
 
 usage: python3 -I summarize.py --meta collection.json --mkip-lit mkip_literature_status.csv
            --runs runs --results results [--miblp-lit miblp_literature_status.csv]
-           [--lbc-optimal optimal.csv]
+           [--lbc-optimal optimal.csv] [--other-lit other_published_optima.csv]
+
+Each published optimum is credited to its first publication: for the general
+instances, the earliest source of miblp_literature_status.csv whose upper and
+lower bounds agree (column `sources`), ranked by the date of its first public
+version (FIRST_PUBLIC below); results/literature/other_published_optima.csv
+(the default of --other-lit) holds the published optima that no other table
+has (two network instances and ex10_0_100).
 
 Inputs (all optional except --meta; missing ones are skipped):
   results/kip/summary.csv         KIP optima from Weninger and Fukasawa (verified files)
+  results/literature/other_published_optima.csv  further published optima (network, ex10_0_100)
   results/ss/proofs.csv            our subset-sum optima (bobi ss-solve, verified files)
   runs/ss_*.tsv                    further local subset-sum runs (bobi ss-solve)
   results/or/compare.csv           OR bounds vs literature (scripts/compare_or.py; runs/or_compare.csv
@@ -33,15 +41,42 @@ def load_csv(path):
     return list(csv.DictReader(open(path))) if os.path.exists(path) else []
 
 
+# Sources of miblp_literature_status.csv (prefix of each entry of its column `sources`), in the order of
+# their first public version: Fischetti et al., Operations Research 65(6), 2017 (MIX++; its Table 6 with
+# the more aggressive setting); Lozano, Bergman and Cire, arXiv 2407.18193 of 25 July 2024 (Operations
+# Research 2026; its Table 2 already closes p0282-0.9); Vasquez, Lozano and van Hoeve, Mathematical
+# Programming 2025 (it cites that preprint). An earlier BOBILib release counts only where no paper
+# proves the optimum.
+FIRST_PUBLIC = [("F17", "Fischetti et al. 2017"), ("LBC", "Lozano et al. 2026"), ("VLH", "Vasquez et al. 2025"),
+                ("BOBILib", "an earlier BOBILib release")]
+
+
+def proving_sources(sources):
+    """Prefixes (F17, LBC, VLH, BOBILib) of the entries of `sources` whose ub equals their lb, earliest first."""
+    found = set()
+    for entry in sources.split("; "):
+        key, _, rest = entry.partition(":")
+        m = re.match(r"ub=([^,]*),lb=([^,]*)", rest)
+        try:
+            ub, lb = float(m.group(1)), float(m.group(2))
+        except (AttributeError, ValueError):
+            continue
+        if abs(ub - lb) <= 1e-6 * max(1.0, abs(ub)):
+            found.add(key.split("-")[0])
+    return [k for k, _ in FIRST_PUBLIC if k in found]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--meta", required=True)
     ap.add_argument("--mkip-lit")
     ap.add_argument("--miblp-lit")
     ap.add_argument("--lbc-optimal", help="solution_files/optimal.csv from Lozano et al.'s repository")
+    ap.add_argument("--other-lit", help="default: RESULTS/literature/other_published_optima.csv")
     ap.add_argument("--runs", default="runs")
     ap.add_argument("--results", default="results")
     a = ap.parse_args()
+    a.other_lit = a.other_lit or f"{a.results}/literature/other_published_optima.csv"
     meta = json.load(open(a.meta))
 
     def family(v):
@@ -64,19 +99,26 @@ def main():
             if n in status and status[n]["bobilib"] != "optimal" and r.get("proven_optimal_in_literature") == "True":
                 src = "literature (Fischetti et al. 2019)" if r.get("set") == "imkp" else "literature (Lozano et al. 2026)"
                 status[n].update(outcome="optimal", source=src)
+    if a.miblp_lit:
+        # General instances: the first publication among the sources that prove the optimum.
+        for r in load_csv(a.miblp_lit):
+            n = r["instance"]
+            if n in status and status[n]["bobilib"] != "optimal" and status[n]["outcome"] is None and r["closed_in_literature"] == "True":
+                first = proving_sources(r["sources"])
+                assert first, f"{n}: closed in the literature, but no source with ub = lb"
+                status[n].update(outcome="optimal", source=f"literature ({dict(FIRST_PUBLIC)[first[0]]})")
     if a.lbc_optimal:
         # Lozano, Bergman and Cire's optimal solution files (decision diagrams), any family.
         for r in load_csv(a.lbc_optimal):
             n = re.sub(r"(\.dd_\d+)?[-.]res\.json$", "", re.sub(r"^dd_", "", r["name"]))
             if n in status and status[n]["bobilib"] != "optimal" and status[n]["outcome"] is None:
                 status[n].update(outcome="optimal", source="literature (Lozano et al. 2026)")
-    if a.miblp_lit:
-        for r in load_csv(a.miblp_lit):
-            n = r["instance"]
-            if n in status and status[n]["bobilib"] != "optimal" and status[n]["outcome"] is None and r["closed_in_literature"] == "True":
-                src = r["lit_best_lb_src"].split("-")[0]
-                src = {"F17": "Fischetti et al. 2017", "LBC": "Lozano et al. 2026", "VLH": "Vasquez et al. 2025", "BOBILib": "an earlier BOBILib release"}.get(src, src)
-                status[n].update(outcome="optimal", source=f"literature ({src})")
+    # Published optima that no other table holds (network: Fischetti et al.'s online appendix; ex10_0_100:
+    # Lefebvre and Schmidt's run file).
+    for r in load_csv(a.other_lit):
+        n = r["instance"]
+        if n in status and status[n]["bobilib"] != "optimal" and status[n]["outcome"] is None:
+            status[n].update(outcome="optimal", source=f"literature ({r['source']})")
     # This work: subset-sum optima (committed proofs, then local runs).
     for r in load_csv(f"{a.results}/ss/proofs.csv"):
         n = r["name"]

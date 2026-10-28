@@ -19,7 +19,7 @@ cnt = collections.Counter(S.outcome_class(v) for v in U.values())
 st = collections.Counter(v["bobilib"] for v in U.values())
 
 S.check(len(U), 1594, "feasible or open in BOBILib")
-S.check(dict(cnt), {"lit": 528, "new": 82, "none": 40, "first": 228, "unchanged": 716},
+S.check(dict(cnt), {"lit": 531, "new": 79, "none": 40, "first": 228, "unchanged": 716},
         "outcomes of the 1,594")
 S.check(dict(st), {"feasible": 1175, "open": 419}, "BOBILib composition")
 settled = cnt["lit"] + cnt["new"] + cnt["none"]

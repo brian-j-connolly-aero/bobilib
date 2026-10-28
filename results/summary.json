@@ -10192,7 +10192,7 @@
    "family": "network",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "this work (every attack, follower by tree DP)"
+   "source": "literature (Fischetti et al. 2017)"
   },
   "tree-50_1-5-5_007": {
    "family": "network",
@@ -10240,7 +10240,7 @@
    "family": "network",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "this work (every attack, follower by tree DP)"
+   "source": "literature (Fischetti et al. 2017)"
   },
   "rndgraph-25_1-3-3_002": {
    "family": "network",
@@ -11830,7 +11830,7 @@
    "family": "general-pure",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Lozano et al. 2026)"
+   "source": "literature (Fischetti et al. 2017)"
   },
   "harp2-0.500000": {
    "family": "general-pure",
@@ -12010,7 +12010,7 @@
    "family": "general-pure",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Vasquez et al. 2025)"
+   "source": "literature (Fischetti et al. 2017)"
   },
   "air04-0.900000": {
    "family": "general-pure",
@@ -14230,7 +14230,7 @@
    "family": "general-pure",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "this work (point meets the MIPLIB optimum of the HPR)"
+   "source": "literature (Lefebvre and Schmidt 2025)"
   },
   "mushroom-best_0_100": {
    "family": "general-mixed",
@@ -15946,7 +15946,7 @@
   },
   "network": {
    "not optimal in BOBILib": 2,
-   "optimal / this work (every attack, follower by tree DP)": 2
+   "optimal / literature (Fischetti et al. 2017)": 2
   },
   "clique": {
    "not optimal in BOBILib": 60,
@@ -15956,12 +15956,11 @@
   "general-pure": {
    "not optimal in BOBILib": 131,
    "unchanged": 102,
-   "optimal / literature (Fischetti et al. 2017)": 1,
-   "optimal / literature (Lozano et al. 2026)": 5,
+   "optimal / literature (Fischetti et al. 2017)": 3,
+   "optimal / literature (Lozano et al. 2026)": 4,
    "feasible / this work (HPR, follower, tie-break)": 11,
-   "optimal / literature (Vasquez et al. 2025)": 1,
    "feasible / this work (bobi coupled)": 3,
-   "optimal / this work (point meets the MIPLIB optimum of the HPR)": 1,
+   "optimal / literature (Lefebvre and Schmidt 2025)": 1,
    "optimal / literature (an earlier BOBILib release)": 1,
    "no bilevel feasible point / this work (recession ray, exact)": 6
   },

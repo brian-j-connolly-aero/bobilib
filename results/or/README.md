@@ -4,9 +4,9 @@ The 810 OR instances (`OR{rows}x{items}-{budget}_{i}.dat-{variant}`) are
 built from Chu and Beasley's multidimensional knapsacks: variant -100 has
 one follower knapsack, variants -0 and -50 several. BOBILib lists none as
 optimal; Lozano, Bergman and Cire (*Operations Research* 2026) proved 87
-(their `optimal.csv`), and one more, OR10x100-0.75_4.dat-0, is closed by
-their published point and the branch-and-cut bound in their repository's
-run data (8,813).
+(their `optimal.csv` and, for six, `solved_instances.csv`), and one more,
+OR10x100-0.75_4.dat-0, is closed by their published point and the
+branch-and-cut bound in their repository's run data (8,813).
 
 * `*.res.json`: 690 verified points (all 270 one-knapsack instances; all
   360 several-knapsack instances with budget 50% or 75%; 60 of 180 at budget
@@ -15,7 +15,7 @@ run data (8,813).
 * `compare.csv`: per instance, the literature's bounds (Lozano et al.'s
   lower bound and the best published point), ours, and the combined gap.
   The best published point counts Lefebvre and Schmidt's values only from
-  runs that ended before the time limit, as their own analysis does
+  runs that ended before the time limit, as most of their own analysis does
   (`../literature/`, `scripts/ls_mkip_points.py`). 474 points are strictly
   better than every published value, BOBILib's included, and 88 are the
   first point for their instance. For one

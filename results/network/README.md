@@ -6,7 +6,12 @@ graphs. BOBILib lists 70 as optimal; `tree-50_1-5-5_006` and
 `tree-50_1-5-5_010` are only `feasible`, with value 26.
 
 **Result.** Both open instances have optimum **26**: BOBILib's feasible
-value is optimal. Of BOBILib's 70 optimal values, 46 are re-derived here
+value is optimal. This re-proves published optima: Fischetti, Ljubić, Monaci
+and Sinnl's MIX++ had proved both optimal at 26 (online appendix of their
+2017 *Operations Research* paper, dated 29 June 2016, Table 9). The data
+package counts them as published optima (`../instances.csv`, source
+`FischettiEtAl2017`), with certificate class `exact` because of the
+enumeration here. Of BOBILib's 70 optimal values, 46 are re-derived here
 from the model files with no disagreement: all 34 trees (tree DP) and the
 12 `rndgraph-25` random graphs (HiGHS as the follower at every attack). The
 other 24 (`rndgraph-50`, `rndgraph-80`) were not enumerated; BOBILib's

@@ -11,8 +11,8 @@ this file, `instances.csv`, `bobilib_update.solu` and `SHA256SUMS` are written b
 
 To cite this material, please cite both the paper and the data package:
 
-* Paper: B. J. Connolly, "Settling 650 unsolved BOBILib instances: 528 published optima,
-  82 new optimality proofs and 40 infeasibility certificates," preprint (2026).
+* Paper: B. J. Connolly, "Settling 650 unsolved BOBILib instances: 531 published optima,
+  79 new optimality proofs and 40 infeasibility certificates," preprint (2026).
 * Data: B. J. Connolly, "BOBILib status update: data package" (2026), the `results/`
   folder of the paper's repository. No DOI has been assigned yet.
 
@@ -34,8 +34,8 @@ BOBILib lists 1,027 instances as optimal, 33 as infeasible,
 
 | Outcome | Instances |
 | --- | ---: |
-| already optimal in published work | 528 |
-| proven optimal here | 82 |
+| already optimal in published work | 531 |
+| proven optimal here | 79 |
 | no bilevel feasible point (proven here) | 40 |
 | verified point here, where BOBILib has none | 228 |
 | status unchanged | 716 |
@@ -45,8 +45,9 @@ Of the 228 verified points where BOBILib has none, 167 are the first point
 anywhere; for the other 61 a published point existed (named in `notes`).
 Every claim is backed by a file in this package (a solution in BOBILib's
 format that passes BOBILib-style verification, a recession-direction
-certificate, a partition certificate) or by a published optimum (cited); for
-82 of the 528 published optima there is no solution file here
+certificate, a partition certificate) or by a published optimum (cited, and
+credited to its first publication among the sources compiled in `literature/`);
+for 82 of the 531 published optima there is no solution file here
 (`verified` = `na`), and only the published value is used.
 
 Certificate classes (column `certificate_class`, defined below): of the
@@ -144,12 +145,13 @@ Rows per `new_status`: bobilib_infeasible 33, bobilib_optimal 1,027, feasible 22
   tolerance enters. Rows: the subset-sum KIP optima (exhaustive integer search,
   re-proved by two integer-only provers), the clique optima (Mantel or
   Brouwer's theorem with the integer-checked case certificates, and the
-  partition files), the network optima (every attack enumerated, exact tree
+  partition files), the 2 network optima that Fischetti et al. (2017)
+  published and this package re-proves (every attack enumerated, exact tree
   DP), the recession directions (exact rational check), and OR points with one
   follower knapsack (integer data, exact knapsack oracle).
 * `numerical` (class (ii)): rests on a floating-point LP, MILP or CP solver run
-  with tolerances, or on a published optimum used as published. Rows: the
-  528 published optima (not re-certified here), the optima at the MIPLIB
+  with tolerances, or on a published optimum used as published. Rows: the other
+  529 published optima (not re-certified here), the optima at the MIPLIB
   bound of the HPR (MIPLIB's published floating-point optima; optimal by
   accepted benchmark conventions), OR points with several follower knapsacks
   (follower optimum by HiGHS), and the points for the general instances (rows
@@ -169,12 +171,12 @@ Rows per class and kind of result:
 | clique interdiction optimum | `exact` | 57 |
 | no bilevel feasible point (recession direction) | `exact` | 40 |
 | knapsack interdiction optimum (subset-sum search) | `exact` | 16 |
-| attack-protect optimum | `exact` | 2 |
-| published optimum | `numerical` | 528 |
+| published optimum, re-proved here exactly | `exact` | 2 |
+| published optimum | `numerical` | 529 |
 | OR point, several follower knapsacks | `numerical` | 140 |
 | point without coupling rows | `numerical` | 60 |
 | point with coupling rows | `numerical` | 28 |
-| optimum at the MIPLIB bound of the HPR | `numerical` | 7 |
+| optimum at the MIPLIB bound of the HPR | `numerical` | 6 |
 
 Other tables (columns in each folder's README): `kip/summary.csv` (published KIP
 optima and the leader-vector source), `ss/proofs.csv` (optimum, nodes, CPU
@@ -195,15 +197,16 @@ instances with one follower knapsack and the 3 open clique instances). It has
 610 `=opt=`, 40 `=inf=`, 693 `=best=` and 194 `=bestdual=` lines.
 Values are upper-level objectives of the minimising leader, at full precision.
 
-Citation keys in `source`:
+Citation keys in `source` (and references named in `notes`):
 
 * `ThuraufEtAl2026`: J. Thürauf, T. Kleinert, I. Ljubić, T. Ralphs and M. Schmidt, BOBILib: Bilevel Optimization (Benchmark) Instance Library, Mathematical Programming Computation 18(3) (2026) 819-876, doi:10.1007/s12532-025-00294-y; https://bobilib.org.
 * `BOBILibEarlierRelease`: an earlier release of the BOBILib metadata, which listed the instance as optimal.
 * `WeningerFukasawa2025`: N. Weninger and R. Fukasawa, A fast combinatorial algorithm for the bilevel knapsack problem with interdiction constraints, Mathematical Programming 210 (2025) 847-879, doi:10.1007/s10107-024-02133-9.
 * `LozanoBergmanCire2026`: L. Lozano, D. Bergman and A. A. Cire, Network relaxations for combinatorial bilevel optimization under linear interactions, Operations Research (2026), Articles in Advance, doi:10.1287/opre.2025.2457 (arXiv:2407.18193).
 * `FischettiEtAl2019`: M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, Interdiction games and monotonicity, with application to knapsack problems, INFORMS Journal on Computing 31(2) (2019) 390-410, doi:10.1287/ijoc.2018.0831.
-* `FischettiEtAl2017`: M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, A new general-purpose algorithm for mixed-integer bilevel linear programs, Operations Research 65(6) (2017) 1615-1637, doi:10.1287/opre.2017.1650.
-* `VasquezLozanoVanHoeve2025`: S. Vásquez, L. Lozano and W.-J. van Hoeve, A single-level reformulation of binary bilevel programs using decision diagrams, Mathematical Programming (2025), online first, doi:10.1007/s10107-025-02294-1.
+* `FischettiEtAl2017`: M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, A new general-purpose algorithm for mixed-integer bilevel linear programs, Operations Research 65(6) (2017) 1615-1637, doi:10.1287/opre.2017.1650, and its online appendix of 29 June 2016 (www.dei.unipd.it/~fisch/appendix.pdf; Table 9 for the two network optima).
+* `VasquezLozanoVanHoeve2025`: S. Vásquez, L. Lozano and W.-J. van Hoeve, A single-level reformulation of binary bilevel programs using decision diagrams, Mathematical Programming (2025), online first, doi:10.1007/s10107-025-02294-1 (named in `notes`: later proofs of two optima first published by Fischetti et al. 2017).
+* `LefebvreSchmidt2025`: H. Lefebvre and M. Schmidt, A Dantzig-Wolfe single-level reformulation for mixed-integer linear bilevel optimization: exact and heuristic approaches, Optimization Online preprint (June 2025), per-instance run files on the first author's web page (henrilefebvre.com); the optimum credited to them is in their run file results-MILP.csv, not in the text of the paper.
 
 ## Verification
 
@@ -252,9 +255,10 @@ published floating-point optima; the OR lower bounds from the LP bracket rest
 on HiGHS's dual bound (with a safety margin of 1e-6 relative); OR lower bounds
 for several follower knapsacks are the literature's; the published OR points
 include values of Lefebvre and Schmidt (2025) that are not verified, taken
-only from runs that ended before the time limit, as in their own analysis
-(their run files are checked against this package in
-`notes/lefebvre_schmidt.md`); for one OR
+only from runs that ended before the time limit, as in most of their own
+analysis, and the one optimum credited to them (ex10_0_100) is a row of their
+run file that this package confirms independently (their run files are
+checked against this package in `notes/lefebvre_schmidt.md`); for one OR
 instance a published lower bound exceeds a published point
 (`notes` of `instances.csv`; OR10x100-0.75_4.dat-0, closed by the published branch-and-cut bound).
 
@@ -288,7 +292,9 @@ then `scripts/gen_facts.py` and `scripts/gen_appendix_tables.py`.
 results/literature/miblp_literature_status.csv --lbc-optimal optimal.csv
 --runs runs --results results` (from `bobilib/`; `optimal.csv` is
 `solution_files/optimal.csv` of Lozano, Bergman and Cire's repository; it reads
-the OR bounds and ray checks from this package and the `bobi general` runs from `runs/`).
+the OR bounds, the ray checks and `literature/other_published_optima.csv` from this
+package and the `bobi general` runs from `runs/`; each published optimum is credited to
+its first publication among these sources).
 `notes/instance_structure.csv` (the structure of the general and assignment
 instances that the paper describes: variable and row split, coupling rows,
 continuous linking variables, follower objective against the leader's) is

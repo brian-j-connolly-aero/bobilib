@@ -14,6 +14,7 @@ import collections
 import csv
 import json
 import re
+import statistics
 import sys
 
 
@@ -97,7 +98,7 @@ def main():
             by[(r["variant"], r["alpha"])].append((r["gap"], r["lit_gap"]))
     # Compare medians over the same instances: those with a literature gap. The
     # instances without a published point are reported on their own.
-    med = lambda v: sorted(v)[len(v) // 2] if v else float("nan")
+    med = lambda v: statistics.median(v) if v else float("nan")
     for k in sorted(by):
         paired = [(x, y) for x, y in by[k] if y is not None]
         alone = [x for x, y in by[k] if y is None]

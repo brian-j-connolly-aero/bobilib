@@ -10,7 +10,8 @@ sides are finite.
 
 \subsection{Unbounded followers: no bilevel feasible point}
 
-\begin{theorem}[Recession direction]\label{thm:ray}
+\begin{theorem}[Recession direction; Fischetti et~al.,\cite{fischetti2018intersection} Thm~1,
+after Xu and Wang\cite{xu2014exact}]\label{thm:ray}
 Let $r\in\mathbf{Q}^{n_y}$ satisfy, for every follower row $i$, $D_ir\ge 0$ if
 $\ell_i>-\infty$ and $D_ir\le 0$ if $h_i<+\infty$; for every follower variable
 $j$, $r_j\ge 0$ if $\ell^y_j>-\infty$ and $r_j\le 0$ if $h^y_j<+\infty$; and
@@ -27,7 +28,16 @@ bound for the same reason; and its integer-constrained entries stay integral.
 Its objective $f^{\top}y+t\nu f^{\top}r$ tends to $-\infty$. So $P(x)$ has no
 optimal solution whenever it is feasible.
 \end{proof}
-\noindent Not formalised.
+\noindent Not formalised. Fischetti, Ljubi\'c, Monaci and Sinnl state the same
+result (their Theorem~1, for rows with one finite side) as a test by one LP:
+minimise $f^{\top}r$ over the sign conditions and $-1\le r\le 1$; a negative
+optimum gives a rational direction as above, and they propose the test as a
+preprocessing step.\cite{fischetti2018intersection} It extends Lemma~2 of Xu
+and Wang (a follower that is unbounded for one leader choice makes the
+bilevel problem infeasible).\cite{xu2014exact} A row with two finite sides is
+written here as its two one-sided rows (Section~\ref{app:conventions}), which their test
+covers. New here are only its systematic application to BOBILib's unsolved
+general instances and the exact rational check of each direction.
 
 \begin{remark}[Meyer's theorem]
 The theorem only needs an explicit rational direction. It is the case we
@@ -84,11 +94,13 @@ Lemma~\ref{lem:hpr}. This is not assumed: a script reads the bilevel
 instance and the MIPLIB~2017 model and checks in exact rational arithmetic
 that they have the same variables, rows, coefficients, sides, bounds,
 integrality requirements and objective (up to the objective's sense). For
-the \NumHprOptimal{} instances where it holds and a verified bilevel feasible point
+the \NumHprWithPublished{} instances where it holds and a verified bilevel feasible point
 attains the bound (\texttt{pigeon-10\_0\_100}, \texttt{pigeon-10\_50\_50},
 \texttt{timtab1\_0\_100}, \texttt{noswot\_0\_100}, \texttt{noswot\_50\_50},
 \texttt{ex10\_0\_100}, \texttt{neos-1445765\_0\_100}; Table~\ref{tab:hpr}),
-the point is optimal by accepted benchmark conventions. The values $z^{*}$
+the point is optimal by accepted benchmark conventions; for
+\texttt{ex10\_0\_100} this confirms a published optimum (below), and the other
+\NumHprOptimal{} are proven optimal here. The values $z^{*}$
 are the optima in MIPLIB~2017's solution file. They were computed by MILP
 solvers in floating point and are solver-certified numerical results
 (class~(ii), Section~\ref{app:classes}), not exact-arithmetic proofs, so these
@@ -104,9 +116,10 @@ be $-42$ or less); BOBILib's own points attain it.
 binary variables, so the same integrality argument applies, and the point of
 \texttt{bobi general} attains it. Lefebvre and Schmidt's run
 files\cite{lefebvre2025dantzig} report the same optimum for \texttt{ex10\_0\_100}
-(an exact MILP run that ended well before its time limit); their paper does not state
-it, so it is not counted as a published optimum
-(\texttt{results/notes/lefebvre\_schmidt.md}).
+(an exact MILP run that ended well before its time limit). Their paper does not name
+the instance; the optimum is counted as published, credited to their run file, and
+this argument confirms it independently (Section~\ref{app:ls},
+\texttt{results/notes/lefebvre\_schmidt.md}).
 \item \texttt{neos-1445765}: $z^{*}=\NeosFourteenOptimum{}$; the objective has integer
 coefficients on integer variables only, so the same argument applies, and the point
 of \texttt{bobi general} attains it.

@@ -42,12 +42,14 @@ EPOCH = 1793145600  # 2026-10-28 00:00 UTC: time stamp of every archive member
 KINDS = ["new optimum proven", "published optimum", "no bilevel feasible point", "first feasible point",
          "better feasible point"]
 # Expected counts (the paper's title and results/README.md): checked, not used to compute anything.
-EXPECT = {"new optimum proven": 82, "published optimum": 528, "no bilevel feasible point": 40,
+EXPECT = {"new optimum proven": 79, "published optimum": 531, "no bilevel feasible point": 40,
           "first feasible point": 228, "better feasible point": 465}
+TITLE = (f"Settling 650 unsolved BOBILib instances: {EXPECT['published optimum']} published optima, "
+         f"{EXPECT['new optimum proven']} new optimality proofs and {EXPECT['no bilevel feasible point']} "
+         "infeasibility certificates")
 
 CITATION = {
-    "this work": "B. J. Connolly, Settling 650 unsolved BOBILib instances: 528 published optima, 82 new "
-                 "optimality proofs and 40 infeasibility certificates, preprint (2026); " + REPO,
+    "this work": f"B. J. Connolly, {TITLE}, preprint (2026); " + REPO,
     "WeningerFukasawa2025": "N. Weninger and R. Fukasawa, Math. Program. 210 (2025) 847-879, "
                             "doi:10.1007/s10107-024-02133-9",
     "LozanoBergmanCire2026": "L. Lozano, D. Bergman and A. A. Cire, Oper. Res. (2026), Articles in Advance, "
@@ -55,15 +57,21 @@ CITATION = {
     "FischettiEtAl2019": "M. Fischetti, I. Ljubic, M. Monaci and M. Sinnl, INFORMS J. Comput. 31(2) (2019) "
                          "390-410, doi:10.1287/ijoc.2018.0831",
     "FischettiEtAl2017": "M. Fischetti, I. Ljubic, M. Monaci and M. Sinnl, Oper. Res. 65(6) (2017) 1615-1637, "
-                         "doi:10.1287/opre.2017.1650",
+                         "doi:10.1287/opre.2017.1650, and its online appendix of 29 June 2016 "
+                         "(www.dei.unipd.it/~fisch/appendix.pdf)",
     "VasquezLozanoVanHoeve2025": "S. Vasquez, L. Lozano and W.-J. van Hoeve, Math. Program. (2025), "
                                  "doi:10.1007/s10107-025-02294-1",
+    "LefebvreSchmidt2025": "H. Lefebvre and M. Schmidt, A Dantzig-Wolfe single-level reformulation for "
+                           "mixed-integer linear bilevel optimization: exact and heuristic approaches, Optimization "
+                           "Online preprint (June 2025), run file results-MILP.csv on the first author's web page "
+                           "(henrilefebvre.com)",
     "BOBILibEarlierRelease": "an earlier release of the BOBILib metadata, which listed the instance as optimal",
 }
 
 SHORT = {"WeningerFukasawa2025": "Weninger and Fukasawa (2025)", "LozanoBergmanCire2026": "Lozano, Bergman and Cire (2026)",
          "FischettiEtAl2019": "Fischetti et al. (2019)", "FischettiEtAl2017": "Fischetti et al. (2017)",
          "VasquezLozanoVanHoeve2025": "Vasquez, Lozano and van Hoeve (2025)",
+         "LefebvreSchmidt2025": "Lefebvre and Schmidt (2025, run file)",
          "BOBILibEarlierRelease": "an earlier BOBILib release"}
 
 SUPP = {  # sections of the paper's supplement (paper/appendix/appendix.pdf), by title
@@ -274,10 +282,31 @@ def main():
                     row["certificate_class"] = "exact"  # follower optimum by the partition argument
         elif k == "published optimum":
             row["check"] = "citation"
-            row["how_to_check"] = ("optimality as published (not re-proved here)" +
-                                   ("; the solution file attains it: run the checker" if row["solution_file"]
-                                    else "; no solution file here"))
+            how = "optimality as published (not re-proved here)"
             row["supplement"] = SUPP["published"]
+            if r["certificate_class"] == "exact":  # the two attack-protect optima, re-proved exactly here
+                check(fam == "network" and r["source"] == "FischettiEtAl2017", f"{n}: exact published optimum")
+                certs.update({"network/summary.csv", "network/review.tsv"})
+                row["certificate_files"] = "results/network/summary.csv;results/network/review.tsv"
+                how = ("optimality as published, and re-proved here: every attack enumerated, follower by exact "
+                       "tree DP (bobi fire in the repository or, independently, checkers/network/fire_check enum)")
+                row["supplement"] = SUPP["network"]
+            elif n in hpr:  # the MIPLIB bound of the HPR: a verified point here confirms the published optimum
+                h = hpr[n]
+                certs.add("general/hpr_optimal.csv")
+                row["certificate_files"] = "results/general/hpr_optimal.csv"
+                bound = (f"the HPR equals MIPLIB's {h['miplib_instance']} (python3 -I checkers/compare_hpr.py "
+                         f"INSTANCE.mps.gz INSTANCE.aux {h['miplib_instance']}.mps.gz), whose published optimum "
+                         f"is {h['miplib_optimum']}")
+                if r["verified"] == "yes":  # ex10_0_100: the solution file here is at the bound
+                    how = f"optimality as published; confirmed here: {bound}"
+                else:  # neos-950242_0_100: BOBILib's own point, not re-verified here
+                    check(h["point_from"].startswith("BOBILib"), f"{n}: unverified point at the MIPLIB bound")
+                    how = (f"optimality as published (not re-proved here); MIPLIB bound: {bound}; BOBILib's own "
+                           f"solution file has that value (not re-verified here)")
+            row["how_to_check"] = how + ("; the solution file attains it: run the checker" if row["solution_file"]
+                                         else "" if n in hpr
+                                         else "; no solution file here")
         elif k == "no bilevel feasible point":
             row["check"] = "certificate"
             check(cert.startswith("rays/") and r["certificate_class"] == "exact", f"{n}: ray")
@@ -399,6 +428,15 @@ def main():
     newopt = Counter()
     for r in by("new optimum proven"):
         newopt[{"knapsack": "ss", "clique": "clique", "network": "network"}.get(r["family"], "hpr")] += 1
+    check(newopt["network"] == 0, "the attack-protect optima are published (Fischetti et al. 2017)")
+    pub_exact = [r for r in by("published optimum") if r["certificate_class"] == "exact"]
+    pub_hpr = [r for r in by("published optimum") if r["instance"] in hpr]
+    check(len(pub_exact) == 2 and sorted(r["instance"] for r in pub_hpr) == ["ex10_0_100", "neos-950242_0_100"],
+          "published optima re-proved or confirmed here")
+    ver = {r["instance"]: r["verified"] for r in rows}  # instances.csv
+    pub_hpr_conf = [r["instance"] for r in pub_hpr if ver[r["instance"]] == "yes"]  # a verified point here at the bound
+    pub_hpr_bob = [r["instance"] for r in pub_hpr if ver[r["instance"]] != "yes"]   # BOBILib's point, not re-verified
+    check(pub_hpr_conf == ["ex10_0_100"] and pub_hpr_bob == ["neos-950242_0_100"], "MIPLIB-bound published optima")
     clique_brouwer = sum("Brouwer" in r["how_to_check"] for r in by("new optimum proven"))
     pub_src = Counter(r["source"] for r in by("published optimum"))
     n_pass = offc.get("pass", 0)
@@ -426,8 +464,7 @@ def main():
     readme = f"""# BOBILib status update: submission
 
 From Brian J. Connolly (Beehive Industries, brian.connolly@beehiveind.com), with the paper
-"Settling 650 unsolved BOBILib instances: 528 published optima, 82 new optimality proofs and
-40 infeasibility certificates" (preprint, 2026). Repository: {REPO}; paths that start with
+"{TITLE}" (preprint, 2026). Repository: {REPO}; paths that start with
 `results/`, `scripts/`, `paper/` or `data-manifest/` are relative to its root (the paper's supplement is
 `paper/appendix/appendix.pdf`), the others to the archive `bobilib_submission.tar.gz`.
 
@@ -446,13 +483,19 @@ Reference: {snapshot_text}
 | first feasible point | {kinds['first feasible point']} | {fmt_before('first feasible point')} | feasible | checker | {cls('first feasible point')} |
 | better feasible point | {kinds['better feasible point']} | {fmt_before('better feasible point')} | feasible (value improves) | checker | {cls('better feasible point')} |
 
-* New optima: {newopt['ss']} subset-sum knapsack interdiction, {newopt['clique']} clique interdiction,
-  {newopt['network']} attack-protect (`inter-fire`) and {newopt['hpr']} general instances whose HPR is a
-  MIPLIB model with a published optimum. For {already} of the {kinds['new optimum proven'] + kinds['published optimum']}
-  optima BOBILib's value was already optimal and only the status changes.
+* New optima: {newopt['ss']} subset-sum knapsack interdiction, {newopt['clique']} clique interdiction
+  and {newopt['hpr']} general instances whose HPR is a MIPLIB model with a published optimum. For
+  {already} of the {kinds['new optimum proven'] + kinds['published optimum']} optima BOBILib's value was
+  already optimal and only the status changes.
 * Published optima: {', '.join(f'{v} {SHORT[k]}' for k, v in pub_src.most_common())} (full references in
-  `status_changes.csv`, column `citation`). For {nofile_pub} of them there is no solution file here;
-  only the published value is used.
+  `status_changes.csv`, column `citation`), each credited to its first publication among the sources
+  we compiled (later proofs are named in `notes`). For {nofile_pub} of them there is no solution file
+  here; only the published value is used. The {len(pub_exact)} attack-protect games (`inter-fire`)
+  {' and '.join(r['instance'] for r in pub_exact)}, which Fischetti et al.'s MIX++ solved (online
+  appendix of their 2017 paper, Table 9), are re-proved here exactly by enumeration (class `exact`).
+  ex10_0_100 is optimal in Lefebvre and Schmidt's run file `results-MILP.csv` (a run that ended
+  before the time limit with value equal to bound; their paper does not name the instance); it is
+  credited to them, and the MIPLIB bound of its HPR with the solution file here confirms it.
 * First feasible points: BOBILib lists no point; for {first_anywhere} it is the first point anywhere, for
   the other {pub_elsewhere} a published point existed (named in `notes`).
 * `bobilib_update.solu` also has {len(bestdual)} `=bestdual=` lines (proven lower bounds better than any
@@ -486,10 +529,10 @@ A point only gives an upper bound. The lower bound or the infeasibility proof is
 | subset-sum knapsack interdiction optimum | {newopt['ss']} | `ss/proofs.csv` | exhaustive search (`bobi ss-solve`); independent prover `checkers/ss_check.py` | {SUPP['ss']} |
 | clique interdiction optimum, value 3 | {newopt['clique'] - clique_brouwer} | `clique/summary.csv` | Mantel's theorem: m - k > floor(n^2/4) (arithmetic) | {SUPP['clique']} |
 | clique interdiction optimum, value 4 | {clique_brouwer} | `clique/certificates/*.cert.jsonl.gz` | Brouwer (1981) Thm 2 plus w3(G) > k, `checkers/check_clique_certificates.py` (integer arithmetic) | {SUPP['clique']} |
-| attack-protect optimum | {newopt['network']} | `network/summary.csv`, `network/review.tsv` | every attack enumerated, 2,138,410 per instance (`bobi fire`; independently `checkers/network/fire_check.c`) | {SUPP['network']} |
+| attack-protect optimum (published, re-proved here) | {len(pub_exact)} | `network/summary.csv`, `network/review.tsv` | every attack enumerated, 2,138,410 per instance (`bobi fire`; independently `checkers/network/fire_check.c`) | {SUPP['network']} |
 | optimum at the MIPLIB bound of the HPR | {newopt['hpr']} | `general/hpr_optimal.csv` | `checkers/compare_hpr.py` (HPR = MIPLIB model) and MIPLIB's published optimum | {SUPP['hpr']} |
 | no bilevel feasible point | {kinds['no bilevel feasible point']} | `rays/*.ray.json` | `checkers/verify_ray.py`: exact rational check of a recession direction of the follower | {SUPP['ray']} |
-| published optimum | {kinds['published optimum']} | (the cited paper) | as published; not re-proved here | {SUPP['published']} |
+| published optimum | {kinds['published optimum']} | (the cited paper) | as published; apart from the {len(pub_exact)} above not re-proved here ({' and '.join(pub_hpr_conf)} is confirmed by the MIPLIB bound with a verified point, `general/hpr_optimal.csv`; BOBILib's point of {' and '.join(pub_hpr_bob)}, not re-verified here, meets that bound too) | {SUPP['published']} |
 
 The upper bound of each new optimum is its solution file (in the clique files the leader deletes
 exactly the edges inside the parts of a partition, so the follower's clique number is at most the
@@ -500,7 +543,8 @@ The supplement has the proofs; `lean/` in the repository formalises the knapsack
 ## Certificate classes (column `certificate_class`)
 
 * `exact`: checked in exact rational or integer arithmetic, or a proof plus an exhaustive integer
-  computation; no tolerance enters.
+  computation; no tolerance enters. The {len(pub_exact)} published attack-protect optima are in this class
+  because of their re-proof here; all other published optima are `numerical`.
 * `numerical`: rests on a floating-point LP/MILP solver run with tolerances (rows within 1e-6, follower
   optimum by HiGHS within max(1e-6, 1e-9 |phi|)), or on a published optimum used as published, or on
   MIPLIB's published floating-point optimum.

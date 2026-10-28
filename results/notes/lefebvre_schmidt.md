@@ -8,6 +8,11 @@ PDF's. The per-instance data are the run files on the first author's
 open-science page for the paper: `results/results-{MILP,MILP-first,PADM,PADM-interdiction}.csv`,
 `to_check.csv`, `bobilib.csv` (their BOBILib snapshot of 5 June 2025) and
 `methodology.render.Rmd` (their analysis script). All of it was read as data.
+Versions: the run files are those of 12 June 2025 (site commit 5a4625f,
+unchanged at the site's HEAD 45db1a4, checked 28 October 2026); the analysis
+script is that of 10 July 2026 (b062f9a). Their Optimization Online page,
+re-checked on 28 October 2026, still says "Published 2025/06/12, Updated
+2026/07/20"; no newer version, erratum or journal version was found.
 
 Column meanings come from the authors' script:
 MILP files `tag, instance, method, time, status, reason, best_obj, best_bound, lambda, pi_lb, pi_ub`;
@@ -29,24 +34,29 @@ result, our status, and where the authors' analysis uses the row).
   624 s. It is correct: the instance's HPR is exactly MIPLIB's ex10 (checked now with
   `scripts/compare_hpr.py`), whose published optimum is 100, and our verified point has
   value 100. The paper never names the instance and claims no optimum for any open
-  instance; it counts it only as a feasible point found for an open instance.
+  instance; it counts it only as a feasible point found for an open instance. The
+  data package counts this optimum as published, credited to their run file
+  (`../literature/other_published_optima.csv`), with our MIPLIB-bound certificate as an
+  independent confirmation (decision of 28 October 2026; see Recommendations).
 * **Value 0 on OR instances**: 366 OR instances get an `Optimal/Proved` value of 0 (387
   get a 0 in some row). Every such row ends at the time limit (3600.0 to 3629.4 s) with
   bound 0. An elementary exact bound gives at least 568 on every one of them. The 0 is not
-  a status code, a default value, a sign convention or an offset. It is the optimum of
-  the high point relaxation (y = 0), which was accepted as the incumbent when the
-  bilevel-feasibility separation did not finish before the time limit. The authors'
-  analysis discards these rows (time 3600 means "not solved"), so Tables 2 and 3 and
-  Figures 1 to 5 are not affected. Figure 6 takes the best value of any run without a
+  a status code, a default value, a sign convention or an offset. It equals the
+  optimum of the high point relaxation (y = 0). The most likely explanation, matching
+  idol's public lazy-cut callback in the version of 23 May 2025 (commit 71ae4e2,
+  before their runs), is that this point was kept as the incumbent when the
+  bilevel-feasibility separation did not finish before the time limit; their driver
+  is not published. The authors' analysis discards these rows (time 3600 means "not
+  solved"), so Tables 2 and 3 and Figures 1 to 5 are not affected. Figure 6 takes the best value of any run without a
   time filter, and its 20 % "best" share for MILP-First on interdiction instances is
   very likely an artefact of these zeros.
 * **highschool1-aigio_0_100**: the PADM point (value 0, `Feasible/Proved`, both penalty
   settings) cannot be bilevel feasible. Our exact recession direction (re-checked now)
-  shows the follower has no optimal response for any leader choice. The "infinite
-  multipliers" are the dual-variable bounds of Remark 2, not a diverging penalty. The
-  paper does not name the instance, but it counts it among the 48 open instances where
-  PADM "found feasible" (Table 2) and among the abstract's "66 instances that were still
-  open".
+  shows the follower has no optimal response for any leader choice. The values 1e+20
+  in the last three columns are the dual-variable bounds of their Remark 2 (no
+  finite bound), not penalty parameters. The paper does not name the instance, but it
+  counts it among the 48 open instances where PADM "found feasible" (Table 2) and among
+  the abstract's "66 instances that were still open".
 * **Further problems in the run files that do reach the paper**: 91 instances with a
   known point are reported `Infeasible/Proved` (in 0.01 to 0.4 s for the 89 generalized
   ones, 23 to 300 s for mas74_0_100 and mas76_0_100), and 2 reported optima are worse
@@ -70,7 +80,7 @@ bound = value. This is unlike the time-limit artefacts of section (2).
 
 Independent evidence: `python3 -I scripts/compare_hpr.py ex10_0_100.mps.gz ex10_0_100.aux ex10.mps.gz`
 (MIPLIB 2017 file, downloaded 2026-10-19) prints `HPR == MIP`. MIPLIB 2017 lists ex10 as
-`=opt= 100` (miplib2017-v31.solu). The objective is the all-ones vector on 17,680 binaries,
+`=opt= 100` (miplib2017-v37.solu, 24 Sep 2026). The objective is the all-ones vector on 17,680 binaries,
 so every value is an integer. 100 is therefore a lower bound under the same convention
 as noswot (a published MIPLIB optimum, safe by integrality rounding if the published
 bound is valid). Our verified point `general/ex10_0_100.res.json` has value 100
@@ -118,15 +128,18 @@ McCormick system. For packing interdiction (leader objective p^T y with p >= 0),
 optimum is y = 0 with value 0. Lines 13-17 of Algorithm 1 accept an integer point as
 the incumbent unless the separation problem yields a violated cut. The paper separates
 "inside the Gurobi callback triggered by the MIPSOL event" (p. 15). In idol's generic
-lazy-cut callback (`lib/src/mixed-integer/optimizers/callbacks/CutSeparation.cpp`,
-commit 8f77367), the separation MILP receives the remaining time as its limit (line 43).
-If it stops without a solution, the callback returns without a cut (line 48), so Gurobi
-keeps the point. Its value 0 then equals the bound 0, Gurobi reports OPTIMAL, and idol
-maps that to `Optimal/Proved` (`Optimizers_Gurobi.cpp` line 227). Whether the authors'
-unpublished driver uses exactly this callback is not known. The rows match this
-behaviour exactly. The nonzero time-limit values below proven bounds (section 4) are
-presumably the same effect after some cuts. The value is therefore that of a relaxation,
-not of a bilevel feasible point.
+lazy-cut callback (`lib/src/mixed-integer/optimizers/callbacks/CutSeparation.cpp`) as of
+commit 71ae4e2 (23 May 2025, before their runs; the file was last changed on 10 April
+2025), the separation MILP receives the remaining time as its limit (line 41). If it
+stops without a solution, the callback returns without a cut (line 48), so Gurobi keeps
+the point. Its value 0 then equals the bound 0, Gurobi reports OPTIMAL, and idol maps
+that to `Optimal/Proved` (`Optimizers_Gurobi.cpp` line 62 in that version). The current
+version (commit 8f77367, 23 June 2026) has the same code (lines 43 and 49; the mapping
+at line 227). Whether the authors' unpublished driver uses exactly this callback is not
+known. The rows match this behaviour exactly. The nonzero time-limit values below proven
+bounds (section 4) are presumably the same effect after some cuts. The value therefore
+equals that of a relaxation; it is not the value of any bilevel feasible point, since it
+lies below proven lower bounds.
 
 Does it reach the paper? Not the tables. The script turns these times into 3600 = "not
 solved / no point", so Figures 1 to 5 and Tables 2 and 3 exclude them, and the paper's
@@ -138,9 +151,13 @@ with no time or status filter. Rerunning that computation on the posted files ov
 instances gives MILP-First "best" on 396 of 1,958 interdiction instances (20.2 %; the
 paper says 20 %). 319 of those 396 are time-limit zeros. Without the time-limit MILP and
 MILP-First values the share is 3.5 %, and MibS-First rises from 31.1 % to 38.0 % (the
-paper says 35 %). The posted script itself restricts Figure 6 to instances where
-MibS-First needs at least 120 s. There, MILP-First is "best" on 63.4 % of 426
-interdiction instances, and on 0 % without the zeros. Either way most of the MILP-First
+paper says 35 %). The posted script contains the best-of-all computation only in a
+chunk restricted to instances where MibS-First needs at least 120 s (it exports
+`ecdf_gap_all_after_120.csv`); the line exporting `ecdf_gap_all.csv`, whose data match
+Figure 6a, is commented out (`methodology.render.Rmd` of 10 July 2026, lines 354-396). In
+that chunk,
+MILP-First is "best" on 63.4 % of 426 interdiction instances, and on 0 % without the
+zeros. Either way most of the MILP-First
 share in Figure 6a comes from the zeros.
 
 ## (3) highschool1-aigio_0_100
@@ -163,15 +180,18 @@ What PADM's output means:
 * `Feasible/Proved` in idol's PADM (`lib/src/mixed-integer/optimizers/padm/Optimizers_PADM.cpp`,
   `is_feasible` lines 308-317 and `check_feasibility` lines 511-518) means the penalised
   constraint violations are within tolerance. That makes the point feasible for the
-  single-level model built so far, and the paper calls such points "stationary points of
-  the single-level problem" (p. 5). That model equals the bilevel problem only under
+  single-level model built so far. For the linear-bilevel PADM of their Section 3 the
+  paper notes that its feasible points are stationary points of the single-level
+  Problem (4) (p. 5); for the mixed-integer PADM, `Feasible` likewise means
+  feasibility for the single-level model. That model equals the bilevel problem only under
   Assumption 1 (p. 6: "the follower's feasible region ... is bounded for all x"), which
   this instance violates.
-* The "infinite multipliers" are not a diverging penalty. `outer_loops = 1` and
+* The values 1e+20 in the last three columns are the dual-variable bounds of their
+  Remark 2 (no finite bound), not penalty parameters. `outer_loops = 1` and
   `inner_loops = 2` show that PADM stopped after two iterations at its initial penalty.
   The triple `1e+20, -2e+20, 1e+20` is the Remark 2 bound triple (u - l, 2l - u, 2u - l)
-  with l = -infinity. Their bound computation found the follower's objective unbounded
-  below over the HPR, which is what our direction (f^T d = -1) implies.
+  with l = -infinity. Their bound computation returned no finite bound, consistent with
+  our direction (f^T d = -1).
 * The value 0 equals MIPLIB's published optimum of highschool1-aigio, consistent with
   PADM returning an HPR solution whose follower part is not optimal.
 
@@ -181,7 +201,7 @@ were open in BOBILib" (p. 20), in the abstract's 66, and in Figures 3, 4b and 6.
 own data the instance has infinite dual-variable bounds. The same holds for 102 other
 test-set instances: all 90 generalized ones (follower variables with no upper bound, so
 u = +infinity) and 12 MIPLIB-derived ones, for every one of which `rays/` holds a
-recession direction. This conflicts with the test-set description "all problems in which
+recession direction. This does not match the test-set description "all problems in which
 the linking variables are binary and the shared constraint set is bounded" (p. 15) and
 with "have all variables explicitly bounded" (p. 3).
 
@@ -236,8 +256,13 @@ Recounted with the authors' own time filter plus the status column:
 
 For this paper and data package:
 
-1. ex10_0_100: classify as optimal at 100 by the HPR (MIPLIB) bound, as the sixth
-   HPR-bound optimum, in the same certificate class as noswot. Record that Lefebvre and
+1. ex10_0_100 (*superseded on 28 October 2026*: the optimum is now counted as
+   published, credited to their run file `results-MILP.csv`, a row of a run that
+   ended in time with value equal to bound, which a verified point at 100 and the
+   MIPLIB bound confirm; their optimum for ex10_50_50, without a verified point, and
+   for mine-166-5_50_50, whose point their `to_check.csv` rejects, are not counted;
+   the original recommendation follows). Classify as optimal at 100 by the HPR (MIPLIB)
+   bound, as the sixth HPR-bound optimum, in the same certificate class as noswot. Record that Lefebvre and
    Schmidt's MILP run file reports the same optimum, although their paper does not state
    it. This changes headline counts by one each: proven optimal here +1 (HPR-bound
    optima 5 to 6), first verified points for general instances without coupling -1,

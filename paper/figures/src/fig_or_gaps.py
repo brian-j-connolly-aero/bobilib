@@ -35,14 +35,14 @@ for r in rows:
         pairs[(ft, r["alpha"])].append((lit, now))
         by_variant[(r["variant"], r["alpha"])].append((lit, now))
 
-# Paired medians quoted in the paper (upper median, as scripts/compare_or.py), in %.
-quoted = {("100", "0.25"): (24.0, 4.0), ("100", "0.50"): (34.0, 7.2), ("100", "0.75"): (0.14, 0.14),
-          ("0", "0.25"): (33.3, 31.4), ("0", "0.50"): (36.6, 29.1), ("0", "0.75"): (5.3, 0.05),
-          ("50", "0.25"): (30.6, 28.3), ("50", "0.50"): (41.3, 35.0), ("50", "0.75"): (11.8, 1.4)}
+# Paired medians quoted in the paper (true median, as scripts/compare_or.py), in %.
+quoted = {("100", "0.25"): (24.0, 4.0), ("100", "0.50"): (34.0, 7.1), ("100", "0.75"): (0.14, 0.14),
+          ("0", "0.25"): (33.3, 31.4), ("0", "0.50"): (36.6, 29.1), ("0", "0.75"): (5.2, 0.05),
+          ("50", "0.25"): (30.1, 28.2), ("50", "0.50"): (41.3, 34.9), ("50", "0.75"): (11.8, 1.4)}
 for k, (ql, qn) in quoted.items():
     v = by_variant[k]
-    ml = 100 * S.upper_median([a for a, _ in v])
-    mn = 100 * S.upper_median([b for _, b in v])
+    ml = 100 * S.median([a for a, _ in v])
+    mn = 100 * S.median([b for _, b in v])
     nd = 2 if ql < 1 else 1
     S.check(round(ml, nd), ql, f"median literature gap, variant -{k[0]}, budget {k[1]}")
     nd = 2 if qn < 1 else 1

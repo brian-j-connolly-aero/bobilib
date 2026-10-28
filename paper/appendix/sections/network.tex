@@ -144,14 +144,18 @@ nodes and $\Phi=\Lambda=5$; the enumeration visits every $k$-subset for
 $k=0,\dots,5$ (the count per size is checked against $\binom{49}k$),
 $\sum_{k=0}^5\binom{49}k=2{,}138{,}410$ attacks per instance
 (\SuppNetFullBudgetAttacks{} of them with exactly 5 nodes), and both optima are
-$26$. The review session obtained the same minima, the same number of optimal
+$26$. These are the published values: Fischetti et~al.'s MIX++ had proved both
+instances optimal at $26$, on four threads within an hour (Table~9 of the online
+appendix of their paper),\cite{fischetti2017new,fischetti2016appendix} so the
+enumeration re-proves published optima in exact arithmetic; the data package
+lists them as published optima, in class~(i) because of this re-proof. The review session obtained the same minima, the same number of optimal
 attacks and the same per-size minima with its own code. The attack counts of
 Tables~\ref{tab:network} and~\ref{tab:network-trees} are of this kind, every
 attack of $0$ to $\Phi$ nodes once per instance: \SuppNetTreeAttacks{} over the
 \SuppNetTrees{} trees (\SuppNetTableTreeAttacks{} over the 34 of
 Table~\ref{tab:network-trees}).
 
-These optima are exact certificates (class~(i), Section~\ref{app:classes}):
+These re-derivations are exact certificates (class~(i), Section~\ref{app:classes}):
 every witness is a 0/1 point of a model with integer coefficients, checked
 against every row with no tolerance in play, and the follower's optimum at
 $Y^{*}$ rests on Proposition~\ref{prop:fire-dp} and on the review's exhaustive

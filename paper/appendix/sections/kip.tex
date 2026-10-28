@@ -54,7 +54,12 @@ $\Phi$, and the induction hypothesis applies to $X^{s}$. Otherwise $X'=X$
 works.
 \end{proof}
 {\raggedright\noindent Formalised: \texttt{Bobi/Knapsack.lean}, theorems
-\texttt{K\_map\_equiv}, \texttt{swap\_block} and \texttt{cheapest\_first}.\par}
+\texttt{K\_map\_equiv}, \texttt{swap\_block} and \texttt{cheapest\_first}. The
+current version of Weninger and Fukasawa's code (commit bc1d985, August 2026,
+not described in their paper) breaks symmetry by item dominance (an item at
+least as profitable as another, with no more weight and no more cost, is
+blocked first); for items of equal profit and weight this contains the
+lemma.\cite{weninger_bkpsolver}\par}
 
 \begin{definition}[Class instance]\label{def:class-instance}
 A \emph{class instance} is a list of classes $1,\dots,L$; class $i$ has a
@@ -111,7 +116,11 @@ deletion $r$ is blocking, $X(r)$ is within budget with $\Phi(X(r))<\ell$, so
 $\mathrm{OPT}<\ell$.
 \end{proof}
 \noindent Not formalised as a whole; its two ingredients are
-Lemmas~\ref{lem:kip-monotone} and~\ref{lem:kip-cheapest}.
+Lemmas~\ref{lem:kip-monotone} and~\ref{lem:kip-cheapest}. Weninger and
+Fukasawa's code merges items equal in profit, follower weight and leader cost
+into counted copies (option \texttt{-dedup}, commit 1838efe, May
+2023);\cite{weninger_bkpsolver} the classes here hold all items of one weight,
+with different costs.
 
 If $\lceil\ell/g\rceil>hi$, the question is trivial: the leader set $F=X(0)$
 costs nothing and, by part~(1), $\Phi(F)\le g\cdot hi<\ell$, so
@@ -138,7 +147,10 @@ the window is $[a,b+v_1+\dots+v_{h-1}]$, of width
 $(b-a+1)+v_1+\dots+v_{h-1}\ge v_h$.
 \end{proof}
 {\raggedright\noindent Formalised: \texttt{Bobi/SubsetSum.lean}, theorems
-\texttt{window\_extend} and \texttt{window\_extend\_all}.\par}
+\texttt{window\_extend} and \texttt{window\_extend\_all}. The general
+statement extends the sufficiency half of Brown's criterion for complete
+sequences of integers\cite{brown1961note} from the start $\{0\}$ to a window
+$[a,b]$.\par}
 
 \begin{lemma}[Survivors that fit]\label{lem:window-survivors}
 Let $[a,b]\subseteq\mathrm{SS}(M)$ with $a\le b$ and $\theta=b-a+1$. Let
@@ -177,7 +189,8 @@ Each term of the first sum is nonnegative ($m^{*}_h=v_h\ge m_h$ when
 $\rho_h<\lambda$, $m^{*}_h=0\le m_h$ when $\rho_h>\lambda$), and the last term is
 nonnegative because $\sum_hm^{*}_h=d\le\sum_hm_h$ and $\lambda\ge 0$.
 \end{proof}
-\noindent Not formalised (a standard linear programming fact).
+\noindent Not formalised (a standard linear programming fact, Dantzig's greedy
+solution of the fractional knapsack problem\cite{dantzig1957discrete}).
 
 The next rule is stated for a search node (Section~\ref{app:kip-exact}): the
 decided classes have left a multiset $M$ of survivors, $S=\mathrm{SS}(M)\cap[0,hi]$,

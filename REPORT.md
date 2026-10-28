@@ -1,6 +1,8 @@
 # BOBILib: what can be solved, and approaches that resolve many instances at once
 
-*Status as of 2026-10-19. `scripts/summarize.py` regenerates every count from
+*Status as of 2026-10-19, with the literature check of 2026-10-28 (published
+optima credited to their first publication; see "Literature" below).
+`scripts/summarize.py` regenerates every count from
 the files in `results/` and `runs/`; `results/summary.json` is its output.
 `results/instances.csv` gives every instance's outcome and the certificate
 class of each result (exact, numerical or benchmark-accepted; see
@@ -25,8 +27,8 @@ Yes. Of the 1,594:
 
 | Outcome | Instances |
 | --- | ---: |
-| already proven optimal in published work (BOBILib's labels are stale) | 528 |
-| proven optimal here for the first time | 82 |
+| already proven optimal in published work (BOBILib's labels are stale) | 531 |
+| proven optimal here (not published before) | 79 |
 | proven here to have no bilevel feasible point at all | 40 |
 | verified point here where BOBILib lists none (167 of them the first anywhere) | 228 |
 | status unchanged (many with better points, see below) | 716 |
@@ -40,8 +42,10 @@ Two observations carry most of the weight.
 1. **BOBILib's statuses come from two general-purpose bilevel solvers**
    (MibS and Fischetti et al.'s MIX++), one hour on one thread each. The
    specialised literature is far ahead: 376 knapsack interdiction, 140
-   multidimensional knapsack interdiction, 4 generalized interdiction and 8
-   MIPLIB-derived instances are solved in published work.
+   multidimensional knapsack interdiction, 4 generalized interdiction, 9
+   MIPLIB-derived and 2 network interdiction instances are solved in
+   published work (one of the MIPLIB-derived, ex10_0_100, only in Lefebvre
+   and Schmidt's run files).
 2. **Most unsolved instances share a structure that general solvers ignore.**
    1,254 of the 1,594 are *packing interdiction* games: the leader removes
    items within one or more budgets, the follower packs what is left into
@@ -55,19 +59,20 @@ The approaches that resolve whole families rather than single instances:
 
 | Approach | Family | Effect |
 | --- | --- | --- |
-| Robust subset-sum search (count formulation, online tables in threshold form, rebuilt at every node from its decided sums) | knapsack interdiction, subset-sum and even-odd classes | all 16 instances unsolved anywhere proven optimal (8 even-odd, 8 subset-sum), each in about 10 s of CPU time or less on one thread, and checked by an independent prover |
+| Robust subset-sum search (Weninger and Fukasawa's counted copies and online game, played on weight classes with an end set from each node's decided sums and rebuilt at every node) | knapsack interdiction, subset-sum and even-odd classes | all 16 instances open in the literature proven optimal (8 even-odd, 8 subset-sum), each in about 10 s of CPU time or less on one thread, and checked by an independent prover |
 | Dualised follower linear program (LP) bracket and a merged-row online bound | multidimensional knapsack interdiction (OR set), one follower knapsack | paired median gap 24% → 4.0% (budget 25%) and 34% → 7.1% (budget 50%); 191 better lower bounds |
 | Certified points from the follower LP | OR set, several follower knapsacks | all 360 instances with budget 50% or 75% certified; 88 first points anywhere |
 | Extremal graph theory (Mantel 1907, Brouwer 1981) plus partition certificates | edge clique interdiction | 57 of 60 proven optimal at 3 or 4, where BOBILib lists 5 to 13 |
-| Exhaustive attacks with an exact tree dynamic program (DP) | attack-protect network interdiction | both non-optimal instances proven optimal |
-| Recession-ray certificates | MIPLIB-derived | 40 open instances have no bilevel feasible point (all 40 checked in exact arithmetic) |
-| High point relaxation (HPR), then the follower, then an optimistic tie-break; a portfolio for coupling rows | MIPLIB-derived | 93 verified points where BOBILib lists none (64 without coupling rows, 29 with), 5 of them optimal; for 9 of the others a published point already existed |
-| HPR bound = published MIPLIB optimum | MIPLIB-derived | 7 proven optimal (5 of them open, with no point known before) |
+| Exhaustive attacks with an exact tree dynamic program (DP) | attack-protect network interdiction | both non-optimal instances re-proved optimal in exact arithmetic (already solved by MIX++: Fischetti et al. 2017, online appendix of 29 June 2016, Table 9) |
+| Recession-ray certificates (the one-LP test of Fischetti et al., *Math. Programming* 172, 2018, Theorem 1) | MIPLIB-derived | 40 open instances have no bilevel feasible point (all 40 checked in exact arithmetic) |
+| High point relaxation (HPR), then the follower, then an optimistic tie-break; a portfolio for coupling rows | MIPLIB-derived | 93 verified points where BOBILib lists none (64 without coupling rows, 29 with), 5 of them optimal (4 proven here, and ex10_0_100, a published optimum); for 9 of the others a published point already existed |
+| HPR bound = published MIPLIB optimum | MIPLIB-derived | 6 proven optimal (4 of them open, with no point known before); it also confirms the published optimum of ex10_0_100 |
 
 What stays hard: 3 clique instances (value 3 or 4), OR instances with
 several follower knapsacks at budget 25% (120 still without a certified
 point, and the best lower bounds 28-31% away), 8 generalized interdiction
-instances with 20 or more linking bits, and 123 MIPLIB-derived instances.
+instances with 20 or more linking bits, and 123 general instances (122 of
+them MIPLIB-derived).
 
 ## Family by family
 
@@ -84,19 +89,29 @@ instances with 20 or more linking bits, and 123 MIPLIB-derived instances.
   Croce and Scatamacchia, and Lozano, Bergman and Cire's decision diagrams
   (2 h) all leave them open; the best lower bounds sit 2 to 8 units below
   the incumbent, which equals the follower's capacity (or capacity minus
-  one for even-odd).
-* **New.** `robust_ss` decides "can the leader keep the follower below the
-  capacity?" by search over *how many copies of each weight survive*
-  (identical items are interchangeable for the follower, and the leader
-  should remove the cheapest copies first). Its strongest rule is an online
-  relaxation: the leader deletes one weight class at a time and may react
-  to what the follower took from earlier classes, which only helps the
-  leader, so whatever the follower can still guarantee holds in the real
-  game. The guarantee is antitone in the budget, so it is stored as one
-  budget threshold per (class, residual sum), and a single backward pass
-  computes it for the undecided classes with the node's own decided sums as
-  the set the game must end in. That is cheap enough to do at every node
-  that would branch. The order of play matters a great deal: classes that
+  one for even-odd). Weninger's 2026 preprint (arXiv 2604.21877, v2 of
+  16 Oct 2026) still reports 16 of the 100 subset-sum instances unsolved
+  after one hour. The current version of their code (commit bc1d985, 3 Aug
+  2026) adds symmetry breaking by item dominance, which its README says
+  speeds up subset-sum instances by roughly an order of magnitude; no
+  results of it are published, and it was not run here.
+* **New here, and what is not.** `robust_ss` decides "can the leader keep
+  the follower below the capacity?" by search over *how many copies of each
+  weight survive* (identical items are interchangeable for the follower,
+  and the leader should remove the cheapest copies first). Counted copies
+  are Weninger and Fukasawa's: their code merges identical items into
+  counted copies (option `-dedup`, commit 1838efe, May 2023). The strongest
+  rule is their online relaxation and lower bound: the leader deletes one
+  class at a time and may react to what the follower took from earlier
+  classes, which only helps the leader, so whatever the follower can still
+  guarantee holds in the real game; their code (bkpsolver) already plays
+  this game class by class on classes of identical items. New here are
+  only classes of one weight whose copies have different costs, the set
+  the game must end in built from a node's own decided sums, and the table
+  rebuilt for that end set at every node. The guarantee is antitone in the
+  budget, so it is stored as one budget threshold per (class, residual
+  sum), and a single backward pass computes it for the undecided classes,
+  which is cheap enough to do at every node that would branch. The order of play matters a great deal: classes that
   are cheapest to delete per unit of mass go first, so the follower sees
   the leader's likely deletions before it commits, and the expensive
   classes are kept for fine adjustment. Contiguous windows of reachable
@@ -158,22 +173,28 @@ instances with 20 or more linking bits, and 123 MIPLIB-derived instances.
   and -50: several). BOBILib has no optimum. Lozano, Bergman and Cire
   (*Operations Research* 2026) proved 87 (budget 75%); 139 had no published
   point.
-* **New, one follower knapsack (270).** Dualising the follower's LP gives
-  U(x) = min over l >= 0 of l C + sum_j max(0, p_j - l w_j)(1 - x_j); with
-  binary x the product linearises exactly, so min over x of U(x) is one
-  mixed-integer linear program (MILP). A knapsack's optimum is within one
-  item's profit of its LP value, which brackets the bilevel optimum.
-  Weninger and Fukasawa's online relaxation, generalised to several leader
-  rows by merging them with tuned multipliers and to large integer data by
-  rounding in the safe direction, gives a second, usually stronger lower
-  bound. With local search on the leader, all 270 get a verified point and
-  191 a better lower bound than published. Median gaps over the same
+* **One follower knapsack (270): published bounds, applied here.**
+  Dualising the follower's LP gives U(x) = min over l >= 0 of
+  l C + sum_j max(0, p_j - l w_j)(1 - x_j); with binary x the product
+  linearises exactly, so min over x of U(x) is one mixed-integer linear
+  program (MILP). This dualisation is the one Caprara et al.'s algorithm
+  for knapsack interdiction rests on (2016), and the classical single-level
+  reformulation of network interdiction (Wood 1993; Israeli and Wood
+  2002). A knapsack's optimum is within one item's profit of its LP value,
+  which brackets the bilevel optimum; for one follower knapsack this
+  bracket is Weninger's (arXiv 2604.21877, 2026, Proposition 3). Weninger
+  and Fukasawa's online relaxation, applied to several leader rows by
+  merging them into one surrogate row (Glover 1968) with tuned multipliers
+  and to large integer data by rounding in the safe direction, gives a
+  second, usually stronger lower bound. With local search on the leader,
+  all 270 get a verified point and 191 a better lower bound than
+  published. Median gaps over the same
   instances:
 
   | Budget | Literature | Now |
   | --- | ---: | ---: |
   | 25% | 24.0% | 4.0% |
-  | 50% | 34.0% | 7.2% |
+  | 50% | 34.0% | 7.1% |
   | 75% | 0.14% | 0.14% |
 
 * **New, several follower knapsacks (540).** The follower's LP at the
@@ -188,15 +209,15 @@ instances with 20 or more linking bits, and 123 MIPLIB-derived instances.
   | --- | ---: | ---: | ---: |
   | -0, 25% | 33.3% | 31.4% | 0 of 31 |
   | -0, 50% | 36.6% | 29.1% | 31 of 31 |
-  | -0, 75% | 5.3% | 0.05% | 27 of 27 |
-  | -50, 25% | 30.6% | 28.3% | 0 of 20 |
-  | -50, 50% | 41.3% | 35.0% | 20 of 20 |
+  | -0, 75% | 5.2% | 0.05% | 27 of 27 |
+  | -50, 25% | 30.1% | 28.2% | 0 of 20 |
+  | -50, 50% | 41.3% | 34.9% | 20 of 20 |
   | -50, 75% | 11.8% | 1.4% | 10 of 10 |
 
   (Medians are over the instances with both a published lower and upper
   bound, without OR10x100-0.75_4.dat-0, whose published bounds conflict.
   Lefebvre and Schmidt's values count as published points only from runs
-  that ended before the time limit, as in their own analysis;
+  that ended before the time limit, as in most of their own analysis;
   `scripts/ls_mkip_points.py`.)
 
 * Over all 810: 690 verified points, 474 strictly better than every
@@ -249,7 +270,13 @@ tree-50_1-5-5_006 and _010, `bobi fire` enumerates all 2,138,410 attacks of
 up to 5 of the 49 nodes and solves the follower on each forest exactly by a
 DP over (protected, saved) per node with the budget as a knapsack
 dimension, so the minimum over attacks is a proven bound. Both are optimal
-at 26, BOBILib's value. The same code reproduces all 34 tree values BOBILib
+at 26, BOBILib's value. This is not new: Fischetti, Ljubić, Monaci and
+Sinnl's MIX++ had already proved all 72 `inter-fire` instances optimal, these
+two at 26 in 2,121 s and 1,703 s on four threads (*Operations Research* 65,
+2017, Table 1; online appendix of 29 June 2016, Table 9). The enumeration
+re-proves the published values in exact arithmetic, and both instances count
+as published optima, with certificate class `exact` because of the re-proof
+(all other published optima are `numerical`). The same code reproduces all 34 tree values BOBILib
 lists as optimal; with brute force on the small random graphs, 54 of
 BOBILib's 70 optimal values are re-derived (`results/network/`).
 
@@ -266,28 +293,36 @@ Enumerating the linking bits reproduces the published optimum 299,577 for
 general30-30-10-20-20-8 (10 bits); with 20 bits the same takes about 58 CPU
 hours per instance, so the other 8 need a pruned search.
 
-### MIPLIB-derived instances (266 not optimal, not counting 33 infeasible)
+### General instances (266 not optimal: 265 MIPLIB-derived, 1 misc; not counting 33 infeasible)
 
-* **Literature (8).** 5 MIPLIB 3 instances by Lozano et al. (decision
-  diagrams), air03-0.100000 by Fischetti et al. (2017), p0282-0.500000 by
-  Vasquez, Lozano and van Hoeve (2025), and neos-950242_0_100 in an earlier
-  BOBILib release.
+* **Literature (9).** 3 MIPLIB 3 instances by Fischetti et al. (2017, caption
+  of Table 6, "more aggressive setting": air03-0.100000, p0201-0.100000 and
+  p0282-0.500000; the last two were proved optimal again later by Vasquez,
+  Lozano and van Hoeve, 2025, and the first of them also by Lozano, Bergman
+  and Cire), 4 by Lozano et al. (decision diagrams), ex10_0_100 in Lefebvre
+  and Schmidt's run file `results-MILP.csv` (Optimal/Proved, value 100 =
+  bound 100, 624 s, posted 12 June 2025; their paper does not name it; the
+  MIPLIB bound and a verified point confirm it here), and neos-950242_0_100
+  in an earlier BOBILib release.
 * **No bilevel feasible point at all (40 open instances).** The follower's
   own rows admit a direction d with follower objective e.d < 0. Leader
   variables only shift right-hand sides, so d is a recession direction for
   every leader choice, and with rational data a feasible mixed-integer
   follower whose LP relaxation is unbounded is itself unbounded (Meyer
-  1974): no leader choice has an optimal response. All 40 directions are
+  1974): no leader choice has an optimal response. The test is one LP, as
+  in Theorem 1 of Fischetti et al. (*Math. Programming* 172, 2018), which
+  extends Lemma 2 of Xu and Wang (2014); new here are its application to
+  BOBILib's unsolved general instances and the exact check. All 40 directions are
   checked in exact rational arithmetic (`scripts/verify_ray.py`); for the
   two supportcase42 instances the direction is a single continuous follower
   variable, found in exact arithmetic by `scripts/exact_ray.py`
   (`results/rays/`).
-* **First feasible points without coupling rows (64).** Solve the HPR (the
+* **Verified feasible points without coupling rows (64).** Solve the HPR (the
   rows of both levels with the leader's objective, without the follower's
   optimality), fix the leader, solve the follower to optimality, and break
   ties optimistically. This handles continuous linking variables, which
   neither BOBILib solver accepts (`results/general/`).
-* **First feasible points with coupling rows (29).** When leader rows
+* **Verified feasible points with coupling rows (29).** When leader rows
   contain follower variables, the follower's optima at the HPR's leader
   values can violate them. `bobi coupled` certifies or rules out a choice
   of the linking variables with one MILP and searches for a usable one: 21
@@ -302,15 +337,16 @@ hours per instance, so the other 8 need a pruned search.
   by the old slack; the superseded files are in `results/*/tolerance/`. All
   1,478 solution files of the package now pass `bobi verify --tight`
   (`results/notes/tight_verify.md`).
-* **Optimal at the MIPLIB bound (7).** The HPR of these instances is the
-  MIPLIB problem they were built from (checked in exact arithmetic by
-  `scripts/compare_hpr.py`), so its published optimum bounds the bilevel
-  optimum from below. pigeon-10_0_100, pigeon-10_50_50 (-9,000),
-  timtab1_0_100 (764,772), ex10_0_100 (100) and neos-1445765_0_100
+* **Optimal at the MIPLIB bound (6, and one published optimum confirmed).**
+  The HPR of these instances is the MIPLIB problem they were built from
+  (checked in exact arithmetic by `scripts/compare_hpr.py`), so its
+  published optimum bounds the bilevel optimum from below. pigeon-10_0_100,
+  pigeon-10_50_50 (-9,000), timtab1_0_100 (764,772) and neos-1445765_0_100
   (-17,783), all open, get points at that bound; BOBILib's own points for
-  noswot_0_100 and noswot_50_50 (-41) already met it. Lefebvre and
-  Schmidt's run files also report ex10_0_100 optimal at 100; their paper
-  does not state it (`results/notes/lefebvre_schmidt.md`).
+  noswot_0_100 and noswot_50_50 (-41) already met it. ex10_0_100 (100, open)
+  gets a point at the bound too; its optimum is credited to Lefebvre and
+  Schmidt's run files, which report it, and the bound and the point confirm
+  it independently (`results/notes/lefebvre_schmidt.md`).
 
 ## How the results are checked
 
@@ -394,10 +430,18 @@ Clique scripts and commands are in `results/clique/README.md`.
 ## Caveats
 
 * "Literature" counts use the per-instance data the authors publish
-  (Weninger and Fukasawa's answer files, Fischetti et al.'s tables, Lozano
-  et al.'s solution files); where only a value is published, the instance
-  is counted as solved but its file here is ours.
-* The 7 optima at the MIPLIB bound rest on MIPLIB's published
+  (Weninger and Fukasawa's answer files, Fischetti et al.'s tables and
+  online appendix, Lozano et al.'s solution files). For 449 of the 531
+  published optima a solution file at the published optimum is verified
+  here (for the 376 knapsack interdiction optima rebuilt from Weninger and
+  Fukasawa's leader choices); for the other 82, where only a value is
+  published, the instance is counted as solved and no file is given.
+  Each optimum is credited to its first publication among these sources.
+  Lefebvre and Schmidt's run files count for one optimum (ex10_0_100),
+  which a verified point and the MIPLIB bound confirm; their other reported
+  optima on unsolved instances (ex10_50_50, no point known;
+  mine-166-5_50_50, rejected by their own check file) are not counted.
+* The 6 optima at the MIPLIB bound rest on MIPLIB's published
   floating-point optima (optimal by accepted benchmark conventions), and
   the OR lower bounds from the LP bracket on HiGHS's dual bound (with a
   safety margin); `results/instances.csv` marks such results `numerical`.
@@ -410,9 +454,6 @@ Clique scripts and commands are in `results/clique/README.md`.
 
 * Send the new optima, certificates and solution files to the BOBILib
   maintainers, who update statuses from submitted solutions.
-* The 4 remaining subset-sum instances: a stronger search (tables rebuilt
-  deeper in the tree, witness reuse, or a hitting-set formulation over copy
-  counts) is the most promising route.
 * OR with several follower knapsacks: a lower bound that exploits the
   structure (the single-knapsack bracket does not carry over), and points
   for the 120 budget-25% instances without one.

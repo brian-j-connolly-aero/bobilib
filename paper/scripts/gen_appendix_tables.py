@@ -10,12 +10,12 @@ leaks into the document. Instance names are escaped for LaTeX.
 
   tab_kip.tex             16 subset-sum KIP optima proven here
   tab_clique.tex          60 clique instances: bounds, arguments, certificates
-  tab_network.tex         2 attack-protect optima + the 34 re-derived trees
+  tab_network.tex         2 published attack-protect optima, re-proved + the 34 re-derived trees
   tab_rays.tex            40 recession-direction certificates
-  tab_hpr.tex             7 optima at the MIPLIB bound of the HPR
+  tab_hpr.tex             6 optima at the MIPLIB bound of the HPR, and ex10_0_100 (published, confirmed)
   tab_general_points.tex  88 first points for MIPLIB-derived instances
   tab_or.tex              all 810 OR instances: published and new bounds
-  tab_literature.tex      528 published optima BOBILib does not list, by source
+  tab_literature.tex      531 published optima BOBILib does not list, by source
   tab_unchanged.tex       716 instances whose status is unchanged, by family
   supp_facts.tex          macros for counts quoted in the appendix text that are not in
                           generated/facts.tex (network attack counts, OR bound sources)
@@ -39,8 +39,10 @@ SOURCE_TEXT = {
     "WeningerFukasawa2025": "Weninger and Fukasawa (2025), combinatorial branch and bound",
     "LozanoBergmanCire2026": "Lozano, Bergman and Cire (2026), decision-diagram relaxations",
     "FischettiEtAl2019": "Fischetti, Ljubi\\'c, Monaci and Sinnl (2019), interdiction cuts",
-    "FischettiEtAl2017": "Fischetti, Ljubi\\'c, Monaci and Sinnl (2017), MIX++",
+    "FischettiEtAl2017": "Fischetti, Ljubi\\'c, Monaci and Sinnl (2017), MIX++ (caption of Table 6; online appendix, "
+                         "Table 9)",
     "VasquezLozanoVanHoeve2025": "V\\'asquez, Lozano and van Hoeve (2025), decision diagrams",
+    "LefebvreSchmidt2025": "Lefebvre and Schmidt (2025), Dantzig-Wolfe reformulation (run file \\texttt{results-MILP.csv})",
     "BOBILibEarlierRelease": "earlier BOBILib release (listed optimal there)",
 }
 FAMILY_TEXT = {
@@ -242,14 +244,16 @@ def main():
     t1 = longtable(
         "@{}l S[table-format=2.0] S[table-format=2.0] S[table-format=1.0] S[table-format=1.0] S[table-format=7.0] "
         "S[table-format=2.0] S[table-format=2.0] S[table-format=2.0] S[table-format=2.0]@{}",
-        "The two attack-protect games (\\texttt{inter-fire}) BOBILib lists as feasible, proven optimal by "
-        "enumerating every attack of at most $\\Phi$ nodes, with the follower (protect at most $\\Lambda$ nodes) "
+        "The two attack-protect games (\\texttt{inter-fire}) BOBILib lists as feasible. Fischetti et al.'s MIX++ "
+        "proved both optimal at their BOBILib value (online appendix of their 2017 paper, Table~9); they are "
+        "re-proved here by enumerating every attack of at most $\\Phi$ nodes, with the follower (protect at most "
+        "$\\Lambda$ nodes) "
         f"solved exactly by a tree dynamic program and the minimiser re-solved by HiGHS. Attacks: every attack of "
         f"$0$ to $\\Phi$ nodes, $\\sum_{{k=0}}^{{\\Phi}}\\binom{{{n0}}}{{k}}=\\num{{{open_[0]['attacks']}}}$ per instance "
         f"(\\num{{{full0}}} of them with exactly $\\Phi={phi0}$ nodes), each enumerated once. Optimal attacks: "
         "attacks at which the follower saves only the optimum. Time: wall seconds of the "
-        "enumeration on one thread of a loaded machine. The optima are exact certificates (class (i) of "
-        "Section~\\ref{app:classes}).",
+        "enumeration on one thread of a loaded machine. The re-proofs are exact certificates (class (i) of "
+        "Section~\\ref{app:classes}), so the data package lists these two published optima in class (i).",
         "tab:network",
         ["Instance", "{Nodes}", "{Edges}", "{$\\Phi$}", "{$\\Lambda$}", "{Attacks}", "{Optimum}",
          "{\\shortstack{Optimal\\\\attacks}}", "{BOBILib}", "{Time (s)}"], rows)
@@ -340,11 +344,16 @@ def main():
 
     # ---- tab_hpr -----------------------------------------------------------------------------
     hpr = load(f"{R}/general/hpr_optimal.csv")
-    rows = []
+    rows, published = [], []
     for r in hpr:
         row = I[r["name"]]
-        if not (row["new_status"] == "optimal" and row["source"] == "this work"):
-            continue
+        if row["new_status"] != "optimal" or r["point_from"].startswith("BOBILib") and row["source"] != "this work":
+            continue  # neos-950242_0_100: listed optimal in an earlier BOBILib release, BOBILib's own point
+        mark = ""
+        if row["source"] != "this work":  # ex10_0_100: published in Lefebvre and Schmidt's run file
+            assert row["source"] == "LefebvreSchmidt2025", r["name"]
+            published.append(r["name"])
+            mark = "$^{*}$"
         if "general-coupled" in r["point_from"]:
             src = "\\texttt{bobi coupled}"
         elif "results/general/" in r["point_from"]:
@@ -352,9 +361,9 @@ def main():
         else:
             src = "BOBILib's solution file"
         mip = r["miplib_optimum"]
-        rows.append(" & ".join([esc(r["name"]), r["bobilib_status"], esc(r["miplib_instance"]),
+        rows.append(" & ".join([esc(r["name"]) + mark, r["bobilib_status"], esc(r["miplib_instance"]),
                                 f"\\num{{{mip}}}", f"\\num{{{r['optimum']}}}", src]))
-    assert len(rows) == 7
+    assert len(rows) == 7 and published == ["ex10_0_100"], (len(rows), published)
     put("tab_hpr.tex", longtable(
         "@{}l l l r r l@{}",
         f"{word(len(rows), cap=True)} MIPLIB-derived instances whose high point relaxation is exactly the MIPLIB model they were built "
@@ -365,10 +374,13 @@ def main():
         "ex10 and neos-1445765 take integer values only (integer coefficients on integer variables), and those "
         "of pigeon-10 multiples of 1,000 only, so their published bounds round up to $-41$, $100$, "
         "$-17{,}783$ and $-9{,}000$ and the results are safe if those bounds are valid; for timtab1 the "
-        "agreement of point and bound is numerical. BOBILib: the instance's status before this work. Lefebvre and Schmidt's run files also report "
-        "ex10\\_0\\_100 optimal at 100; their paper does not state it, so it is not counted as published. "
-        "(neos-950242\\_0\\_100 meets its bound too, but was already listed as optimal in an "
-        "earlier BOBILib release and is counted as published.)",
+        "agreement of point and bound is numerical. BOBILib: the instance's status before this work. "
+        f"{word(len(rows) - len(published), cap=True)} of them are proven optimal here. $^{{*}}$: a published "
+        "optimum, credited to Lefebvre and Schmidt's run file \\texttt{results-MILP.csv} (a run that ended before "
+        "the time limit with value 100 equal to its bound; their paper does not name the instance), which the "
+        "bound and the verified point here confirm independently. "
+        "(The BOBILib point of neos-950242\\_0\\_100, not re-verified here, meets its bound too; the "
+        "instance was already listed as optimal in an earlier BOBILib release and is counted as published.)",
         "tab:hpr",
         ["Instance", "BOBILib", "MIPLIB instance", "MIPLIB optimum", "Bilevel optimum", "Point from"], rows))
 
@@ -404,7 +416,7 @@ def main():
     facts["SuppCoupledExact"] = (str(len(exact_c)), "coupled files certified by bobi certify --tight")
     facts["SuppCoupledFiles"] = (str(len(cfiles)), "coupled files (results/general-coupled)")
     facts["SuppGeneralTightenedShown"] = (str(tightened), "points of the table re-derived under the strict tolerance")
-    hpr_files = [r for r in ins if r["new_status"] == "optimal" and r["source"] == "this work"
+    hpr_files = [r for r in ins if r["new_status"] == "optimal"  # with ex10_0_100, a published optimum confirmed here
                  and r["certificate"].startswith(("general/", "general-coupled/")) and r["certificate"].endswith(".res.json")]
     put("tab_general_points.tex", longtable(
         "@{}l l c l S[table-format=-10.4] S[table-format=-10.4]@{}",
@@ -552,7 +564,7 @@ def main():
     # ---- tab_literature ------------------------------------------------------------------------
     lit = [r for r in ins if r["bobilib_status"] in ("feasible", "open") and r["new_status"] == "optimal"
            and r["source"] != "this work"]
-    assert len(lit) == 528
+    assert len(lit) == 531
     bysrc = collections.defaultdict(list)
     for r in lit:
         bysrc[r["source"]].append(r)
@@ -568,7 +580,8 @@ def main():
     txt = longtable(
         "@{}p{0.6\\linewidth} l S[table-format=3.0]@{}",
         "Published optima for instances BOBILib lists as feasible or open, by source (sub-collection and count). "
-        "The instance names follow.",
+        "Each optimum is credited to its first publication among the sources compiled here (Section~\\ref{app:data}); "
+        "later proofs are named in the notes of \\texttt{instances.csv}. The instance names follow.",
         "tab:literature", ["Source", "Collections", "{Instances}"], rows)
     for k in order:
         names = sorted((r["instance"] for r in bysrc[k]), key=natural)

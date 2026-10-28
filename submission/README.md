@@ -1,7 +1,7 @@
 # BOBILib status update: submission
 
 From Brian J. Connolly (Beehive Industries, brian.connolly@beehiveind.com), with the paper "Settling
-650 unsolved BOBILib instances: 528 published optima, 82 new optimality proofs and 40 infeasibility
+650 unsolved BOBILib instances: 531 published optima, 79 new optimality proofs and 40 infeasibility
 certificates" (preprint, 2026). Repository: https://github.com/brian-j-connolly-aero/bobilib; paths
 that start with `results/`, `scripts/`, `paper/` or `data-manifest/` are relative to its root (the
 paper's supplement is `paper/appendix/appendix.pdf`), the others to the archive
@@ -20,19 +20,26 @@ one row each; the same in MIPLIB/SCIP form in `bobilib_update.solu`):
 
 | Kind | Instances | BOBILib now | New status | Check | Certificate class |
 | --- | ---: | --- | --- | --- | --- |
-| new optimum proven | 82 | 77 feasible, 5 open | optimal | certificate | 75 exact, 7 numerical |
-| published optimum | 528 | 513 feasible, 15 open | optimal | citation | 528 numerical |
+| new optimum proven | 79 | 75 feasible, 4 open | optimal | certificate | 73 exact, 6 numerical |
+| published optimum | 531 | 515 feasible, 16 open | optimal | citation | 2 exact, 529 numerical |
 | no bilevel feasible point | 40 | 40 open | infeasible | certificate | 40 exact |
 | first feasible point | 228 | 228 open | feasible | checker | 228 numerical |
 | better feasible point | 465 | 465 feasible | feasible (value improves) | checker | 232 exact, 233 numerical |
 
-* New optima: 16 subset-sum knapsack interdiction, 57 clique interdiction, 2 attack-protect
-  (`inter-fire`) and 7 general instances whose HPR is a MIPLIB model with a published optimum. For
-  52 of the 610 optima BOBILib's value was already optimal and only the status changes.
-* Published optima: 376 Weninger and Fukasawa (2025), 97 Lozano, Bergman and Cire (2026), 52
-  Fischetti et al. (2019), 1 an earlier BOBILib release, 1 Fischetti et al. (2017), 1 Vasquez,
-  Lozano and van Hoeve (2025) (full references in `status_changes.csv`, column `citation`). For 82
-  of them there is no solution file here; only the published value is used.
+* New optima: 16 subset-sum knapsack interdiction, 57 clique interdiction and 6 general instances
+  whose HPR is a MIPLIB model with a published optimum. For 52 of the 610 optima BOBILib's value was
+  already optimal and only the status changes.
+* Published optima: 376 Weninger and Fukasawa (2025), 96 Lozano, Bergman and Cire (2026), 52
+  Fischetti et al. (2019), 5 Fischetti et al. (2017), 1 Lefebvre and Schmidt (2025, run file), 1 an
+  earlier BOBILib release (full references in `status_changes.csv`, column `citation`), each
+  credited to its first publication among the sources we compiled (later proofs are named in
+  `notes`). For 82 of them there is no solution file here; only the published value is used. The 2
+  attack-protect games (`inter-fire`) tree-50_1-5-5_006 and tree-50_1-5-5_010, which Fischetti et
+  al.'s MIX++ solved (online appendix of their 2017 paper, Table 9), are re-proved here exactly by
+  enumeration (class `exact`). ex10_0_100 is optimal in Lefebvre and Schmidt's run file
+  `results-MILP.csv` (a run that ended before the time limit with value equal to bound; their paper
+  does not name the instance); it is credited to them, and the MIPLIB bound of its HPR with the
+  solution file here confirms it.
 * First feasible points: BOBILib lists no point; for 167 it is the first point anywhere, for the
   other 61 a published point existed (named in `notes`).
 * `bobilib_update.solu` also has 194 `=bestdual=` lines (proven lower bounds better than any
@@ -54,7 +61,7 @@ solver-free MIPLIB step ran, and it passed. All 1,219 also pass this repository'
 also run on the 108 large ones.
 
 Each file's `status` is the new status. 75 files differ from the repository's copy in that field
-only: the repository's files of 70 published optima and 5 new optima say `feasible`, the status
+only: the repository's files of 71 published optima and 4 new optima say `feasible`, the status
 under which the point was found. Everything else is byte for byte the same.
 
 ## Needs more: optimality and infeasibility (column `check` = `certificate` or `citation`)
@@ -66,10 +73,10 @@ A point only gives an upper bound. The lower bound or the infeasibility proof is
 | subset-sum knapsack interdiction optimum | 16 | `ss/proofs.csv` | exhaustive search (`bobi ss-solve`); independent prover `checkers/ss_check.py` | Knapsack interdiction proofs |
 | clique interdiction optimum, value 3 | 27 | `clique/summary.csv` | Mantel's theorem: m - k > floor(n^2/4) (arithmetic) | Clique interdiction proofs |
 | clique interdiction optimum, value 4 | 30 | `clique/certificates/*.cert.jsonl.gz` | Brouwer (1981) Thm 2 plus w3(G) > k, `checkers/check_clique_certificates.py` (integer arithmetic) | Clique interdiction proofs |
-| attack-protect optimum | 2 | `network/summary.csv`, `network/review.tsv` | every attack enumerated, 2,138,410 per instance (`bobi fire`; independently `checkers/network/fire_check.c`) | Network interdiction |
-| optimum at the MIPLIB bound of the HPR | 7 | `general/hpr_optimal.csv` | `checkers/compare_hpr.py` (HPR = MIPLIB model) and MIPLIB's published optimum | General instances: rays, HPR bound and pipelines (The HPR bound and the MIPLIB optimum) |
+| attack-protect optimum (published, re-proved here) | 2 | `network/summary.csv`, `network/review.tsv` | every attack enumerated, 2,138,410 per instance (`bobi fire`; independently `checkers/network/fire_check.c`) | Network interdiction |
+| optimum at the MIPLIB bound of the HPR | 6 | `general/hpr_optimal.csv` | `checkers/compare_hpr.py` (HPR = MIPLIB model) and MIPLIB's published optimum | General instances: rays, HPR bound and pipelines (The HPR bound and the MIPLIB optimum) |
 | no bilevel feasible point | 40 | `rays/*.ray.json` | `checkers/verify_ray.py`: exact rational check of a recession direction of the follower | General instances: rays, HPR bound and pipelines (Unbounded followers: no bilevel feasible point) |
-| published optimum | 528 | (the cited paper) | as published; not re-proved here | Per-instance tables (Published optima) |
+| published optimum | 531 | (the cited paper) | as published; apart from the 2 above not re-proved here (ex10_0_100 is confirmed by the MIPLIB bound with a verified point, `general/hpr_optimal.csv`; BOBILib's point of neos-950242_0_100, not re-verified here, meets that bound too) | Per-instance tables (Published optima) |
 
 The upper bound of each new optimum is its solution file (in the clique files the leader deletes
 exactly the edges inside the parts of a partition, so the follower's clique number is at most the
@@ -80,7 +87,8 @@ interdiction lemmas.
 ## Certificate classes (column `certificate_class`)
 
 * `exact`: checked in exact rational or integer arithmetic, or a proof plus an exhaustive integer
-  computation; no tolerance enters.
+  computation; no tolerance enters. The 2 published attack-protect optima are in this class because
+  of their re-proof here; all other published optima are `numerical`.
 * `numerical`: rests on a floating-point LP/MILP solver run with tolerances (rows within 1e-6,
   follower optimum by HiGHS within max(1e-6, 1e-9 |phi|)), or on a published optimum used as
   published, or on MIPLIB's published floating-point optimum.

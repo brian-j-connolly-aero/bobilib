@@ -1,4 +1,4 @@
-"""The 266 MIPLIB-derived instances BOBILib lists as feasible or open: outcomes,
+"""The 266 general instances BOBILib lists as feasible or open (265 MIPLIB-derived, 1 misc): outcomes,
 split by BOBILib status and, for the open ones, by coupling rows (leader rows
 that contain follower variables).
 
@@ -21,10 +21,10 @@ G = {k: v for k, v in U.items() if v["family"] in ("general-pure", "general-mixe
 nocpl = {r["name"] for r in S.read_csv("general/points.csv")}
 cpl_run = {r["name"] for r in S.read_csv("general-coupled/summary.csv")}
 
-S.check(len(G), 266, "MIPLIB-derived instances, feasible or open")
+S.check(len(G), 266, "general instances, feasible or open")
 S.check(len(nocpl), 98, "open instances without coupling rows (points.csv)")
 S.check(all(G.get(k, {}).get("bobilib") == "open" for k in nocpl | cpl_run), True,
-        "points.csv / general-coupled rows are open MIPLIB-derived instances")
+        "points.csv / general-coupled rows are open general instances")
 S.check(len(nocpl & cpl_run), 0, "no instance in both points.csv and general-coupled")
 
 BARS = [("open-nocpl", "open, no\ncoupling rows"), ("open-cpl", "open, with\ncoupling rows"),
@@ -38,7 +38,7 @@ S.check(sum(cnt["open-cpl"].values()), 87, "open instances with coupling rows")
 S.check(cnt["open-nocpl"]["first"], 60, "first points without coupling rows")
 S.check(cnt["open-cpl"]["first"], 28, "first points with coupling rows")
 tot = sum(cnt.values(), collections.Counter())
-S.check(dict(tot), {"lit": 8, "new": 7, "none": 40, "first": 88, "unchanged": 123},
+S.check(dict(tot), {"lit": 9, "new": 6, "none": 40, "first": 88, "unchanged": 123},
         "outcomes of the 266")
 
 fig, ax = S.plt.subplots(figsize=(S.HALF, 1.75))
@@ -67,10 +67,16 @@ for i, (b, _) in enumerate(BARS):
         else:
             above.append((left + w / 2, w))
         left += w
-    for x, w in above:  # narrow segments: count above the bar, on a leader line from the segment
-        ax.plot([x, x + 1.2], [y + H / 2 - 0.02, y + H / 2 + 0.13], color=S.INK, lw=0.7,
+    # Narrow segments: count above the bar, on a leader line from the segment. Adjacent narrow
+    # segments (1 and 3 on the first bar) get their labels spread apart, so that they do not
+    # read as one number.
+    free = -1e9  # first x at which the next label may start
+    for x, w in above:
+        tx = max(x + 1.4, free)
+        ax.plot([x, tx - 0.2], [y + H / 2 - 0.02, y + H / 2 + 0.13], color=S.INK, lw=0.7,
                 solid_capstyle="butt", zorder=4)
-        ax.text(x + 1.4, y + H / 2 + 0.09, str(w), ha="left", va="bottom", fontsize=7, zorder=4)
+        ax.text(tx, y + H / 2 + 0.09, str(w), ha="left", va="bottom", fontsize=7, zorder=4)
+        free = tx + 0.07 / per_in * len(str(w)) + 0.08 / per_in  # label width plus a gap, in instances
     ax.text(left + 1.5, y, str(left), ha="left", va="center", fontsize=7, color=S.INK2)
 
 ax.set_yticks(range(len(BARS)))

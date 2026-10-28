@@ -53,6 +53,7 @@ LIT_KEYS = {
     "literature (Fischetti et al. 2019)": "FischettiEtAl2019",
     "literature (Fischetti et al. 2017)": "FischettiEtAl2017",
     "literature (Vasquez et al. 2025)": "VasquezLozanoVanHoeve2025",
+    "literature (Lefebvre and Schmidt 2025)": "LefebvreSchmidt2025",
     "literature (an earlier BOBILib release)": "BOBILibEarlierRelease",
 }
 LIT_METHOD = {
@@ -61,8 +62,16 @@ LIT_METHOD = {
     "FischettiEtAl2019": "branch and cut with interdiction cuts (published optimum)",
     "FischettiEtAl2017": "MIX++ branch and cut (published optimum)",
     "VasquezLozanoVanHoeve2025": "decision-diagram reformulation (published optimum)",
+    "LefebvreSchmidt2025": "Dantzig-Wolfe single-level reformulation, exact MILP run (published run file)",
     "BOBILibEarlierRelease": "listed optimal in an earlier BOBILib release",
 }
+# Where Fischetti et al. (2017) publish the optimum: the network optima are in their online appendix, the
+# MIPLIB 3 ones come from the more aggressive MIX++ setting named in the caption of their Table 6.
+F17_METHOD = {"network": "MIX++ branch and cut (published optimum; online appendix, Table 9)",
+              "general": "MIX++ branch and cut, more aggressive setting (published optimum; caption of Table 6)"}
+# Later proofs of a published optimum of a general instance (prefixes of the column `sources` of
+# miblp_literature_status.csv; scripts/summarize.py credits the first one).
+LATER_PROOF = {"LBC": "Lozano, Bergman and Cire (2026)", "VLH": "Vasquez, Lozano and van Hoeve (2025)"}
 BOBILIB_KEY = "ThuraufEtAl2026"
 REFERENCES = [
     ("ThuraufEtAl2026", "J. Thürauf, T. Kleinert, I. Ljubić, T. Ralphs and M. Schmidt, BOBILib: Bilevel "
@@ -80,10 +89,16 @@ REFERENCES = [
      "390-410, doi:10.1287/ijoc.2018.0831"),
     ("FischettiEtAl2017", "M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, A new general-purpose algorithm "
      "for mixed-integer bilevel linear programs, Operations Research 65(6) (2017) 1615-1637, "
-     "doi:10.1287/opre.2017.1650"),
+     "doi:10.1287/opre.2017.1650, and its online appendix of 29 June 2016 (www.dei.unipd.it/~fisch/appendix.pdf; "
+     "Table 9 for the two network optima)"),
     ("VasquezLozanoVanHoeve2025", "S. Vásquez, L. Lozano and W.-J. van Hoeve, A single-level reformulation of "
      "binary bilevel programs using decision diagrams, Mathematical Programming (2025), online first, "
-     "doi:10.1007/s10107-025-02294-1"),
+     "doi:10.1007/s10107-025-02294-1 (named in `notes`: later proofs of two optima first published by "
+     "Fischetti et al. 2017)"),
+    ("LefebvreSchmidt2025", "H. Lefebvre and M. Schmidt, A Dantzig-Wolfe single-level reformulation for "
+     "mixed-integer linear bilevel optimization: exact and heuristic approaches, Optimization Online preprint "
+     "(June 2025), per-instance run files on the first author's web page (henrilefebvre.com); the optimum "
+     "credited to them is in their run file results-MILP.csv, not in the text of the paper"),
 ]
 
 # Hand-written notes that come from the text of REPORT.md or a results README
@@ -97,9 +112,11 @@ EXTRA_NOTES = {
     "timtab1_50_50": "HPR is exactly MIPLIB's timtab1 (optimum 764772), a lower bound; this point is 764774 "
                      "(general-coupled/README.md)",
     # Lefebvre and Schmidt's run files (notes/lefebvre_schmidt.md, sections 1 and 3).
-    "ex10_0_100": "Lefebvre and Schmidt's (2025) MILP and MILP-First run files report the same optimum, 100 "
-                  "(Optimal/Proved, about 624 s); their paper does not state it, so it is not counted as a published "
-                  "optimum (notes/lefebvre_schmidt.md)",
+    "ex10_0_100": "published optimum in Lefebvre and Schmidt's (2025) run file results-MILP.csv (Optimal/Proved, "
+                  "value 100 = bound 100, 624 s, ended before the time limit; also in results-MILP-first.csv); their "
+                  "paper does not name the instance; confirmed here independently: the HPR is exactly MIPLIB's ex10, "
+                  "whose published optimum 100 is a lower bound, and the verified point has value 100 "
+                  "(general/hpr_optimal.csv, notes/lefebvre_schmidt.md)",
     "ex10_50_50": "HPR is exactly MIPLIB's ex10 (scripts/compare_hpr.py), so MIPLIB's optimum 100 is a lower bound; "
                   "Lefebvre and Schmidt's (2025) MILP and MILP-First run files report Optimal/Proved 100, not verified "
                   "here, and no point is known here (notes/lefebvre_schmidt.md)",
@@ -117,7 +134,6 @@ EXTRA_NOTES = {
 EXTRA_PUBLISHED = {
     "rmine6_0_100": (-3.11093, "Lefebvre and Schmidt (2025), PADM run files"),
     "rmine6_50_50": (-3.11093, "Lefebvre and Schmidt (2025), PADM run files"),
-    "ex10_0_100": (100, "Lefebvre and Schmidt (2025), MILP run files, reported there as optimal"),
     "neos-631710_0_100": (556, "Lefebvre and Schmidt (2025), MILP-First run file"),
 }
 
@@ -133,7 +149,7 @@ OR_BC_CLOSED = {
 # Authoritative counts (paper spec). The script fails if the data disagree.
 EXPECT = dict(
     instances=2654, bobilib_optimal=1027, bobilib_infeasible=33, bobilib_feasible=1175, bobilib_open=419,
-    unsolved=1594, literature=528, new_optimal=82, infeasible_bilevel=40, first_point=228, unchanged=716,
+    unsolved=1594, literature=531, new_optimal=79, infeasible_bilevel=40, first_point=228, unchanged=716,
     settled=650, optimal_now=610, packing=1254,
 )
 CLASSES = ("exact", "numerical", "benchmark")  # certificate classes (i), (ii), (iii) of the appendix
@@ -403,6 +419,29 @@ def main():
             if n in summary and summary[n]["family"] == "generalized":
                 lit.setdefault(n, (num(r["UB"]), ""))
         lit_sources.append(os.path.basename(a.lbc_optimal))
+    # Published optima that no other table holds (literature/other_published_optima.csv, also read by
+    # scripts/summarize.py): Fischetti et al.'s two network optima and Lefebvre and Schmidt's ex10_0_100.
+    other_lit = {r["instance"]: r for r in load_csv(f"{R}/literature/other_published_optima.csv")}
+    for n, r in other_lit.items():
+        check(summary[n]["source"] == f"literature ({r['source']})", f"source of {n} in summary.json")
+        lit.setdefault(n, (num(r["optimum"]), ""))
+    lit_sources.append("literature/other_published_optima.csv")
+    # Later proofs of the published optima of general instances (miblp_literature_status.csv, column sources)
+    later_proofs = {}
+    if a.miblp_lit:
+        for r in load_csv(a.miblp_lit):
+            if r["closed_in_literature"] != "True":
+                continue
+            found = []
+            for entry in r["sources"].split("; "):
+                key, _, rest = entry.partition(":")
+                m = re.match(r"ub=([^,]*),lb=([^,]*)", rest)
+                ub, lb = (num(m.group(1)), num(m.group(2))) if m else (None, None)
+                k = key.split("-")[0]
+                if ub is not None and lb is not None and abs(ub - lb) <= 1e-6 * max(1, abs(ub)) and k in LATER_PROOF \
+                        and LATER_PROOF[k] not in found:
+                    found.append(LATER_PROOF[k])
+            later_proofs[r["instance"]] = [v for v in LATER_PROOF.values() if v in found]  # LBC's preprint first
     for n, r in hpr.items():
         if summary[n]["source"] == "literature (an earlier BOBILib release)":
             lit.setdefault(n, (num(r["optimum"]), ""))
@@ -499,19 +538,38 @@ def main():
             val, lnote = lit[n]
             row.update(new_status="optimal", primal_value=val, dual_bound=val, source=key, method=LIT_METHOD[key],
                        certificate_class="numerical")  # a published optimum, used as published
+            if key == "FischettiEtAl2017":
+                row["method"] = F17_METHOD["network" if fam == "network" else "general"]
             if lnote:
                 notes.append(lnote)
+            if n in other_lit and key == "FischettiEtAl2017":
+                notes.append("published optimum: Fischetti et al. (2017), " + other_lit[n]["where"].split(", row ")[0])
+            if later_proofs.get(n) and key != "LozanoBergmanCire2026":
+                notes.append("also proved optimal later by " + " and by ".join(later_proofs[n]))
             obj, rel = own_file()
             if rel and abs(obj - val) <= 1e-6 * max(1, abs(val)):
                 cert(rel)
                 if fam == "knapsack":
                     notes.append("file rebuilt from the published leader vector, follower re-solved exactly")
+                if fam == "network" and n in net:
+                    # An exact re-proof in this package (every attack, exact tree DP): class (i).
+                    r = net[n]
+                    check(r["certified"] == "true" and num(r["value"]) == val and row["verified"] == "yes",
+                          f"network re-proof of {n}")
+                    row["certificate_class"] = "exact"
+                    notes.append(f"re-proved here by exact enumeration: {int(r['attacks']):,} attacks, "
+                                 f"{r['optimal_attacks']} optimal, follower by exact tree DP (bobi fire); "
+                                 f"re-derived by the independent review (network/review.tsv)")
             elif rel:
                 notes.append(f"our verified point {fmt(obj)} ({rel}) is above the published optimum")
             if bval is None:
                 notes.append("BOBILib lists no point")
             elif bval > val + 1e-6 * max(1, abs(val)):
-                notes.append(f"BOBILib value {fmt(bval)} is {100 * (bval - val) / abs(val):.2f}% above the optimum")
+                above = 100 * (bval - val) / abs(val)
+                if above >= 0.01:
+                    notes.append(f"BOBILib value {fmt(bval)} is {above:.2f}% above the optimum")
+                else:  # two decimals would print 0.00%
+                    notes.append(f"BOBILib value {fmt(bval)} is {fmt(bval - val)} above the optimum ({above:.1g}%)")
             else:
                 notes.append("BOBILib value already optimal")
         elif outcome == "optimal":  # this work
@@ -726,7 +784,9 @@ def main():
         ("multidim-knapsack", "optimal", "LozanoBergmanCire2026"): 88,
         ("multidim-knapsack", "optimal", "FischettiEtAl2019"): 52,
         ("multidim-knapsack", "optimal", "this work"): 0, ("multidim-knapsack", "feasible", "this work"): 140,
-        ("clique", "optimal", "this work"): 57, ("network", "optimal", "this work"): 2,
+        ("clique", "optimal", "this work"): 57, ("network", "optimal", "FischettiEtAl2017"): 2,
+        ("network", "optimal", "this work"): 0,
+        ("general-pure", "optimal", "FischettiEtAl2017"): 3, ("general-pure", "optimal", "LefebvreSchmidt2025"): 1,
         ("generalized", "optimal", "LozanoBergmanCire2026"): 4,
     }
     for k, v in want.items():
@@ -736,7 +796,7 @@ def main():
           and fam_unch["general-pure"] + fam_unch["general-mixed"] == 123, f"unchanged per family {fam_unch}")
     gen = [r for r in unsolved if r["family"].startswith("general-") and r["bobilib_status"] != "infeasible"]
     gc = C((r["new_status"], r["source"] == "this work") for r in gen)
-    check(len(gen) == 266 and gc[("optimal", False)] == 8 and gc[("optimal", True)] == len(hpr) - 1
+    check(len(gen) == 266 and gc[("optimal", False)] == 9 and len(hpr) == 8 and gc[("optimal", True)] == 6
           and gc[("infeasible_bilevel", True)] == 40 and gc[("feasible", True)] == 88, f"general outcomes {gc}")
     check(sum(1 for r in rows if r["family"] == "general-pure" and r["bobilib_status"] != "optimal") == 131
           and sum(1 for r in rows if r["family"] == "general-mixed" and r["bobilib_status"] != "optimal") == 168,
@@ -761,19 +821,24 @@ def main():
     check(sum(got[f"class_{c}"] for c in CLASSES) == got["settled"] + got["first_point"], f"classes {cls}")
     check(all(r["bobilib_status"] in ("feasible", "open") for r in rows if r["certificate_class"] != "na"),
           "classes only on rows that BOBILib does not list as optimal or infeasible")
+    lit_exact = [r for r in lit_rows if r["certificate_class"] == "exact"]
     exact_parts = (sum(1 for r in new_opt if r["family"] in ("knapsack", "clique", "network"))
-                   + ns["infeasible_bilevel"]
+                   + len(lit_exact) + ns["infeasible_bilevel"]
                    + sum(1 for r in rows if r["new_status"] == "feasible" and r["family"] == "multidim-knapsack"
                          and orc[r["instance"]]["variant"] == "100"))
     check(got["class_exact"] == exact_parts, f"exact class {got['class_exact']} != {exact_parts}")
-    check(all(r["certificate_class"] == "numerical" for r in lit_rows), "published optima: numerical")
+    # Published optima are used as published (class (ii)), except where this package holds an exact re-proof.
+    check(all(r["certificate_class"] == "numerical" for r in lit_rows if r not in lit_exact)
+          and sorted(r["instance"] for r in lit_exact) == ["tree-50_1-5-5_006", "tree-50_1-5-5_010"],
+          "published optima: numerical, the two network optima exact")
+    got["lit_exact"] = len(lit_exact)
     got["class_by_status"] = {f"{st_} {c}": v for (st_, c), v in sorted(cls.items()) if c != "na"}
 
     def kind(r):
         if r["new_status"] == "infeasible_bilevel":
             return "no bilevel feasible point (recession direction)"
         if r["new_status"] == "optimal" and r["source"] != "this work":
-            return "published optimum"
+            return "published optimum, re-proved here exactly" if r["certificate_class"] == "exact" else "published optimum"
         if r["new_status"] == "optimal":
             return {"knapsack": "knapsack interdiction optimum (subset-sum search)",
                     "clique": "clique interdiction optimum", "network": "attack-protect optimum",
@@ -929,8 +994,8 @@ this file, `instances.csv`, `bobilib_update.solu` and `SHA256SUMS` are written b
 
 To cite this material, please cite both the paper and the data package:
 
-* Paper: B. J. Connolly, "Settling 650 unsolved BOBILib instances: 528 published optima,
-  82 new optimality proofs and 40 infeasibility certificates," preprint (2026).
+* Paper: B. J. Connolly, "Settling {got['settled']} unsolved BOBILib instances: {got['literature']} published optima,
+  {got['new_optimal']} new optimality proofs and {got['infeasible_bilevel']} infeasibility certificates," preprint (2026).
 * Data: B. J. Connolly, "BOBILib status update: data package" (2026), the `results/`
   folder of the paper's repository. No DOI has been assigned yet.
 
@@ -963,8 +1028,9 @@ Of the {got['first_point']} verified points where BOBILib has none, {got['first_
 anywhere; for the other {got['first_point'] - got['first_anywhere']} a published point existed (named in `notes`).
 Every claim is backed by a file in this package (a solution in BOBILib's
 format that passes BOBILib-style verification, a recession-direction
-certificate, a partition certificate) or by a published optimum (cited); for
-{got['lit_no_file']} of the {got['literature']} published optima there is no solution file here
+certificate, a partition certificate) or by a published optimum (cited, and
+credited to its first publication among the sources compiled in `literature/`);
+for {got['lit_no_file']} of the {got['literature']} published optima there is no solution file here
 (`verified` = `na`), and only the published value is used.
 
 Certificate classes (column `certificate_class`, defined below): of the
@@ -1062,12 +1128,13 @@ Rows per `new_status`: {', '.join(f'{k} {v:,}' for k, v in sorted(ns.items()))}.
   tolerance enters. Rows: the subset-sum KIP optima (exhaustive integer search,
   re-proved by two integer-only provers), the clique optima (Mantel or
   Brouwer's theorem with the integer-checked case certificates, and the
-  partition files), the network optima (every attack enumerated, exact tree
+  partition files), the {got['lit_exact']} network optima that Fischetti et al. (2017)
+  published and this package re-proves (every attack enumerated, exact tree
   DP), the recession directions (exact rational check), and OR points with one
   follower knapsack (integer data, exact knapsack oracle).
 * `numerical` (class (ii)): rests on a floating-point LP, MILP or CP solver run
-  with tolerances, or on a published optimum used as published. Rows: the
-  {got['literature']} published optima (not re-certified here), the optima at the MIPLIB
+  with tolerances, or on a published optimum used as published. Rows: the other
+  {got['literature'] - got['lit_exact']} published optima (not re-certified here), the optima at the MIPLIB
   bound of the HPR (MIPLIB's published floating-point optima; optimal by
   accepted benchmark conventions), OR points with several follower knapsacks
   (follower optimum by HiGHS), and the points for the general instances (rows
@@ -1105,7 +1172,7 @@ instances with one follower knapsack and the {tally['bestdual clique']} open cli
 {tally['opt']} `=opt=`, {tally['inf']} `=inf=`, {tally['best']} `=best=` and {tally['bestdual']} `=bestdual=` lines.
 Values are upper-level objectives of the minimising leader, at full precision.
 
-Citation keys in `source`:
+Citation keys in `source` (and references named in `notes`):
 
 {refs}
 
@@ -1156,9 +1223,10 @@ published floating-point optima; the OR lower bounds from the LP bracket rest
 on HiGHS's dual bound (with a safety margin of 1e-6 relative); OR lower bounds
 for several follower knapsacks are the literature's; the published OR points
 include values of Lefebvre and Schmidt (2025) that are not verified, taken
-only from runs that ended before the time limit, as in their own analysis
-(their run files are checked against this package in
-`notes/lefebvre_schmidt.md`); for {'one' if got['or_inconsistent'] == 1 else got['or_inconsistent']} OR
+only from runs that ended before the time limit, as in most of their own
+analysis, and the one optimum credited to them (ex10_0_100) is a row of their
+run file that this package confirms independently (their run files are
+checked against this package in `notes/lefebvre_schmidt.md`); for {'one' if got['or_inconsistent'] == 1 else got['or_inconsistent']} OR
 instance{'s' if got['or_inconsistent'] != 1 else ''} a published lower bound exceeds a published point
 (`notes` of `instances.csv`{'; OR10x100-0.75_4.dat-0, closed by the published branch-and-cut bound' if got['or_inconsistent'] == 1 else ''}).
 
@@ -1192,7 +1260,9 @@ then `scripts/gen_facts.py` and `scripts/gen_appendix_tables.py`.
 results/literature/miblp_literature_status.csv --lbc-optimal optimal.csv
 --runs runs --results results` (from `bobilib/`; `optimal.csv` is
 `solution_files/optimal.csv` of Lozano, Bergman and Cire's repository; it reads
-the OR bounds and ray checks from this package and the `bobi general` runs from `runs/`).
+the OR bounds, the ray checks and `literature/other_published_optima.csv` from this
+package and the `bobi general` runs from `runs/`; each published optimum is credited to
+its first publication among these sources).
 `notes/instance_structure.csv` (the structure of the general and assignment
 instances that the paper describes: variable and row split, coupling rows,
 continuous linking variables, follower objective against the leader's) is

@@ -1,18 +1,19 @@
 # refs.bib: what each entry supports
 
-One line per BibTeX key in `refs.bib` (74 entries), grouped as in the file.
+One line per BibTeX key in `refs.bib` (81 entries), grouped as in the file.
 "Checked" says how the bibliographic data were confirmed. "Crossref" means the
 DOI's Crossref record matched authors, title, volume, issue, pages and year.
 
 ## The library and the solvers behind its statuses
 
-- `thurauf2026bobilib`: BOBILib itself (2,654 instances, file format, statuses from MibS and MIX++ with a 1 h limit, families and their sources, 1e-4 tolerances). MPC 18(3) 819-876 (2026), online 21 Mar 2026. Checked: Crossref and the Springer landing page.
+- `thurauf2026bobilib`: BOBILib itself (2,654 instances, file format, statuses from MibS and MIX++ with a 1 h limit, families and their sources, 1e-4 tolerances; pp. 829-830: without coupling constraints a feasible MILP relaxation is "technically enough to conclude the instance is feasible"). MPC 18(3) 819-876 (2026), online 21 Mar 2026, open access. Checked: Crossref, the Springer landing page and the open-access PDF (read 28 Oct 2026).
 - `bobilib_website`: bobilib.org, the source of the status data, solution files and feasibility checker used here (accessed 18 Oct 2026). Checked: site title fetched.
 - `tahernejad2020mibs`: MibS, one of BOBILib's two solvers; the general branch-and-cut framework. Checked: Crossref.
 - `mibs_software`: the MibS code (BOBILib ran version 1.2.2). Authors and year as in BOBILib's own reference list. Checked: URL as cited by BOBILib and Tahernejad-Ralphs; GitHub is not reachable from this machine.
 - `denegre2009branch`: first branch-and-cut for integer bilevel programs; history in the introduction. Checked: Crossref and the Springer page (editors, ORCS vol. 47).
 - `denegre2011thesis`: DeNegre's thesis; source of the inter-assig, inter-kp and denegre sets. Checked: PDF title page (Lehigh University, May 2011).
-- `fischetti2017new`: MIX++ (BOBILib's second solver); source of xularge; air03-0.100000 solved there. Checked: Crossref.
+- `fischetti2017new`: MIX++ (BOBILib's second solver); source of xularge; first published optima of air03-0.100000, p0201-0.100000 and p0282-0.500000 (caption of Table 6, "more aggressive setting"; accepted manuscript, hdl.handle.net/11585/611023, read 28 Oct 2026) and of the two inter-fire trees (via its online appendix). Checked: Crossref.
+- `fischetti2016appendix`: the online appendix of `fischetti2017new` (cited there as Fischetti et al. 2016a, same URL), dated 29 June 2016; Table 9 gives tree-50-1-5-5-006 and -010 at BestSol 26 = LB 26 (2,120.85 s and 1,702.69 s); the appendix gives no thread count, and the run setting (4 threads, 3,600 s wall-clock limit) is stated in Section 7 of `fischetti2017new` (accepted manuscript). No DOI. Checked: PDF downloaded 28 Oct 2026 from www.dei.unipd.it/~fisch/appendix.pdf.
 - `mixpp_software`: page distributing the MIX++ binary and the instance sets. Checked: page fetched.
 - `fischetti2016intersection`: intersection cuts (IPCO 2016); source of the miplib3 set. Checked: Crossref and Springer page (LNCS 9682, editors Louveaux and Skutella).
 - `fischetti2018intersection`: journal version; also a source of the miplib3 set. Checked: Crossref.
@@ -26,12 +27,14 @@ DOI's Crossref record matched authors, title, volume, issue, pages and year.
 - `dellacroce2020exact`: the DCS exact algorithm for KIP (prior state of the art). Checked: Crossref.
 - `weninger2023fast`: Weninger-Fukasawa, IPCO 2023 (LNCS 13904, editors Del Pia and Kaibel). Checked: Crossref and Springer page.
 - `weninger2025fast`: journal version, Math. Program. 210 (2025) 847-879; 376 KIP literature optima; the online lower bound and greedy heuristic used here. Checked: Crossref.
-- `weninger_bkpsolver`: their code and answer files (source of the 376 per-instance optima). Checked: URL printed in their paper; repository cloned earlier in this project.
-- `lozano2026network`: Lozano, Bergman, Cire, decision-diagram network relaxations ("lbc"/"LBC" in the scratch notes): 87 OR + 4 generalized + 5 MIPLIB 3 literature optima and the published OR bounds. Operations Research, Articles in Advance, online 26 Aug 2026, no volume yet. The arXiv version (2407.18193) had the title "... Discrete Bilevel Optimization ...". Checked: Crossref and the repository README.
+- `weninger_bkpsolver`: their code and answer files (source of the 376 per-instance optima); commit 1838efe (4 May 2023) merges identical items into counted copies (now option `-dedup`) and plays the online DP over copy counts; commit bc1d985 (3 Aug 2026, HEAD on 28 Oct 2026) adds symmetry breaking by item dominance, "not described in the paper" (README). Checked: URL printed in their paper; repository cloned 28 Oct 2026.
+- `weninger2026approx`: Weninger, (2+eps)-approximation for knapsack interdiction, arXiv 2604.21877 (v1 23 Apr 2026, v2 16 Oct 2026): the dual form of the follower LP minimised over (x, alpha), Proposition 3 (OPT_I >= OPT_F - p*, the m = 1 case of the LP bracket), the t-row dual form, and "16 of them time out after one hour" for the 100 subset-sum instances. DataCite DOI (not in Crossref). Checked: arXiv abstract page and v2 PDF; the DOI resolves to the abstract page.
+- `lozano2026network`: Lozano, Bergman, Cire, decision-diagram network relaxations ("lbc"/"LBC" in the scratch notes): 87 OR + 4 generalized + 4 MIPLIB 3 literature optima (p0201-0.100000, also in their data, is credited to its first publication, `fischetti2017new`) and the published OR bounds; the arXiv v1 of 25 Jul 2024, Table 2, already closes p0282-0.9, which `vasquez2025single` closes later. Operations Research, Articles in Advance, online 26 Aug 2026, no volume yet. The arXiv version (2407.18193) had the title "... Discrete Bilevel Optimization ...". Checked: Crossref and the repository README.
 - `lozano_dbo_repo`: their solution files (optimal and improved BOBILib points) read by the reconciliation. Checked: repository cloned earlier; README names the paper and DOI.
-- `vasquez2025single`: Vasquez, Lozano, van Hoeve, decision-diagram single-level reformulation; p0282-0.500000 optimum. Math. Program., online first 16 Dec 2025, no volume yet. Checked: Crossref and Springer page.
+- `vasquez2025single`: Vasquez, Lozano, van Hoeve, decision-diagram single-level reformulation; re-proves the p0201-0.100000 and p0282-0.500000 optima first published in `fischetti2017new` (named in the notes of `instances.csv`; no optimum is credited to this paper); a published point for cap6000-0.500000. Math. Program., online first 16 Dec 2025, no volume yet. Checked: Crossref and Springer page.
 - `martello1999dynamic`: the knapsack instance generator behind cclw and kp (item classes), and the combo algorithm. Checked: Crossref.
-- `dantzig1957discrete`: the greedy LP (Dantzig) bound used in the exact knapsack oracle (`src/kp.rs`). Checked: Crossref.
+- `dantzig1957discrete`: the greedy LP (Dantzig) bound used in the exact knapsack oracle (`src/kp.rs`) and the fractional deletion bound (Supp. Lemma B.7). Checked: Crossref.
+- `brown1961note`: Brown's criterion for complete sequences of integers, the classical form of the window-extension lemma (Supp. Lemma B.5). Amer. Math. Monthly 68(6), 1961. Checked: Crossref (first page 557; the range 557-560 from the JSTOR listing as cited on Wikipedia's "Complete sequence" page).
 - `martello1990knapsack`: standard knapsack reference (LP bound, dynamic programming). Book, no DOI; ISBN 0-471-92420-2. Checked: library catalogue records.
 - `chu1998genetic`: the Chu-Beasley multidimensional knapsacks underlying the 810 OR instances. Checked: Crossref.
 - `beasley1990orlibrary`: OR-Library, where the Chu-Beasley instances are distributed. Checked: Crossref.
@@ -41,7 +44,9 @@ DOI's Crossref record matched authors, title, volume, issue, pages and year.
 
 - `tang2016class`: Tang-Richard-Smith; the bcpins edge clique interdiction instances. Checked: Crossref (online 2015, issue 2016).
 - `furini2019maximum`: maximum (vertex) clique interdiction, related work. Checked: Crossref.
-- `furini2021branch`: exact branch and cut for the edge interdiction clique problem (BOBILib's clique family is this problem); related work and its note on the n = 40-60 instances. Checked: Crossref.
+- `furini2021branch`: exact branch and cut for the edge interdiction clique problem (BOBILib's clique family is this problem); related work, its Proposition 2 (deletions needed to bring a clique K_q below size l, after `hassan2018clique`) and its note on the n = 40-60 instances (ER graphs with budgets up to 20%). Checked: Crossref.
+- `hassan2018clique`: Hassan, Kacem, Martin, Osman, J. Comb. Optim. 36(3) 1074-1101 (2018); source of Furini et al.'s Proposition 2. Checked: Crossref.
+- `zhou2026exact`: Zhou, Jiang, Zhu, Rossi, RLCM exact method for edge clique interdiction (arXiv 2601.01869, 5 Jan 2026; EJOR, in press, no volume yet); uses Turan's theorem; random graphs with n in {25, 50, 75, 100} and budgets up to 20% of the edges. Checked: Crossref (Aug 2026) and the arXiv full text.
 - `baggio2021multilevel`: multilevel critical node (attack-protect) problem; source of inter-fire. Checked: Crossref.
 - `smith2020survey`: survey of network interdiction; applications in the introduction. Checked: Crossref.
 - `brown2006defending`: defending critical infrastructure; defence applications in the introduction. Checked: Crossref.
@@ -56,8 +61,9 @@ DOI's Crossref record matched authors, title, volume, issue, pages and year.
 - `kleinert2021computing`: PADM; source of the miplib2010 and miplib2017 bilevel sets; the `padm` method of the coupled portfolio. Checked: Crossref.
 - `mitsos2010global`: value-function (bounding) cuts, the `vcut` method of the coupled portfolio. Checked: Crossref.
 - `lozano2017value`: value-function-based exact approach, also behind `vcut`. Checked: Crossref.
-- `xu2014exact`: Xu-Wang algorithm; source of the xuwang set. Checked: Crossref.
+- `xu2014exact`: Xu-Wang algorithm; source of the xuwang set; its Lemma 2 (a follower unbounded for one leader choice makes the bilevel problem infeasible), extended by Theorem 1 of `fischetti2018intersection`. Checked: Crossref.
 - `ozaltin2017branch`: Ozaltin-Zhang; source of the zhang set. Checked: Optimization Online page (published 2017/05/16).
+- `rodrigues2026unboundedness`: Rodrigues, Carvalho, Anjos, Sugishita, unboundedness in bilevel optimization (complexity; algorithms tested on LP relaxations of BOBILib instances with the bounds removed; urges unboundedness checks and certificates). Math. Program., online 26 Mar 2026, no volume yet. Crossref's title has the typo "Builevel"; the entry uses the correct spelling. Checked: Crossref and the Optimization Online preprint (Feb 2025).
 - `meyer1974existence`: rational MILPs that are feasible and bounded attain their optimum; basis of the recession-ray certificates (no bilevel feasible point when the follower is unbounded). Checked: Crossref.
 
 ## Extremal graph theory (clique lower bounds)
@@ -79,7 +85,7 @@ DOI's Crossref record matched authors, title, volume, issue, pages and year.
 
 ## MIPLIB
 
-- `gleixner2021miplib`: MIPLIB 2017; source models of the miplib2017 set, published optima used as HPR bounds, and the solution checker BOBILib's verification builds on. Checked: Crossref.
+- `gleixner2021miplib`: MIPLIB 2017; source models of the miplib2017 set, published optima used as HPR bounds (solution file miplib2017-v37.solu, Last-Modified 24 Sep 2026, re-read 28 Oct 2026: noswot, pigeon-10, timtab1, ex10, neos-1445765 and neos-950242 unchanged), and the solution checker BOBILib's verification builds on. Checked: Crossref.
 - `koch2011miplib`: MIPLIB 2010; source models of the miplib2010 set. Title as in the Crossref and Springer metadata ("MIPLIB 2010"); BOBILib's list adds the subtitle "Mixed integer programming library version 5". Checked: Crossref and the Springer page.
 - `bixby1998miplib`: MIPLIB 3.0 (Optima 58, 12-15); source models of the miplib3 set. Checked: MIPLIB 3 page and the MIPLIB site's BibTeX record.
 
@@ -94,9 +100,10 @@ DOI's Crossref record matched authors, title, volume, issue, pages and year.
 
 ## Added in the review round
 
-- `lefebvre2025dantzig`: Lefebvre and Schmidt, Dantzig-Wolfe single-level reformulation; source of published OR points (`lefebvre_schmidt_ub` in `results/literature/mkip_literature_status.csv`) and of four published points for general instances (`EXTRA_PUBLISHED` in `scripts/build_data_package.py`). Optimization Online preprint, June 2025 (latest version read: 20 July 2026); per-instance run files on henrilefebvre.com. Checked: Optimization Online page (title, authors) and the preprint's title page.
+- `lefebvre2025dantzig`: Lefebvre and Schmidt, Dantzig-Wolfe single-level reformulation; source of published OR points (`lefebvre_schmidt_ub` in `results/literature/mkip_literature_status.csv`), of three published points for general instances (`EXTRA_PUBLISHED` in `scripts/build_data_package.py`) and of one published optimum, ex10_0_100 (run file `results-MILP.csv`, line 682; `results/literature/other_published_optima.csv`). Optimization Online preprint, June 2025 (latest version read: 20 July 2026); per-instance run files on henrilefebvre.com. Checked: Optimization Online page (title, authors) and the preprint's title page.
 - `wood1993deterministic`: classical duality-based single-level reformulation in network interdiction (prior art for the LP bracket). Checked: Crossref.
 - `israeli2002shortest`: the same, shortest-path interdiction. Checked: Crossref.
+- `glover1968surrogate`: surrogate constraints, the merging of the leader rows in the merged-row online bound. Checked: Crossref.
 - `kellerer2004knapsack`: knapsack textbook; a basic LP solution of a multidimensional knapsack has at most as many fractional variables as rows (prior art for the m*p_max gap). Checked: Crossref (book, Springer Berlin Heidelberg, 2004).
 - `cheung2017verifying`: VIPR certificates for MILP results (remedy for trusted solvers). Checked: Crossref (pages 148-160, LNCS 10328, editors Eisenbrand and Koenemann).
 - `eifler2023computational`: exact rational MIP in SCIP. Checked: Crossref (Math. Program. 197(2) 793-812; online January 2022, issue 2023).

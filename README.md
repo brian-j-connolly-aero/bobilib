@@ -6,8 +6,8 @@ supplement and the data package (`results/`). Start with `REPORT.md` for the
 findings and `paper/README.md` to build the paper.
 
 BOBILib's statuses come from two general-purpose bilevel solvers run for one
-hour each. About 79% of the instances it does not list as optimal are
-*packing interdiction* games: the leader removes items within one or more
+hour each. Of the 1,594 instances it lists as feasible or open, 1,254 (79%)
+are *packing interdiction* games: the leader removes items within one or more
 budgets, then the follower packs the remaining items into one or more
 knapsacks. This crate exploits that structure.
 

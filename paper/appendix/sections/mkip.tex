@@ -34,7 +34,9 @@ item $j$ with $W_{kj}>0$ still has $(W^{\top}\lambda)_j\ge\lambda_kW_{kj}\ge p_{
 so its term stays $0$; items with $W_{kj}=0$ are unaffected; and $c_k\lambda_k$
 does not increase because $c_k\ge 0$. So $D$ does not increase.
 \end{proof}
-\noindent Not formalised.
+\noindent Not formalised. For one follower knapsack ($m=1$) Weninger derives
+the same form and minimises it over $(x,\lambda)$ jointly; he also gives it
+for several follower rows.\cite{weninger2026approx}
 
 \begin{proposition}[Exact linearisation]\label{prop:mkip-milp}
 Let $U^{*}=\min\{U(x): Gx\le g,\ x\in\{0,1\}^n\}$. Then $U^{*}$ is the optimal
@@ -57,7 +59,11 @@ with $p_j=0$ contribute $0$. So the MILP's value is the minimum of
 $D(x,\lambda)$ over leader-feasible $x$ and $\lambda$ in the box, which is
 $\min_xU(x)=U^{*}$ by Lemma~\ref{lem:mkip-dual}.
 \end{proof}
-\noindent Not formalised.
+\noindent Not formalised. The linearisation is the classical one of
+duality-based interdiction
+models;\cite{caprara2016bilevel,wood1993deterministic,israeli2002shortest} for
+$m=1$ Weninger computes the same $U^{*}$ instead by a knapsack dynamic program
+for each candidate $\lambda$.\cite{weninger2026approx}
 
 \subsection{The integrality-gap bracket}
 
@@ -101,7 +107,9 @@ $\mathrm{OPT}\ge L-m\,p_{\max}$, and $\mathrm{OPT}$ is an integer because $p$ is
 The upper bounds hold because the leader may play $\hat x$ and the game is
 zero-sum.
 \end{proof}
-\noindent Not formalised.
+\noindent Not formalised. For $m=1$ the lower bound is Proposition~3 of
+Weninger's preprint, $\mathrm{OPT}\ge U^{*}-p^{*}$ with $p^{*}\le p_{\max}$, proved
+there in the same way.\cite{weninger2026approx}
 
 For the OR instances with one follower knapsack (variant $-100$, $m=1$) the
 lower bound is $\lceil L-p_{\max}-10^{-6}\max(1,|L|)\rceil$, where $L$ is HiGHS's
@@ -124,8 +132,8 @@ $m\,p_{\max}$ makes the lower bound weak, and only the upper bounds are used.
 
 Theorem~\ref{thm:online} needs one leader row and one follower row. For one
 follower row ($m=1$, weights $w_j=W_{1j}$, capacity $c=c_1$) and several leader
-rows, \texttt{mkip::omega\_root} merges the leader rows into one surrogate row
-and rescales both rows to small integers. Its inputs are multipliers
+rows, \texttt{mkip::omega\_root} merges the leader rows into one surrogate
+row\cite{glover1968surrogate} and rescales both rows to small integers. Its inputs are multipliers
 $\mu\in\mathbf{R}^{m_u}_{\ge 0}$ and scales $s_u,s_l>0$, all double-precision
 numbers. For these numbers let
 \[

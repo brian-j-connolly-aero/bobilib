@@ -205,8 +205,8 @@ lists \FamKipUnsolved{} KIP instances as not optimal, and at \NumKipBobiAbove{} 
 instances its value is above the optimum, by a median of \KipBobiExcessMedian\% and up to
 \KipBobiExcessMax\%. Weninger and Fukasawa's combinatorial branch and
 bound,\cite{weninger2023fast,weninger2025fast} the state of the art, solves \NumLitKip{} of the
-\FamKipUnsolved{}. The \NumNewKip{} it leaves open in runs with 16 threads and a one-hour limit
-are all in classes~6 and~7, with \KipOpenItemsMin{} to \KipOpenItemsMax{} items. Weninger and
+\FamKipUnsolved{}. The \NumNewKip{} it leaves open in runs with 16 threads and a one-hour
+limit\cite{weninger_bkpsolver,weninger2026approx} are all in classes~6 and~7, with \KipOpenItemsMin{} to \KipOpenItemsMax{} items. Weninger and
 Fukasawa's runs of Della Croce and Scatamacchia's algorithm leave them open too, and the best
 published lower bounds, in Weninger and Fukasawa's run records, lie \KipPubLbGapMin{} to
 \KipPubLbGapMax{} units below BOBILib's values;\cite{weninger_bkpsolver} two-hour runs of Lozano,
@@ -335,10 +335,14 @@ true value by branching over these choices. As for knapsack interdiction, the HP
 \textbf{What was known.} BOBILib lists all \NumCliqueSet{} \code{clique} instances as feasible, with
 values \CliqueBobiMin{} to \CliqueBobiMax; Fischetti et~al.\ used them to test heuristics. Furini
 et~al.\ gave exact algorithms for vertex and edge clique
-interdiction,\cite{furini2019maximum,furini2021branch} and deciding whether at most $k$ deletions
-bring the clique number down to a given value is the edge blocker clique
-problem,\cite{mahdavipajouh2020minimum} but no optimum of these \NumCliqueSet{} instances had been
-published. Section~\ref{sec:clique} proves \NumNewClique{} of them optimal.
+interdiction,\cite{furini2019maximum,furini2021branch} the latter strengthened by a Tur\'an-type
+count of the deletions that leave no clique of a given size in a clique (their Proposition~2, after
+Hassan et~al.\cite{hassan2018clique}), and Zhou et~al.'s RLCM is a recent exact
+method;\cite{zhou2026exact} deciding whether at most $k$ deletions bring the clique number down to
+a given value is the edge blocker clique problem.\cite{mahdavipajouh2020minimum} None of them ran
+these instances (the random graphs of Furini et~al.\ and of Zhou et~al.\ have budgets of at most
+20\% of the edges, BOBILib's 25\%), and no optimum of these \NumCliqueSet{} instances had been published.
+Section~\ref{sec:clique} proves \NumNewClique{} of them optimal.
 
 % --------------------------------------------------------------------------------------
 \subsection{Network Interdiction: The Attack-Protect Game}\label{sec:prob-network}
@@ -391,8 +395,12 @@ attack, and the leader has many attacks to choose from: \NetworkAttacks{} sets o
 the follower may save nothing, is worth 0.
 
 \textbf{What was known.} BOBILib lists \NetworkBobiOptimal{} of the \FamNetworkAll{} instances as
-optimal; the other \FamNetworkUnsolved{}, two forests with \NetworkNodes{} nodes (a tree of 50 nodes
-without its one vaccinated node) and $\Phi=\Lambda=\NetworkPhi$, are solved in Section~\ref{sec:network}.
+optimal. The other \FamNetworkUnsolved{}, two forests with \NetworkNodes{} nodes (a tree of 50 nodes
+without its one vaccinated node) and $\Phi=\Lambda=\NetworkPhi$, had been solved as well:
+Fischetti et~al.'s MIX++ proved all \FamNetworkAll{} instances of the set optimal, these two at
+value \NetworkOptimum{} on four threads within an hour (Table~9 of the online appendix of their
+paper\cite{fischetti2017new,fischetti2016appendix}). Section~\ref{sec:network} proves the two
+values again by complete enumeration in exact arithmetic.
 
 % --------------------------------------------------------------------------------------
 \subsection{Generalized Interdiction}\label{sec:prob-generalized}

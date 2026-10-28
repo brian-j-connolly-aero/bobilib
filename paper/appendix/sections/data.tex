@@ -65,7 +65,7 @@ Column & Meaning\\
 \texttt{method} & how the status or value was obtained\\
 \texttt{certificate} & path, relative to \texttt{results/}, of the solution or certificate file; \texttt{ARCHIVE.tar.gz:FILE} names a member of an archive\\
 \texttt{verified} & \texttt{yes}: the certificate passed its check (\texttt{bobi verify}, or the exact ray check); \texttt{no}: it did not (no row); \texttt{na}: no certificate in this package. The column says whether a check passed, not how rigorous it is\\
-\texttt{certificate\_class} & the certificate class of the row's result (Definition~\ref{def:classes}): \texttt{exact}, \texttt{numerical} or \texttt{benchmark} for every row with \texttt{new\_status} \texttt{optimal}, \texttt{infeasible\_bilevel} or \texttt{feasible}, \texttt{na} for the others; a published optimum counts as \texttt{numerical}\\
+\texttt{certificate\_class} & the certificate class of the row's result (Definition~\ref{def:classes}): \texttt{exact}, \texttt{numerical} or \texttt{benchmark} for every row with \texttt{new\_status} \texttt{optimal}, \texttt{infeasible\_bilevel} or \texttt{feasible}, \texttt{na} for the others; a published optimum counts as \texttt{numerical}, unless this package re-proves it exactly (the two network optima, \texttt{exact})\\
 \texttt{notes} & free text, separated by semicolons\\
 \bottomrule
 \end{tabular}
@@ -79,8 +79,9 @@ and \NumUnchanged{} \texttt{unchanged}. The \NumOptimalNow{} optimal rows are th
 with the \NumNoFeasible{} rows without a bilevel feasible point they are the
 \NumSettled{} settled instances. Of the \NumClassRows{} rows with a result,
 \NumClassExact{} are \texttt{exact} (the \NumClassExactNew{} new optima of the
-subset-sum, clique and network families and the \NumNoFeasible{} recession
-directions), \NumClassNumerical{} \texttt{numerical} (the \NumLitOptimal{}
+subset-sum and clique families, the \NumClassExactLit{} published network optima,
+re-proved here by enumeration, and the \NumNoFeasible{} recession
+directions), \NumClassNumerical{} \texttt{numerical} (the other \NumClassNumericalLit{}
 published optima, the \NumNewHpr{} optima at the MIPLIB bound and the
 \NumFirstPoint{} verified points, all of which pass \texttt{bobi verify -{}-tight})
 and \NumClassBenchmark{} \texttt{benchmark}. The keys of the \texttt{source}
@@ -98,8 +99,8 @@ Key in \texttt{source} & Reference & Optima\\
 \texttt{WeningerFukasawa2025} & Weninger and Fukasawa\cite{weninger2025fast} & \NumLitKip{}\\
 \texttt{LozanoBergmanCire2026} & Lozano, Bergman and Cire\cite{lozano2026network} & \NumLitLozano{}\\
 \texttt{FischettiEtAl2019} & Fischetti, Ljubi\'c, Monaci and Sinnl\cite{fischetti2019interdiction} & \NumLitImkp{}\\
-\texttt{FischettiEtAl2017} & Fischetti, Ljubi\'c, Monaci and Sinnl\cite{fischetti2017new} & \NumLitFischettiSeventeen{}\\
-\texttt{VasquezLozanoVanHoeve2025} & V\'asquez, Lozano and van Hoeve\cite{vasquez2025single} & \NumLitVasquez{}\\
+\texttt{FischettiEtAl2017} & Fischetti, Ljubi\'c, Monaci and Sinnl\cite{fischetti2017new,fischetti2016appendix} & \NumLitFischettiSeventeen{}\\
+\texttt{LefebvreSchmidt2025} & Lefebvre and Schmidt's run files\cite{lefebvre2025dantzig} & \NumLitLefebvreSchmidt{}\\
 \texttt{BOBILibEarlierRelease} & an earlier release of BOBILib's metadata\cite{bobilib_website} & \NumLitEarlierRelease{}\\
 \texttt{this work} & a certificate in this package & \NumNewOptimal{}\\
 \bottomrule

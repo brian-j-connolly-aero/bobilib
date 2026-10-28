@@ -1,6 +1,6 @@
 # The BOBILib paper
 
-Sources of the paper "Settling 650 unsolved BOBILib instances: 528 published optima, 82 new
+Sources of the paper "Settling 650 unsolved BOBILib instances: 531 published optima, 79 new
 optimality proofs and 40 infeasibility certificates"
 (Brian J. Connolly), its supplementary document, its figures, and the scripts that
 build the data package in `../results/`.

@@ -149,8 +149,9 @@ with solution files, a feasibility checker and a status per instance. Its metada
 open (no point is known). The statuses come from runs of two general-purpose bilevel solvers,
 MibS\cite{tahernejad2020mibs,mibs_software} and the solver of Fischetti et~al.\ in its setting
 MIX++, or HC++ where MIX++ does not apply,\cite{fischetti2017new,mixpp_software} each for one hour
-on one thread. They were fixed when the instances were collected, and some of the specialized
-results discussed below appeared later.
+on one thread. They were fixed when the instances were collected. Some of the specialized
+results discussed below appeared later, and a few earlier ones, from MIX++ runs with four threads
+or a more aggressive setting, were not carried over (Section~\ref{sec:literature}).
 
 This paper asks a simple question: which of the \NumUnsolved{} feasible or open instances (below,
 \emph{unsolved}) can be \emph{settled}, that is, proven optimal or proven to have no bilevel
@@ -222,11 +223,17 @@ data package, in which every settled instance and every new point carries a cert
 and are applied here systematically: dualizing the follower's linear programming relaxation into
 one mixed-integer program\cite{caprara2016bilevel,wood1993deterministic,israeli2002shortest} and
 the integrality gap of a packing problem with few rows, which follows from the fact that a basic
-LP solution has at most as many fractional variables as rows;\cite{kellerer2004knapsack} the online
-lower bound of Weninger and Fukasawa;\cite{weninger2025fast} Meyer's argument that a rational
+LP solution has at most as many fractional variables as rows,\cite{kellerer2004knapsack} a bracket
+that Weninger's 2026 preprint also states for one follower knapsack;\cite{weninger2026approx} the
+online lower bound of Weninger and Fukasawa, whose code already plays it on counted copies of
+identical items;\cite{weninger2025fast,weninger_bkpsolver} the one-LP test of Fischetti et~al.\ for
+followers that are unbounded for every leader choice, which extends a lemma of Xu and
+Wang;\cite{fischetti2018intersection,xu2014exact} Meyer's argument that a rational
 mixed-integer program that is feasible and bounded attains its optimum;\cite{meyer1974existence}
-the bound $\HPR\le\OPT$ of the high point relaxation;\cite{moore1990mixed} and exhaustive
-enumeration.
+Tur\'an-type counts of the deletions that leave no clique of a given size, which exact methods for
+edge clique interdiction already apply within single cliques;\cite{furini2021branch,zhou2026exact}
+the bound $\HPR\le\OPT$ of the high
+point relaxation;\cite{moore1990mixed} and exhaustive enumeration.
 
 Section~\ref{sec:problems} describes BOBILib's problem families for readers outside the field and
 says what published work had solved. Section~\ref{sec:methods} describes how each claim is
@@ -254,7 +261,12 @@ reformulation\cite{lefebvre2025dantzig} and heuristics such as a penalty alterna
 method (PADM).\cite{kleinert2021computing} Published points without a proof of optimality are
 used in two ways: to decide whether a point of this work is the first one known
 (Section~\ref{sec:verify}), and as the published upper bounds of the OR comparison
-(Section~\ref{sec:res-or}).
+(Section~\ref{sec:res-or}). Lozano, Bergman and Cire's repository lists 344 instances as solved to
+optimality.\cite{lozano_dbo_repo} Of these, the KIP and \code{imkp} instances had been solved
+before\cite{weninger2025fast,fischetti2019interdiction} and \inst{p0201-0.100000} by Fischetti
+et~al.;\cite{fischetti2017new} Table~\ref{tab:lit} credits Lozano, Bergman and Cire with the
+others, with the OR optima that appear only in their table of solved instances and with one
+closure, \NumLitLozano{} in all.
 
 \begin{table}[b]
 \caption{Published optima of instances that BOBILib lists as feasible or open.}\label{tab:lit}
@@ -268,16 +280,26 @@ Fischetti, Ljubi\'c, Monaci and Sinnl\cite{fischetti2019interdiction} & interdic
 Lozano, Bergman and Cire\cite{lozano2026network} & decision diagrams & MKIP, set \code{or} & \NumLitOr$^{\dagger}$\\
  & & generalized interdiction & \NumLitGeneralized\\
  & & MIPLIB~3 & \NumLitMiplibLozano\\
-Fischetti et~al.\cite{fischetti2017new} & branch and cut & \inst{air03-0.100000} & \NumLitFischettiSeventeen\\
-V\'asquez, Lozano and van Hoeve\cite{vasquez2025single} & decision diagrams & \inst{p0282-0.500000} & \NumLitVasquez\\
+Fischetti et~al.\cite{fischetti2017new,fischetti2016appendix} & branch and cut & MIPLIB~3, network$^{\S}$ & \NumLitFischettiSeventeen\\
+Lefebvre and Schmidt\cite{lefebvre2025dantzig} & Dantzig--Wolfe reformulation & \inst{ex10\_0\_100}$^{\P}$ & \NumLitLefebvreSchmidt\\
 An earlier BOBILib release & solver runs & \inst{neos-950242\_0\_100}$^{\ddagger}$ & \NumLitEarlierRelease\\
 \midrule
 Total & & & \NumLitOptimal\\
 \bottomrule
-\multicolumn{4}{@{}p{6.4in}@{}}{\footnotesize $^{\dagger}$\NumLitOrClaimed{} listed as optimal in
-their solution files, and \inst{\OrClosureName}, closed by their published point and a
-branch-and-cut bound in their run data (Section~\ref{sec:res-or}). $^{\ddagger}$Its BOBILib point
-also meets the MIPLIB bound of Section~\ref{sec:general} (Supp.\ Table~S11).}
+\multicolumn{4}{@{}p{6.4in}@{}}{\footnotesize Each optimum is credited to its first publication among
+the per-instance sources compiled here (Supp.\ Sec.~H); later proofs are named in the data package.
+$^{\dagger}$\NumLitOrClaimed{} listed as optimal in
+their published data (most in their collection of optimal solution files, the others only in
+their table of solved instances), and \inst{\OrClosureName}, closed by their published point and a
+branch-and-cut bound in their run data (Section~\ref{sec:res-or}). $^{\S}$\inst{air03-0.100000},
+\inst{p0201-0.100000} and \inst{p0282-0.500000}, solved with a more aggressive setting of MIX++
+(caption of their Table~6; the last two were proved optimal again later by V\'asquez, Lozano and
+van Hoeve,\cite{vasquez2025single} \inst{p0201-0.100000} also by Lozano, Bergman and Cire), and
+\inst{tree-50\_1-5-5\_006} and \inst{tree-50\_1-5-5\_010} (Table~9 of their online appendix;
+re-proved here, Section~\ref{sec:network}). $^{\P}$From their run files (Section~\ref{sec:verify});
+the MIPLIB bound of Section~\ref{sec:general} and a verified point confirm it.
+$^{\ddagger}$Its BOBILib point (not re-verified here) also meets the MIPLIB bound of
+Section~\ref{sec:general} (Supp.\ Table~S11).}
 \end{tabular}
 \end{table}
 
@@ -291,8 +313,8 @@ per-instance data the authors publish: answer files and run records,\cite{wening
 tables, solution files\cite{lozano_dbo_repo} and run files.\cite{lefebvre2025dantzig} An
 instance counts as solved in published work when the data its authors released, in the paper or in
 the files that go with it, prove its optimal value: a claimed optimum, or a published point together
-with a bound from their runs that meets it. Lefebvre and Schmidt's run files are the exception: they
-are used only for points, never for optima (below). Two of Lozano, Bergman and Cire's optima need
+with a bound from their runs that meets it. Lefebvre and Schmidt's run files need more care
+(below). Two of Lozano, Bergman and Cire's optima need
 care. For \inst{\OrClosureName} the lower bound in their paper's table exceeds their point, and a
 branch-and-cut bound in their run data closes the instance (Section~\ref{sec:res-or}). For
 \inst{p0548-0.900000} their decision diagrams report \PFiveFortyEightDd{} at a point whose follower answer is not
@@ -310,11 +332,25 @@ optimality proofs are not repeated here.
 \textbf{Lefebvre and Schmidt's run files.} Their per-instance run files cover most of BOBILib,
 but not every row can be read at face value: rows that end at the time limit can carry the status
 ``optimal'' with a value that no bilevel feasible point has (the value 0 on \LsOrZeroOptimal{} OR
-instances), and a few other rows contradict verified points or certificates (\supp{A.6}). Their own
-analysis discards time-limit rows, and so does this paper: their values count as published points
-only from runs that ended before the limit, and never as optima. Their runs report
-\inst{ex10\_0\_100} optimal at \ExTenOptimum{}, which is correct (Section~\ref{sec:res-general}) but not
-stated in their paper; it is counted as optimal here, not as published.
+instances), and rows of runs that ended in time, on about a hundred other instances, almost all of
+them outside the boundedness assumption of their method, contradict verified points or
+certificates (\supp{A.6}). Their own analysis discards time-limit rows except in one
+best-of-all-methods comparison (their Figure~6), and this paper discards them throughout: their
+values count as published points only from runs that ended before the limit. Their files hold no
+solutions, so an optimum that a run reports before the limit, with its value equal to its bound,
+counts as published only where a point with that value is verified here. This holds for
+\inst{ex10\_0\_100}, optimal at \ExTenOptimum{} in their run file \code{results-MILP.csv}
+although their paper does not name it; it is credited to them, and the MIPLIB bound confirms it
+independently (Section~\ref{sec:res-general}). Their runs also report \inst{neos-950242\_0\_100}
+optimal, which an earlier BOBILib release had already listed as optimal and to which it is
+credited. Their optima for
+\inst{ex10\_50\_50}, where no point is known, and \inst{mine-166-5\_50\_50}, whose point their
+own check file rejects, are not counted. Their exact runs also end with status ``infeasible'', before the limit, on
+\LsInfeasibleNoFeasible{} of the \NumNoFeasible{} instances shown here to have no bilevel feasible
+point (Section~\ref{sec:general}). These instances, too, lie outside the boundedness assumption of
+their method, the same status is contradicted by verified points on \LsInfeasibleVerifiedPoint{}
+other instances, and their paper does not state these results, so they are not counted as
+published.
 
 \textbf{Verification.} Every solution file of this work uses BOBILib's format and passes
 \code{bobi verify}, a verifier written for this work after BOBILib's own feasibility checker
@@ -384,9 +420,11 @@ value \GenTolPhiSol{} lies \GenTolDiff{} units (\GenTolRel{} relative) above the
 optimum \GenTolPhiOpt{} at the same leader choice, and a row with right-hand side $-245$ is
 violated by \GenTolViolation{}; both pass BOBILib's tolerances, which are relative (\supp{E.5}).
 \end{itemize}
-A result is in the weakest class of the steps it uses. Published optima are not re-proved here: they
-rest on their authors' software and its numerics, and for \NumLitNoFile{} of them not even the point
-is verified, so they are listed in \cls{ii} as the weakest class that fits. As in BOBILib and MIPLIB,
+A result is in the weakest class of the steps it uses. Published optima are used as published:
+they rest on their authors' software and its numerics, and for \NumLitNoFile{} of them not even
+the point is verified, so they are listed in \cls{ii} as the weakest class that fits. The
+exception are the \NumClassExactLit{} network optima, which this work re-proves by complete
+enumeration (Section~\ref{sec:network}); they are listed in \cls{i}. As in BOBILib and MIPLIB,
 a verified point that meets a lower bound of \cls{i} or~(ii) is called optimal.
 Table~\ref{tab:classes} gives the class of every settled instance and every new point; the text
 gives that of each bound (Section~\ref{sec:res-or} for the OR lower bounds). No result of this work
@@ -402,12 +440,12 @@ Result & Basis & Class & Instances\\
 \midrule
 Knapsack interdiction optima & exhaustive integer search, Lean-proved pruning lemmas, two integer-only provers & (i) exact & \NumNewKip\\
 Edge clique interdiction optima & Mantel's and Brouwer's theorems, integer-checked case trees, partition files & (i) exact & \NumNewClique\\
-Network interdiction optima & every attack enumerated, exact tree program & (i) exact & \NumNewNetwork\\
 No bilevel feasible point & recession direction checked in rational arithmetic & (i) exact & \NumNoFeasible\\
+Published optima, re-proved exactly (network) & every attack enumerated, exact tree program & (i) exact & \NumClassExactLit\\
 Optima at the MIPLIB bound & exact model comparison, MIPLIB's floating-point optimum & (ii) solver & \NumNewHpr\\
 OR points, several follower knapsacks & follower optimum by HiGHS & (ii) solver & \NumOrFirstPoints\\
 General points & follower and tie-break by HiGHS, tight test & (ii) solver & \NumGeneralFirstPoints\\
-Published optima with a verified file & published bound; point verified here & (ii) solver & \NumLitWithFile\\
+Other published optima with a verified file & published bound; point verified here & (ii) solver & \NumLitWithFileNumerical\\
 Published optima, value only & as published & (ii) solver & \NumLitNoFile\\
 \midrule
 \multicolumn{3}{@{}l}{Total: \cls{i} \NumClassExact, \cls{ii} \NumClassNumerical, \cls{iii} \NumClassBenchmark} & \NumClassRows\\
@@ -432,7 +470,12 @@ optimum lies far below $c$ the band is wider, and the loop may need several sear
 are interchangeable for the follower, so the leader should delete the cheapest copies first,
 and the search branches on how many copies of each weight survive rather than on which items
 are deleted (Figure~\ref{fig:ss}a; Supp.\ Prop.~B.4, which also divides the weights by their
-greatest common divisor). This removes many symmetric branches.
+greatest common divisor). This removes many symmetric branches. Weninger and Fukasawa's code
+already merges items equal in profit, weight and cost into counted copies (its option
+\code{-dedup}, since 2023), and its current version (August 2026, not described in their paper)
+breaks symmetry by a dominance rule that, for items of equal weight, contains
+Lemma~\ref{lem:count}(ii);\cite{weninger_bkpsolver} here a class holds all items of one weight,
+whatever their costs.
 
 \begin{lem}[Monotonicity and cheapest copies]\label{lem:count}
 (i) Blocking more items never helps the follower: $X\subseteq X'$ implies $\Phi(X')\le\Phi(X)$.
@@ -445,7 +488,8 @@ every copy it leaves, costs no more than $X$, and has $\Phi(X')=\Phi(X)$.
 
 \textbf{Windows.} At a node of the search the decided classes have left survivors $M$ whose subset
 sums are known. A run of consecutive reachable sums only grows when a copy of value $v$ is added,
-as long as $v$ is at most the run's width (Figure~\ref{fig:ss}b; Lean: \lean{window\_extend},
+as long as $v$ is at most the run's width, as in Brown's criterion for complete
+sequences\cite{brown1961note} (Figure~\ref{fig:ss}b; Lean: \lean{window\_extend},
 \lean{window\_extend\_all}). If the leader cannot afford to delete enough weight to stop such a
 window before it reaches the band, the node is safe whatever the leader does (Supp.\
 Prop.~B.8).
@@ -465,7 +509,12 @@ the budget $\beta$. Hence $\Omega(o,\beta,c)\le\OPT$.
 \lean{online\_lower\_bound}.
 
 \textbf{Tables with an end set.} For subset-sum instances I play the online game class by class,
-in the count formulation and with a target. At each class the leader announces how many copies
+in the count formulation and with a target. Weninger and Fukasawa's code plays it the same way on
+classes of identical items, the leader choosing how many copies to block and the follower how
+many to take;\cite{weninger_bkpsolver} new here are classes of one weight with different costs,
+the end set built from a node's decided sums, and the table rebuilt for that end set at every
+node. At each class
+the leader announces how many copies
 it deletes; the follower then takes some of the surviving copies, which lowers a residual $t$;
 the follower wins if the final residual lies in an \emph{end set} $A$. Let $G_A(Q,\beta')$ be the
 set of residuals from which the follower wins when the classes $Q$ are played in a given order
@@ -538,12 +587,15 @@ U(x)=\min_{\lambda\ge 0}\ c\T\lambda+\sum_{j=1}^n\max\bigl(0,\,p_j-(W\T\lambda)_
 and for binary $x$ the product linearizes exactly, so $U^*=\min\{U(x): Gx\le g\}$ is the value of
 a single MILP (Supp.\ Prop.~C.2). Caprara et~al.'s algorithm for KIP rests on this
 dualization,\cite{caprara2016bilevel,dellacroce2020exact} and it is the classical single-level
-reformulation of network interdiction.\cite{wood1993deterministic,israeli2002shortest} An optimal
+reformulation of network interdiction.\cite{wood1993deterministic,israeli2002shortest} For one
+follower knapsack, Weninger writes $U^*$ the same way, as one minimization over $(x,\lambda)$, and
+proves $\OPT\ge U^*-p^*$ with $p^*\le\pmax$, the case $m=1$ of Theorem~\ref{thm:bracket}; he also
+gives the dual form for several follower rows.\cite{weninger2026approx} An optimal
 vertex of the follower's LP has at most $m$ fractional items when the follower has $m$ rows, which
 bounds the gap between $U$ and $\Phi$ (Figure~\ref{fig:bracket}).
 
 \needspace{6\baselineskip}
-\begin{thm}[LP bracket]\label{thm:bracket}
+\begin{thm}[LP bracket; for $m=1$ Weninger\cite{weninger2026approx}]\label{thm:bracket}
 With $m$ follower rows, $U(x)-m\,\pmax\le\Phi(x)\le U(x)$ for every leader choice $x$. Hence for
 any lower bound $L\le U^*$, for example a MILP solver's proven dual bound, and any leader-feasible
 $\hat x$:\ \ $\lceil L-m\,\pmax\rceil\le\OPT\le\Phi(\hat x)\le U(\hat x)$.
@@ -579,7 +631,8 @@ its width is $\Phi(\hat x)-\lceil L-\pmax\rceil$. In floating point, $L$ is HiGH
 bound, used only when it is finite and lowered by a safety margin of $10^{-6}\max(1,|L|)$ before
 rounding up, so that its rounding error cannot push the bound past an integer (\supp{C.2}); the
 bound is solver-certified (\cls{ii}). A second lower bound extends Theorem~\ref{thm:online} to
-several leader rows: merge them into one row with nonnegative multipliers, then round the
+several leader rows: merge them into one surrogate row\cite{glover1968surrogate} with nonnegative
+multipliers, then round the
 leader's costs down and its budget up, and the follower's weights up and its capacity down. Each
 step only helps the leader, so the online game on the merged data is still a lower bound. The
 rounding goes in the safe direction and the game is solved in integer arithmetic (Supp.\ Thm~C.5;
@@ -676,12 +729,15 @@ the burned nodes are the smallest set that contains the attacked nodes and is cl
 spreading to unprotected neighbors (Supp.\ Lemma~F.1). On a forest it is solved exactly by a
 dynamic program (DP) over the states (protected, saved) of each node, with the number of
 protected nodes as a knapsack dimension (\supp{F.3}). The two instances BOBILib lists as
-feasible are forests with \NetworkNodes{} nodes and $\Phi=\Lambda=\NetworkPhi$, so all
+feasible, which Fischetti et~al.'s MIX++ had already solved (Section~\ref{sec:prob-network}), are
+forests with \NetworkNodes{} nodes and $\Phi=\Lambda=\NetworkPhi$, so all
 \NetworkAttacks{} attacks of at most $\Phi$ nodes can be enumerated (Figure~\ref{fig:network},
 Section~\ref{sec:prob-network}, shows the game).
 Every follower point is checked against the model as read from the files, and at the minimizing
 attack the follower's MILP is solved again by HiGHS. The minimum over all attacks is then the
-optimum (Supp.\ Thm~F.4), an exact certificate (\cls{i}).
+optimum (Supp.\ Thm~F.4), an exact certificate (\cls{i}) of the published value. The data package
+counts the two instances as published optima, in \cls{i} because of this re-proof
+(Section~\ref{sec:verify}).
 
 \subsection{General Instances: Recession Directions, the MIPLIB Bound and Feasible Points}\label{sec:general}
 
@@ -689,14 +745,18 @@ optimum (Supp.\ Thm~F.4), an exact certificate (\cls{i}).
 constants. So a direction along which the follower can improve without limit works for every
 leader choice at once (Figure~\ref{fig:ray}).
 
-\begin{thm}[Recession direction]\label{thm:ray}
+\begin{thm}[Recession direction\cite{xu2014exact,fischetti2018intersection}]\label{thm:ray}
 Let $r$ be a rational direction of the follower's variables that keeps every follower row and
 bound satisfied when added to a feasible point ($D_ir\ge 0$ for a row with a finite lower side,
 $D_ir\le 0$ for a row with a finite upper side, and the same sign conditions for the variable
 bounds), and let $f\T r<0$. Then for every leader choice the follower's problem is infeasible or
 unbounded, so the bilevel problem has no feasible point.
 \end{thm}
-\noindent Proof in Supp.\ Thm~E.1, after Meyer;\cite{meyer1974existence} not formalized.
+\noindent This is Theorem~1 of Fischetti et~al.,\cite{fischetti2018intersection} who test it with
+one LP and extend Lemma~2 of Xu and Wang;\cite{xu2014exact} it is written here for rows with a
+finite lower side, a finite upper side or both. Proof in Supp.\ Thm~E.1, after Meyer;\cite{meyer1974existence} not
+formalized. New here are its systematic application to BOBILib's unsolved general instances and
+the exact rational check of each direction.
 
 The integrality of the follower is no obstacle because $r$ is rational: a multiple of $r$ keeps
 the integer variables integral. The directions are found by an LP solver in floating point. A
@@ -710,7 +770,8 @@ coefficient $-1$. All \NumRayExact{} certificates are exact (\cls{i}).
 \textbf{The MIPLIB bound.} Every bilevel feasible point is feasible for the HPR, so $\HPR\le\OPT$,
 and a bilevel feasible point with value $\HPR$ is optimal (Supp.\ Lemma~E.3). When BOBILib
 builds an instance from a MIPLIB problem and changes nothing else, the HPR \emph{is} that MIPLIB
-problem, and its published optimum\cite{gleixner2021miplib} is a lower bound on the bilevel
+problem, and its published optimum (MIPLIB~2017 solution file, version~37 of 24~September
+2026)\cite{gleixner2021miplib} is a lower bound on the bilevel
 optimum. This is checked, not assumed: a script compares the bilevel instance with the
 MIPLIB~2017 model in exact rational arithmetic (variables, rows, coefficients, sides, bounds,
 integrality and objective). The published optimum itself, however, is a floating-point result of
@@ -827,7 +888,7 @@ Robust subset-sum search & the \NumNewKip{} open KIP instances; \NumKipValidatio
 LP bracket, merged-row bound, local search & \NumOrOneKnapsack{} OR, one follower knapsack & MILP 60~s (bracket re-run 120~s), local search 30~s & \NumOrOneKnapsackPoints{} points, \NumOrBetterLb{} better lower bounds\\
 Follower LP at the bracket's minimizer & \NumOrSeveral{} OR, several follower knapsacks & MILP 30~s, follower 60~s & \NumOrSeveralPoints{} points\\
 Partitions, part-size cases, tree certificates & \NumCliqueSet{} clique & part-size cases run until decided & \NumNewClique{} optimal, \NumCliqueOpen{} open\\
-Enumeration with tree DP & \NumNetworkUnsolved{} feasible and \NetworkTreesReproduced{} optimal trees & complete; \NetworkSecsEnumA~s and \NetworkSecsEnumB~s for the two & \NumNewNetwork{} optimal; \NetworkTreesReproduced{} values reproduced\\
+Enumeration with tree DP & \NumNetworkUnsolved{} feasible and \NetworkTreesReproduced{} optimal trees & complete; \NetworkSecsEnumA~s and \NetworkSecsEnumB~s for the two & \NumNetworkUnsolved{} published optima re-proved; \NetworkTreesReproduced{} values reproduced\\
 Recession directions & general instances & LP, then exact check & \NumNoFeasible{} without a feasible point\\
 HPR, follower, tie-break (\code{bobi general}) & the \NumGeneralCandidates{} open ones without coupling rows & HPR 300~s, follower 300~s & \NumGeneralFiles{} points; \NumGeneralCandRays{} rays, \NumGeneralNoHpr{} without an HPR point, \NumGeneralFollowerUnsolved{} follower unsolved, \NumGeneralFailedCheck{} failed check\\
 Portfolio (\code{bobi coupled}) & \NumCoupledCandidates{} of the \NumCoupledOpen{} open ones with coupling rows (\NumCoupledRays{} rays and \NumCoupledLarge{} with over 100,000 variables left out) & 600~s or 300~s, follower 120~s, batch budget 2.5~h & \NumCoupledAttempted{} attempted: \NumCoupledFiles{} points, \NumCoupledNone{} none\\
@@ -846,8 +907,8 @@ lists none, \NumOrFirstAnywhere{} get the first point anywhere; for the other
 (Section~\ref{sec:res-or}). Of the \NumGeneralFirstPoints{} general instances that get a verified
 point, \NumGeneralFirstAnywhere{} get the first point anywhere. Of the \NumNewOptimal{} new
 optimality proofs, \NumNewValueKnown{} confirm a value BOBILib already listed (the \NumNewKip{} KIP
-instances, the \NumNewNetwork{} network instances and the \NumNewValueKnownGeneral{} \inst{noswot}
-instances): there the proof is new, not the value. Of the \NumSettledHere{} instances settled
+instances and the \NumNewValueKnownGeneral{} \inst{noswot} instances): there the proof is new, not
+the value. Of the \NumSettledHere{} instances settled
 here, \NumClassExactSettled{} have exact certificates and \NumClassNumericalNew{} are optimal at
 the MIPLIB bound; every new point is solver-certified (two of them, \inst{neos-3627168-kasai\_0\_100}
 and \inst{neos-3754480-nidda\_0\_100}, only by \code{bobi verify -{}-tight}; Section~\ref{sec:general}),
@@ -875,8 +936,13 @@ is the version immediately preceding the per-node tables, run on the same machin
 of \KipPrevUnfinishedHours{} hours. The second prover, which uses only the direct and per-node
 rules, needs almost the same number of nodes. Weninger and Fukasawa's solver was not run again
 here: it needs Gurobi, which is not available on this machine, and their published runs (16
-threads, one hour) already leave these instances open. The times are therefore not a
-like-for-like comparison with their solver.
+threads, one hour) already leave these instances open; Weninger's 2026 preprint still reports 16
+of the 100 subset-sum instances of Fischetti et~al.\ unsolved after one
+hour.\cite{weninger2026approx} The
+current version of their code adds a symmetry-breaking rule that, by its documentation, speeds up
+subset-sum instances by about an order of magnitude; no results of it are published, and it was
+not run here.\cite{weninger_bkpsolver} The times are therefore not a like-for-like comparison
+with their solver.
 
 \begin{table}[t]
 \caption{The \NumNewKip{} knapsack interdiction instances without a published optimum. Class~6:
@@ -916,7 +982,12 @@ and Schmidt,\cite{lefebvre2025dantzig} whose values count only from runs that en
 limit (Section~\ref{sec:verify}). For \NumOrLsTimeLimitBest{} instances a value from one of their
 runs stopped at the limit would otherwise be the best published point, and for
 \NumOrLsTimeLimitBelowLb{} of them it lies below Lozano, Bergman and Cire's lower bound (Supp.\
-Table~S6). For one instance, \inst{\OrClosureName}, a published lower bound exceeds a published
+Table~S6). Of these values, \NumOrBetterLsTl{} are lower than this work's point on an instance that
+is counted below among the \NumOrBetter{} with a better point: \NumOrBetterLsTlBelowLb{} lie below a
+proven lower bound, and \NumOrBetterLsTlOpen{} are ruled out by no known bound (for
+\NumOrBetterLsTlKo{} of these the authors' own check file marks the instance as not bilevel
+feasible), so for those \NumOrBetterLsTlOpen{} the count rests on the rule of
+Section~\ref{sec:verify}. For one instance, \inst{\OrClosureName}, a published lower bound exceeds a published
 point; it is closed (below) and left out of the medians. With one follower
 knapsack the median gap falls from \OrGapOneQuarterLit\% to \OrGapOneQuarterNow\% at budget 25\%
 and from \OrGapOneHalfLit\% to \OrGapOneHalfNow\% at budget 50\%; at budget 75\% the published
@@ -1019,15 +1090,21 @@ not 3-partite (\supp{D.6}). LP bounds on the smallest such edge set stop near
 \subsection{Network and General Instances}\label{sec:res-general}
 
 The network instances \inst{tree-50\_1-5-5\_006} and \inst{tree-50\_1-5-5\_010} are optimal at
-\NetworkOptimum{}, BOBILib's value; \NetworkOptAttacksA{} and \NetworkOptAttacksB{} of the
-\NetworkAttacks{} attacks reach it. Of BOBILib's \NetworkBobiOptimal{} optimal network values,
+\NetworkOptimum{}, BOBILib's value, as Fischetti et~al.\ had proved with
+MIX++;\cite{fischetti2016appendix} the enumeration confirms it in exact arithmetic:
+\NetworkOptAttacksA{} and \NetworkOptAttacksB{} of the \NetworkAttacks{} attacks reach it. Of BOBILib's \NetworkBobiOptimal{} optimal network values,
 \NetworkRederived{} are derived again: the \NetworkTreesReproduced{} trees by the same code, the
 \NetworkRndSmall{} random graphs with 25 nodes by HiGHS at every attack, and \NetworkReviewOnly{}
 random graphs with 50 or 80 nodes by the brute force of the separate review.
 
 Figure~\ref{fig:general} shows the outcome for the \NumGeneralUnsolved{} unsolved general
 instances. Of the instances that BOBILib lists as open, \NumNoFeasible{} have no bilevel feasible
-point, all with exact certificates. Without coupling rows, \code{bobi general} was run on
+point, all with exact certificates. BOBILib's paper notes that an instance without coupling rows
+whose MILP relaxation is feasible is ``technically'' feasible even when no point is
+known;\cite{thurauf2026bobilib} that needs a follower with an optimal response, and the
+\NumGeneralCandRays{} \inst{\_0\_100} instances among the \NumNoFeasible{} are counterexamples. The
+LP test of Section~\ref{sec:general} detects all \NumNoFeasible{}, and most of them have continuous
+linking variables, which BOBILib's two solvers do not handle. Without coupling rows, \code{bobi general} was run on
 \NumGeneralCandidates{} open instances. Of these, \NumGeneralCandRays{} have no bilevel feasible
 point, and of the other \NumGeneralCandWithPoint{} it gives verified points for
 \NumGeneralFiles{}, \NumGeneralFilesOptimal{} of them optimal (below). For
@@ -1051,9 +1128,10 @@ variables (coupling rows).}\label{fig:general}
 \end{minipage}\hfill
 \begin{minipage}[b]{3.33in}
 \centering\footnotesize\setlength{\tabcolsep}{3pt}
-\captionof{table}{Instances settled here whose HPR is exactly the MIPLIB model they were built
-from, with a verified point at its published optimum (\cls{ii}). BOBILib: status before this
-work; point from: BOBILib's solution file or the method of this work. MIPLIB's optimum of noswot,
+\captionof{table}{Instances whose HPR is exactly the MIPLIB model they were built from, with a
+verified point at its published optimum (\cls{ii}): the \NumHprOptimal{} settled here and, marked
+$^{*}$, a published optimum that this confirms. BOBILib: status before this work; point from:
+BOBILib's solution file or the method of this work. MIPLIB's optimum of noswot,
 \NoswotMiplibOptimum{}, rounds up because its objective takes integer values only.}\label{tab:hpr}
 \begin{tabular}{@{}l l r l@{}}
 \toprule
@@ -1065,10 +1143,12 @@ Instance & BOBILib & Optimum & Point from\\
 \end{minipage}
 \end{figure}
 
-Table~\ref{tab:hpr} lists the \NumHprOptimal{} instances that are optimal at the MIPLIB bound.
-Of these, \NumHprOpen{} were open in BOBILib, without a BOBILib point; for one of them,
-\inst{ex10\_0\_100}, Lefebvre and Schmidt's run files hold an unverified point at the optimum
-\ExTenOptimum{} and report it optimal. For \inst{noswot\_0\_100} and \inst{noswot\_50\_50} BOBILib's
+Table~\ref{tab:hpr} lists the \NumHprOptimal{} instances proven optimal here at the MIPLIB bound;
+\NumHprOpen{} of them were open in BOBILib, without a BOBILib point. It also lists
+\inst{ex10\_0\_100}, which BOBILib lists as open and whose optimum \ExTenOptimum{} Lefebvre and
+Schmidt's run files had reported, from a run that ended before the time limit (no solution file is
+published; Section~\ref{sec:verify}): the MIPLIB bound and the verified point of \code{bobi general}
+confirm this published optimum independently. For \inst{noswot\_0\_100} and \inst{noswot\_50\_50} BOBILib's
 own points already had the optimal value; the proof is new. For \inst{noswot}, \inst{ex10},
 \inst{neos-1445765} and \inst{pigeon-10} the objective takes integer values only (for
 \inst{pigeon-10} multiples of 1,000), so the results are safe by integrality rounding if MIPLIB's
@@ -1086,7 +1166,8 @@ MIBLP solver does not use. A general branch and bound over the \CliqueMSixtyNine
 of a 60-vertex clique instance at density 0.9 is unlikely to show quickly that every deletion of
 \CliqueKSixtyNine{} edges leaves a $K_4$, while Brouwer's theorem and \NumCliquePartCases{} small
 cases do; and an instance without a bilevel feasible point needs one direction as a certificate,
-while a solver that searches for a point can only report a time limit.
+which one LP finds,\cite{fischetti2018intersection} while a solver that only searches for a point
+can only report a time limit.
 
 \subsection{Recommendations for Benchmark Libraries}
 
@@ -1097,8 +1178,10 @@ From this work I suggest:
 a certificate) and its certificate class, and import published per-instance results, so that an
 instance solved elsewhere is not listed as unsolved;
 \item screen new instances for followers that are infeasible or unbounded for every leader
-choice, and accept certificates of bilevel infeasibility, such as the recession directions here,
-as evidence for an infeasible status;
+choice (for unboundedness one LP suffices\cite{fischetti2018intersection}), and accept certificates
+of bilevel infeasibility, such as the recession directions here, as evidence for an infeasible
+status; Rodrigues et~al.\ make a similar case for checks and certificates of unboundedness in
+bilevel optimization;\cite{rodrigues2026unboundedness}
 \item state the tolerances behind every status, and prefer exactly optimal follower responses.
 A relative test such as~\eqref{eq:tol} lets the leader profit from a suboptimal follower when the
 follower's values are large, as in BOBILib's file for \inst{general20-30-20-20-20-2}
@@ -1144,12 +1227,18 @@ DP, the recession directions, or the search code itself (Table~\ref{tab:lean}).
 their authors, the published lower bounds of the OR instances with several follower knapsacks,
 and Brouwer's theorem are used as published; for \NumLitNoFile{} of the optima not even a point is
 verified here. Lefebvre and Schmidt's values are taken only from runs that ended before the time
-limit, as in their own analysis. ``First point anywhere'' means that none of the published sources
+limit, as in most of their own analysis; the one optimum taken from their run files is confirmed
+by a verified point and the MIPLIB bound. ``First point anywhere'' means that none of the published sources
 compiled here (Supp.\ Sec.~H) has a point; for \NumGeneralPublishedPoint{} of the general instances
 that get a feasible point from \code{bobi general} or \code{bobi coupled} a published point exists
 (for \NumGeneralPublishedLS{} of them only in Lefebvre and Schmidt's run files), and these are not
-counted as first points; \inst{ex10\_0\_100}, now optimal, also has one there. Other sources may
-hold points that this reconciliation missed.
+counted as first points; \inst{ex10\_0\_100}, whose optimum is taken from their run files, is
+counted as a published optimum (Section~\ref{sec:verify}). Published points
+that beat BOBILib's value on instances whose status this work leaves unchanged were not compiled
+systematically: Fischetti et~al.'s Table~6 has such points for several MIPLIB~3 instances, and for
+\inst{air04-0.900000}, which BOBILib lists as open, a point where BOBILib has
+none;\cite{fischetti2017new} Lefebvre and Schmidt's run files have such points for some other
+instances; and other sources may hold points that this reconciliation missed.
 
 \textbf{Common-mode errors.} The solvers, the verifier and the separate review sessions were all
 written with the same AI coding agent directed by the same author. Separate sessions with their own
@@ -1184,16 +1273,17 @@ maintainers, who update the statuses from submitted solutions.
 I asked which of BOBILib's \NumUnsolved{} feasible or open instances can be settled. The key
 findings are:
 \begin{itemize}
-\item Published work had already solved \NumLitOptimal{} of them; reconciling BOBILib's statuses,
+\item Published work had already solved \NumLitOptimal{} of them (among them the two network
+instances, which exhaustive enumeration with an exact tree program re-proves here); reconciling
+BOBILib's statuses,
 which predate some of these results, with the literature settles more instances than any single
 method.
 \item Structure-specific methods settle \NumSettledHere{} more, \NumClassExactSettled{} of them
 with exact certificates: a robust subset-sum search proves all \NumNewKip{} remaining knapsack
 interdiction instances optimal, by computational proofs supported by formally verified lemmas;
 extremal graph theory, with partition certificates and \NumCliquePartCases{} integer-checked case
-certificates, settles \NumNewClique{} of \NumCliqueSet{} clique interdiction instances; exhaustive
-enumeration with an exact tree program settles the \NumNewNetwork{} network interdiction
-instances; recession directions, all checked in exact arithmetic, show that \NumNoFeasible{}
+certificates, settles \NumNewClique{} of \NumCliqueSet{} clique interdiction instances; recession
+directions, all checked in exact arithmetic, show that \NumNoFeasible{}
 instances have no bilevel feasible point; and published MIPLIB optima make the remaining
 \NumNewHpr{} of the \NumNewOptimal{} new optima optimal by the conventions of MIPLIB and BOBILib
 (solver-certified, \cls{ii}).

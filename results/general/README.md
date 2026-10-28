@@ -13,7 +13,8 @@ For each row, `scripts/compare_hpr.py` checked in exact arithmetic that the
 instance's HPR is the MIPLIB 2017 model (same variables, rows,
 coefficients, sides, bounds, integrality and objective), and `bobi verify
 --generic` checked the point (rows, objective, follower optimality by an
-exact re-solve). MIPLIB optima are from `miplib2017-v31.solu`.
+exact re-solve). MIPLIB optima are from `miplib2017-v31.solu` (unchanged in
+`miplib2017-v37.solu` of 24 September 2026).
 
 ```sh
 python3 -I scripts/compare_hpr.py INSTANCE.mps.gz INSTANCE.aux noswot.mps.gz
@@ -30,26 +31,36 @@ rounding if MIPLIB's published bound is valid; for timtab1 the agreement is
 numerical. These optima are solver-certified numerical results (they rest
 on MIPLIB's floating-point optima), not exact-arithmetic proofs; the column
 `certificate_class` of `../instances.csv` says `numerical`. Lefebvre and
-Schmidt's MILP run files also report ex10_0_100 optimal at 100; their paper
-does not state it, so it is not counted as published
-(`../notes/lefebvre_schmidt.md`). `pigeon-10_50_50` (open, with coupling rows) gets
+Schmidt's MILP run files report ex10_0_100 optimal at 100 (a run that ended
+before the time limit, value equal to bound); their paper does not name the
+instance. Its optimum is counted as published and credited to their run file
+(`../literature/other_published_optima.csv`); the bound and the point here
+confirm it independently (`../notes/lefebvre_schmidt.md`). The other four
+rows of `hpr_optimal.csv` with a point of this work, and the two noswot rows,
+are proven optimal here. `pigeon-10_50_50` (open, with coupling rows) gets
 its point at the bound from `bobi coupled`; the file is in
 `results/general-coupled/`. For `noswot_*` and `neos-950242_0_100`, BOBILib's
 own solution files already had the optimal value. For `noswot_*` the
-proof is new; `neos-950242_0_100` was already listed as optimal in an
-earlier BOBILib release, and the current one lists it as feasible.
+files pass `bobi verify --generic` and the proof is new; these 7 rows (a
+verified point at the bound) are the ones of the supplement's table of
+MIPLIB-bound optima.
+`neos-950242_0_100` was already listed as optimal in an earlier BOBILib
+release, and the current one lists it as feasible; it is counted as a
+published optimum, and its BOBILib point, which meets the bound, is not
+re-verified here (`../instances.csv`: `verified` na).
 
 ## Feasible points without coupling rows (`points.csv`)
 
 `bobi general` on the 98 open instances without coupling rows: 64 verified
 bilevel feasible points (BOBILib lists no value for any of them); four of
-them are optimal at the HPR bound (above). For 8 of the other 60 a point had
+them are optimal at the HPR bound (above; three proven here, and ex10_0_100,
+a published optimum). For 8 of the other 60 a point had
 been published elsewhere (Fischetti et al. 2017; Vasquez, Lozano and van Hoeve
 2025; Lozano, Bergman and Cire 2026; an earlier BOBILib release; Lefebvre and
 Schmidt 2025); the notes of `../instances.csv` give each published value, and
 for 6 of the 8 it is better than the point here. Of the four optimal ones,
-ex10_0_100 also has a published point, at the same value, in Lefebvre and
-Schmidt's run files (not counted as a published optimum). Of the other 34, 17 have no bilevel feasible point at all
+ex10_0_100 has its optimum, at the same value, in Lefebvre and Schmidt's run
+files (counted as a published optimum). Of the other 34, 17 have no bilevel feasible point at all
 (`../rays`); for 10 HiGHS found no HPR point in 300 s, for 6 the follower
 was not solved to optimality in time, and 1 point failed the final check. Each
 passes `bobi verify --generic` (rows of both levels within 1e-6, the stated

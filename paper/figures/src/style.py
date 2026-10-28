@@ -9,6 +9,7 @@ in the paper and stops with an error instead of plotting if they disagree.
 import csv
 import json
 import re
+import statistics
 import sys
 from pathlib import Path
 
@@ -130,10 +131,9 @@ def fmt(n):
     return f"{n:,}"
 
 
-def upper_median(v):
-    """Median as in scripts/compare_or.py (upper middle element), used in the paper."""
-    v = sorted(v)
-    return v[len(v) // 2]
+def median(v):
+    """Median as in scripts/compare_or.py (mean of the two middle values for an even count), used in the paper."""
+    return statistics.median(v)
 
 
 def read_csv(rel):
