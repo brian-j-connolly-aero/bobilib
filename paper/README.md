@@ -78,6 +78,6 @@ rebuilding them gives byte-identical PDFs.
 
 ## Placeholders
 
-`main.tex` defines `\repourl`, still the literal text `REPOSITORY-URL`, for the
-Data availability section; fill it in before submission. No DOI has been
-assigned yet, so neither the paper nor `../results/README.md` cites one.
+`main.tex` defines `\repourl` (https://github.com/brian-j-connolly-aero/bobilib) for the
+Data availability section. No DOI has been assigned yet, so neither the paper nor
+`../results/README.md` cites one.

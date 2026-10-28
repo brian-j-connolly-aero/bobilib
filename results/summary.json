@@ -4,13 +4,13 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish25.dat-0": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish08.dat-100": {
    "family": "multidim-knapsack",
@@ -28,19 +28,19 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish20.dat-50": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish17.dat-50": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish10.dat-0": {
    "family": "multidim-knapsack",
@@ -52,7 +52,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pet5.dat-50": {
    "family": "multidim-knapsack",
@@ -94,7 +94,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish06.dat-50": {
    "family": "multidim-knapsack",
@@ -142,7 +142,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish02.dat-0": {
    "family": "multidim-knapsack",
@@ -160,13 +160,13 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish28.dat-50": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "hp1.dat-0": {
    "family": "multidim-knapsack",
@@ -178,13 +178,13 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish23.dat-100": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "sento1.dat-50": {
    "family": "multidim-knapsack",
@@ -208,7 +208,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pb7.dat-0": {
    "family": "multidim-knapsack",
@@ -226,13 +226,13 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish30.dat-0": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish12.dat-100": {
    "family": "multidim-knapsack",
@@ -244,13 +244,13 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pet7.dat-50": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "sento1.dat-0": {
    "family": "multidim-knapsack",
@@ -280,7 +280,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish11.dat-0": {
    "family": "multidim-knapsack",
@@ -298,25 +298,25 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pet7.dat-0": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish29.dat-0": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish29.dat-100": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish08.dat-0": {
    "family": "multidim-knapsack",
@@ -358,7 +358,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish17.dat-0": {
    "family": "multidim-knapsack",
@@ -394,7 +394,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pb5.dat-100": {
    "family": "multidim-knapsack",
@@ -418,7 +418,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish10.dat-50": {
    "family": "multidim-knapsack",
@@ -430,7 +430,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "sento1.dat-100": {
    "family": "multidim-knapsack",
@@ -442,7 +442,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish12.dat-0": {
    "family": "multidim-knapsack",
@@ -484,25 +484,25 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish22.dat-100": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish29.dat-50": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish19.dat-100": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish13.dat-50": {
    "family": "multidim-knapsack",
@@ -514,7 +514,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pet4.dat-0": {
    "family": "multidim-knapsack",
@@ -550,7 +550,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pb2.dat-0": {
    "family": "multidim-knapsack",
@@ -568,7 +568,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "hp2.dat-100": {
    "family": "multidim-knapsack",
@@ -592,13 +592,13 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish16.dat-50": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pet2.dat-0": {
    "family": "multidim-knapsack",
@@ -622,7 +622,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weing6.dat-50": {
    "family": "multidim-knapsack",
@@ -634,13 +634,13 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish19.dat-0": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish09.dat-100": {
    "family": "multidim-knapsack",
@@ -664,7 +664,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pb5.dat-0": {
    "family": "multidim-knapsack",
@@ -682,13 +682,13 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish26.dat-0": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish03.dat-100": {
    "family": "multidim-knapsack",
@@ -700,7 +700,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish11.dat-50": {
    "family": "multidim-knapsack",
@@ -718,7 +718,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pet3.dat-50": {
    "family": "multidim-knapsack",
@@ -760,7 +760,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pb6.dat-50": {
    "family": "multidim-knapsack",
@@ -772,19 +772,19 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish23.dat-50": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish20.dat-0": {
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish06.dat-100": {
    "family": "multidim-knapsack",
@@ -796,7 +796,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weish01.dat-0": {
    "family": "multidim-knapsack",
@@ -820,7 +820,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "hp2.dat-50": {
    "family": "multidim-knapsack",
@@ -832,7 +832,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "pet3.dat-0": {
    "family": "multidim-knapsack",
@@ -856,7 +856,7 @@
    "family": "multidim-knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Fischetti et al. 2019)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "weing4.dat-50": {
    "family": "multidim-knapsack",
@@ -6280,7 +6280,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction40-4": {
    "family": "knapsack",
@@ -6292,7 +6292,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction55-9": {
    "family": "knapsack",
@@ -6304,7 +6304,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction40-1": {
    "family": "knapsack",
@@ -6364,7 +6364,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction45-7": {
    "family": "knapsack",
@@ -6376,7 +6376,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction50-9": {
    "family": "knapsack",
@@ -6394,7 +6394,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction45-9": {
    "family": "knapsack",
@@ -6406,13 +6406,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction50-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction45-8": {
    "family": "knapsack",
@@ -6448,7 +6448,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction35-2": {
    "family": "knapsack",
@@ -6466,7 +6466,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction50-2": {
    "family": "knapsack",
@@ -6508,7 +6508,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "interdiction50-10": {
    "family": "knapsack",
@@ -6532,13 +6532,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction55-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction40-9": {
    "family": "knapsack",
@@ -6550,13 +6550,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction55-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Caprara et al. 2016)"
   },
   "interdiction40-10": {
    "family": "knapsack",
@@ -6568,19 +6568,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-5-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-3-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-9-1": {
    "family": "knapsack",
@@ -6592,7 +6592,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-9-4": {
    "family": "knapsack",
@@ -6604,25 +6604,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-1-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-1-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-7-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-2-10": {
    "family": "knapsack",
@@ -6634,25 +6634,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-1-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-5-3": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-5-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-1-9": {
    "family": "knapsack",
@@ -6670,19 +6670,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-1-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-7-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-9-5": {
    "family": "knapsack",
@@ -6694,37 +6694,37 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-3-4": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-5-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-5-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-5-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-3-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-9-2": {
    "family": "knapsack",
@@ -6736,7 +6736,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-9-7": {
    "family": "knapsack",
@@ -6748,19 +6748,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-1-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-7-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-9-9": {
    "family": "knapsack",
@@ -6772,7 +6772,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-7-2": {
    "family": "knapsack",
@@ -6790,25 +6790,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-3-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-5-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-3-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-9-2": {
    "family": "knapsack",
@@ -6826,13 +6826,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-3-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-9-8": {
    "family": "knapsack",
@@ -6844,19 +6844,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-1-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-7-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-9-6": {
    "family": "knapsack",
@@ -6874,13 +6874,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-3-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-6-10": {
    "family": "knapsack",
@@ -6892,25 +6892,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-5-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-7-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-3-3": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-9-7": {
    "family": "knapsack",
@@ -6934,7 +6934,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-9-8": {
    "family": "knapsack",
@@ -6946,19 +6946,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-1-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-7-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-9-6": {
    "family": "knapsack",
@@ -6970,37 +6970,37 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-3-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-5-5": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-5-4": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-3-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-3-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-4-10": {
    "family": "knapsack",
@@ -7018,19 +7018,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-1-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-7-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-9-9": {
    "family": "knapsack",
@@ -7054,13 +7054,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-3-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-9-6": {
    "family": "knapsack",
@@ -7084,7 +7084,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-9-4": {
    "family": "knapsack",
@@ -7108,19 +7108,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-1-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-7-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-9-5": {
    "family": "knapsack",
@@ -7132,49 +7132,49 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-3-4": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-5-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-5-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-5-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-5-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-3-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-1-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-9-4": {
    "family": "knapsack",
@@ -7186,31 +7186,31 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-1-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-1-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-7-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-5-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-9-5": {
    "family": "knapsack",
@@ -7222,7 +7222,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-2-10": {
    "family": "knapsack",
@@ -7234,19 +7234,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-2-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-6-10": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-2-9": {
    "family": "knapsack",
@@ -7264,91 +7264,91 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-8-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-6-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-6-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-8-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-4-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-2-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-2-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-8-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-2-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-8-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-2-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-4-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-8-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-6-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-8-10": {
    "family": "knapsack",
@@ -7360,19 +7360,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-8-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-8-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-6-3": {
    "family": "knapsack",
@@ -7396,31 +7396,31 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-2-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-2-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-4-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-6-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-6-10": {
    "family": "knapsack",
@@ -7432,19 +7432,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-6-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-4-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-4-9": {
    "family": "knapsack",
@@ -7456,19 +7456,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-2-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-2-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-8-10": {
    "family": "knapsack",
@@ -7486,25 +7486,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-6-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-8-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-8-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-4-10": {
    "family": "knapsack",
@@ -7516,25 +7516,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-2-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-4-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-4-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-8-10": {
    "family": "knapsack",
@@ -7546,13 +7546,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-8-5": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-4-9": {
    "family": "knapsack",
@@ -7564,7 +7564,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-4-10": {
    "family": "knapsack",
@@ -7576,25 +7576,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-8-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-2-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-8-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-6-10": {
    "family": "knapsack",
@@ -7606,37 +7606,37 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-6-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-4-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-8-4": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-6-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-4-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-4-9": {
    "family": "knapsack",
@@ -7648,19 +7648,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-2-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-8-10": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-2-9": {
    "family": "knapsack",
@@ -7672,7 +7672,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-2-10": {
    "family": "knapsack",
@@ -7684,31 +7684,31 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-6-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-6-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-8-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-8-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-6-3": {
    "family": "knapsack",
@@ -7726,37 +7726,37 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-6-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-8-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-2-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-8-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-2-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-6-9": {
    "family": "knapsack",
@@ -7780,61 +7780,61 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-8-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-6-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-6-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-8-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-4-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-2-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-2-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-1-10": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-4-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-4-9": {
    "family": "knapsack",
@@ -7846,25 +7846,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-6-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-8-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-4-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-7-10": {
    "family": "knapsack",
@@ -7876,67 +7876,67 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-2-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-6-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-4-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-4-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-6-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-8-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-4-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-2-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-8-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-6-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-3-10": {
    "family": "knapsack",
@@ -7948,55 +7948,55 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-4-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-4-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-4-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-2-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-2-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-6-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-8-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-2-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-1-10": {
    "family": "knapsack",
@@ -8008,25 +8008,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-6-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-4-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-8-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-6-2": {
    "family": "knapsack",
@@ -8038,43 +8038,43 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-2-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-8-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-4-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-8-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-6-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-2-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-6-3": {
    "family": "knapsack",
@@ -8086,49 +8086,49 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-4-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-6-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-8-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-8-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-6-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-2-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-2-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-3-10": {
    "family": "knapsack",
@@ -8140,31 +8140,31 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-4-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-4-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-2-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-2-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-6-3": {
    "family": "knapsack",
@@ -8176,19 +8176,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-6-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-8-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-3-10": {
    "family": "knapsack",
@@ -8200,37 +8200,37 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-6-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-2-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-6-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-2-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-4-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-1-10": {
    "family": "knapsack",
@@ -8242,37 +8242,37 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-2-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-2-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-6-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-6-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-8-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-4-1": {
    "family": "knapsack",
@@ -8284,25 +8284,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-6-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-2-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-8-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-6-2": {
    "family": "knapsack",
@@ -8314,13 +8314,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-4-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-5-10": {
    "family": "knapsack",
@@ -8332,19 +8332,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-2-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-4-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-9-10": {
    "family": "knapsack",
@@ -8356,13 +8356,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-6-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-6-1": {
    "family": "knapsack",
@@ -8374,7 +8374,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-4-8": {
    "family": "knapsack",
@@ -8386,19 +8386,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-4-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-4-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-4-9": {
    "family": "knapsack",
@@ -8410,67 +8410,67 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-6-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-8-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-1-10": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-4-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-6-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-2-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-2-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-4-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-3-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-7-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-9-8": {
    "family": "knapsack",
@@ -8482,7 +8482,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-9-3": {
    "family": "knapsack",
@@ -8506,13 +8506,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-7-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-9-7": {
    "family": "knapsack",
@@ -8530,7 +8530,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-9-9": {
    "family": "knapsack",
@@ -8542,31 +8542,31 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-5-4": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-1-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-3-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-3-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-7-10": {
    "family": "knapsack",
@@ -8578,25 +8578,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-3-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-5-5": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-7-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-9-8": {
    "family": "knapsack",
@@ -8608,13 +8608,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-3-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-9-6": {
    "family": "knapsack",
@@ -8626,7 +8626,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-7-3": {
    "family": "knapsack",
@@ -8644,19 +8644,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-1-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-5-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-9-9": {
    "family": "knapsack",
@@ -8668,13 +8668,13 @@
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-7-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-9-10": {
    "family": "knapsack",
@@ -8686,49 +8686,49 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-3-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-5-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-1-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-5-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-7-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-1-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-7-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-9-4": {
    "family": "knapsack",
@@ -8740,67 +8740,67 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-5-10": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-1-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-5-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-5-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-3-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-3-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-5-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-1-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-5-6": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-1-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-9-5": {
    "family": "knapsack",
@@ -8812,25 +8812,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-3-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-1-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-7-10": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-9-1": {
    "family": "knapsack",
@@ -8842,25 +8842,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-5-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-5-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-7-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-1-10": {
    "family": "knapsack",
@@ -8872,7 +8872,7 @@
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-7-1": {
    "family": "knapsack",
@@ -8890,25 +8890,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-5-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-5-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-1-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-9-5": {
    "family": "knapsack",
@@ -8920,19 +8920,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-1-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-3-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-9-1": {
    "family": "knapsack",
@@ -8944,37 +8944,37 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-5-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-1-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-3-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-5-3": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-1-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-3-10": {
    "family": "knapsack",
@@ -8986,19 +8986,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-3-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-7-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-9-10": {
    "family": "knapsack",
@@ -9010,13 +9010,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-7-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-9-4": {
    "family": "knapsack",
@@ -9028,61 +9028,61 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-5-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-1-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-5-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-5-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-3-5": {
    "family": "knapsack",
    "bobilib": "open",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-7-2": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-3-7": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-3-9": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-5-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-7-9": {
    "family": "knapsack",
@@ -9100,7 +9100,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-9-6": {
    "family": "knapsack",
@@ -9112,7 +9112,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-7-10": {
    "family": "knapsack",
@@ -9136,31 +9136,31 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-1-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-1-4": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-5-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-3-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-9-10": {
    "family": "knapsack",
@@ -9172,13 +9172,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-1-5": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-9-3": {
    "family": "knapsack",
@@ -9196,13 +9196,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-7-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-300-100-9-7": {
    "family": "knapsack",
@@ -9214,13 +9214,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-5-1": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-9-9": {
    "family": "knapsack",
@@ -9232,7 +9232,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-200-100-5-10": {
    "family": "knapsack",
@@ -9244,25 +9244,25 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-400-100-3-8": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-100-100-7-3": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "interKP-500-100-3-6": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Weninger-Fukasawa 2022, answer files)"
   },
   "K5010W02.KNP": {
    "family": "knapsack",
@@ -9322,13 +9322,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5050W05.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5020W10.KNP": {
    "family": "knapsack",
@@ -9340,13 +9340,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5050W14.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5020W01.KNP": {
    "family": "knapsack",
@@ -9430,19 +9430,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5050W16.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5050W06.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5020W13.KNP": {
    "family": "knapsack",
@@ -9484,13 +9484,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5040W01.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5040W11.KNP": {
    "family": "knapsack",
@@ -9538,19 +9538,19 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5050W07.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5050W17.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5020W02.KNP": {
    "family": "knapsack",
@@ -9592,13 +9592,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5050W02.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5030W11.KNP": {
    "family": "knapsack",
@@ -9646,13 +9646,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5040W15.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5020W20.KNP": {
    "family": "knapsack",
@@ -9700,13 +9700,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5050W13.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5030W12.KNP": {
    "family": "knapsack",
@@ -9748,13 +9748,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5050W18.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5020W14.KNP": {
    "family": "knapsack",
@@ -9778,13 +9778,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5050W01.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5040W20.KNP": {
    "family": "knapsack",
@@ -9808,7 +9808,7 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5030W03.KNP": {
    "family": "knapsack",
@@ -9850,13 +9850,13 @@
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "K5050W09.KNP": {
    "family": "knapsack",
    "bobilib": "feasible",
    "outcome": "optimal",
-   "source": "literature (Weninger-Fukasawa 2025)"
+   "source": "literature (Fischetti et al. 2016, technical report)"
   },
   "rndgraph-25_3-3-3_014": {
    "family": "network",
@@ -15928,7 +15928,7 @@
  "per_family": {
   "multidim-knapsack": {
    "not optimal in BOBILib": 862,
-   "optimal / literature (Fischetti et al. 2019)": 52,
+   "optimal / literature (Fischetti et al. 2016, technical report)": 52,
    "unchanged": 582,
    "feasible / this work (certified point)": 52,
    "feasible / this work (first certified point)": 88,
@@ -15941,7 +15941,9 @@
   },
   "knapsack": {
    "not optimal in BOBILib": 392,
-   "optimal / literature (Weninger-Fukasawa 2025)": 376,
+   "optimal / literature (Caprara et al. 2016)": 14,
+   "optimal / literature (Fischetti et al. 2016, technical report)": 26,
+   "optimal / literature (Weninger-Fukasawa 2022, answer files)": 336,
    "optimal / this work (robust subset-sum search)": 16
   },
   "network": {

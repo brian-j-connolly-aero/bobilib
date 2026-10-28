@@ -30,7 +30,8 @@ To cite this material, please cite both the paper and the data package:
 BOBILib lists 1,027 instances as optimal, 33 as infeasible,
 1,175 as feasible (a point is known, no proof) and 419 as open
 (no point known), from two general-purpose bilevel solvers run for one hour each
-(metadata snapshot of 2026-10-18). Of the 1,594 feasible or open instances:
+(metadata `collection.json`, last modified 2026-05-27, downloaded 2026-10-18).
+Of the 1,594 feasible or open instances:
 
 | Outcome | Instances |
 | --- | ---: |
@@ -68,7 +69,7 @@ results/
   bobilib_update.solu   status changes and improved values, MIPLIB/SCIP .solu format
   SHA256SUMS            sha256 of every other file here
   summary.json          per-instance outcome and per-family counts (scripts/summarize.py)
-  kip/                  583 knapsack interdiction solutions at published optima (Weninger-Fukasawa)
+  kip/                  583 knapsack interdiction solutions at published optima (Weninger and Fukasawa's runs)
   ss/                   16 subset-sum knapsack interdiction optima proven here; proofs.csv
   or/                   690 verified points for the 810 OR instances; bounds and compare.csv
   clique/               60 clique-interdiction certificates, solver logs, separate review
@@ -77,7 +78,9 @@ results/
   general/              64 points for MIPLIB-derived instances without coupling rows; HPR-bound optima
   general-coupled/      29 points for MIPLIB-derived instances with coupling rows
   */tolerance/          superseded points (follower within BOBILib's tolerance only), replaced by tight ones
-  literature/           published bounds and optima per instance (inputs of compare.csv and of this index)
+  literature/           published bounds and optima per instance (inputs of compare.csv and of this index);
+                        kip_first_publication.csv and imkp_first_publication.csv: the first publication
+                        of each KIP and imkp optimum
   notes/                tight re-verification of every file, Lefebvre and Schmidt's run files checked against
                         this package, BOBILib's general20-30-20-20-20-2 file, instance structure of the general sets
 ```
@@ -129,7 +132,7 @@ and proof in `clique/certificates/README.md`).
 | `new_status` | `optimal` (proven, published or here), `infeasible_bilevel` (no bilevel feasible point), `feasible` (verified point here; BOBILib had none; `notes` says whether it is the first point anywhere), `unchanged`, `bobilib_optimal`, `bobilib_infeasible` |
 | `primal_value` | best upper-level value backed by a verified solution file (this package or BOBILib's) or a published optimum |
 | `dual_bound` | best proven lower bound (the upper level is minimised), if any |
-| `source` | citation key of the published result (see below), `this work`, or `ThuraufEtAl2026` (BOBILib's own value) |
+| `source` | citation key of the published result (see below), `this work`, or `ThuraufEtAl2026` (BOBILib's own value). A published optimum is credited to its first publication only for the instances BOBILib lists as feasible or open; every instance BOBILib lists as optimal keeps `ThuraufEtAl2026`, even where a publication had the value earlier (for example the 207 KIP and 92 imkp instances it lists as optimal, `literature/README.md`) |
 | `method` | how the status or value was obtained |
 | `certificate` | path, relative to `results/`, of the solution or certificate file; `ARCHIVE.tar.gz:FILE` names an archive member |
 | `verified` | `yes`: the certificate passed its check (`bobi verify`, or the exact ray check); `no`: it did not; `na`: no certificate. It says whether a check passed, not how rigorous it is (see `certificate_class`) |
@@ -201,9 +204,14 @@ Citation keys in `source` (and references named in `notes`):
 
 * `ThuraufEtAl2026`: J. Thürauf, T. Kleinert, I. Ljubić, T. Ralphs and M. Schmidt, BOBILib: Bilevel Optimization (Benchmark) Instance Library, Mathematical Programming Computation 18(3) (2026) 819-876, doi:10.1007/s12532-025-00294-y; https://bobilib.org.
 * `BOBILibEarlierRelease`: an earlier release of the BOBILib metadata, which listed the instance as optimal.
-* `WeningerFukasawa2025`: N. Weninger and R. Fukasawa, A fast combinatorial algorithm for the bilevel knapsack problem with interdiction constraints, Mathematical Programming 210 (2025) 847-879, doi:10.1007/s10107-024-02133-9.
-* `LozanoBergmanCire2026`: L. Lozano, D. Bergman and A. A. Cire, Network relaxations for combinatorial bilevel optimization under linear interactions, Operations Research (2026), Articles in Advance, doi:10.1287/opre.2025.2457 (arXiv:2407.18193).
-* `FischettiEtAl2019`: M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, Interdiction games and monotonicity, with application to knapsack problems, INFORMS Journal on Computing 31(2) (2019) 390-410, doi:10.1287/ijoc.2018.0831.
+* `WeningerFukasawa2022Code`: N. Weninger and R. Fukasawa, bkpsolver: code, instances and answer files for their bilevel knapsack algorithm, https://github.com/nwoeanhinnogaehr/bkpsolver; the answer files instances/*/*.ans are in the initial commit d8c3b74 (authored 6 August 2022, committed 6 October 2022) and the repository was public by 7 October 2022 (literature/README.md); the leader vectors of kip/ come from its run records.
+* `FischettiEtAl2016Report`: M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, Interdiction games and monotonicity, technical report, DEI, University of Padova (2016), www.dei.unipd.it/~fisch/papers/interdiction_games_and_monotonicity.pdf (PDF of 20 December 2016; a version of 30 August 2016 is at msinnl.github.io/pdfs/independentSystems-techreport.pdf); the preprint of FischettiEtAl2019; Tables 1 and 3 for the KIP optima (also named in `notes`: a later proof of the other cclw optima), Tables 4-6 and Section 5.6 for the imkp optima.
+* `CapraraEtAl2016`: A. Caprara, M. Carvalho, A. Lodi and G. J. Woeginger, Bilevel knapsack with interdiction constraints, INFORMS Journal on Computing 28(2) (2016) 319-333, doi:10.1287/ijoc.2015.0676 (Tables 1 and 4).
+* `DellaCroceScatamacchia2020`: F. Della Croce and R. Scatamacchia, An exact approach for the bilevel knapsack problem with interdiction constraints and extensions, Mathematical Programming 183 (2020) 249-281, doi:10.1007/s10107-020-01482-5 (named in `notes`: kp instances proved optimal earlier, as counts per group, without values; a later proof of the cclw optima), and its preprint arXiv:1811.02822 (November 2018).
+* `WeningerFukasawa2022`: N. Weninger and R. Fukasawa, A fast combinatorial algorithm for the bilevel knapsack problem with interdiction constraints, Optimization Online preprint (7 October 2022), counts per class only (named in `notes`, with their answer files WeningerFukasawa2022Code: later proofs of the cclw and inter-kp optima).
+* `WeningerFukasawa2025`: N. Weninger and R. Fukasawa, A fast combinatorial algorithm for the bilevel knapsack problem with interdiction constraints, Mathematical Programming 210 (2025) 847-879, doi:10.1007/s10107-024-02133-9 (the journal version of WeningerFukasawa2022).
+* `LozanoBergmanCire2026`: L. Lozano, D. Bergman and A. A. Cire, Network relaxations for combinatorial bilevel optimization under linear interactions, Operations Research (2026), Articles in Advance, doi:10.1287/opre.2025.2457 (arXiv:2407.18193), and their repository https://github.com/andrecire/DiscreteBilevelOptimization (named in `notes`: later proofs of KIP, imkp and general optima, from its solution_files/optimal.csv).
+* `FischettiEtAl2019`: M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, Interdiction games and monotonicity, with application to knapsack problems, INFORMS Journal on Computing 31(2) (2019) 390-410, doi:10.1287/ijoc.2018.0831 (no optimum is credited to it: its technical report of 2016, FischettiEtAl2016Report, published them first; named in `notes` as the journal version of that report).
 * `FischettiEtAl2017`: M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, A new general-purpose algorithm for mixed-integer bilevel linear programs, Operations Research 65(6) (2017) 1615-1637, doi:10.1287/opre.2017.1650, and its online appendix of 29 June 2016 (www.dei.unipd.it/~fisch/appendix.pdf; Table 9 for the two network optima).
 * `VasquezLozanoVanHoeve2025`: S. Vásquez, L. Lozano and W.-J. van Hoeve, A single-level reformulation of binary bilevel programs using decision diagrams, Mathematical Programming (2025), online first, doi:10.1007/s10107-025-02294-1 (named in `notes`: later proofs of two optima first published by Fischetti et al. 2017).
 * `LefebvreSchmidt2025`: H. Lefebvre and M. Schmidt, A Dantzig-Wolfe single-level reformulation for mixed-integer linear bilevel optimization: exact and heuristic approaches, Optimization Online preprint (June 2025), per-instance run files on the first author's web page (henrilefebvre.com); the optimum credited to them is in their run file results-MILP.csv, not in the text of the paper.
@@ -294,7 +302,8 @@ results/literature/miblp_literature_status.csv --lbc-optimal optimal.csv
 `solution_files/optimal.csv` of Lozano, Bergman and Cire's repository; it reads
 the OR bounds, the ray checks and `literature/other_published_optima.csv` from this
 package and the `bobi general` runs from `runs/`; each published optimum is credited to
-its first publication among these sources).
+its first publication among these sources, the KIP optima by `literature/kip_first_publication.csv`
+and the imkp optima by `literature/imkp_first_publication.csv`).
 `notes/instance_structure.csv` (the structure of the general and assignment
 instances that the paper describes: variable and row split, coupling rows,
 continuous linking variables, follower objective against the leader's) is

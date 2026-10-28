@@ -52,7 +52,7 @@ BOBILib's layout: `data/collection/...` (`.mps.gz`, `.aux`),
 | `bobi verify MPS SOL` | Verify a solution like BOBILib's feasibility checker: rows, bounds and integrality within 1e-6, the stated objective, and follower optimality with the leader fixed (relative gap at most 1e-4). |
 | `bobi verify --instances DIR SOL...` | The same for many solution files or directories, matching instances by name. |
 | `bobi verify --tight ...` | The same with the follower held to its optimum: its value within max(1e-6, 1e-9 \|phi\|) of every optimum the solver's proof allows (zero relative gap); two more columns give BOBILib's verdict on the same solve and the follower's slack (`--follower-abs-tol`, `--follower-rel-tol` change the tolerances). |
-| `bobi kip-import DIR --meta --wf --out` | Write verified optimal solution files for BOBILib's KIP instances from Weninger and Fukasawa's published optima (see `results/kip`). |
+| `bobi kip-import DIR --meta --wf --out` | Write verified optimal solution files for BOBILib's KIP instances from the optima and run records in Weninger and Fukasawa's repository (see `results/kip`). |
 | `bobi ss-solve MPS...` | Exact solver for subset-sum knapsack interdiction (profit = follower weight). |
 | `bobi lp-bound MPS...` | Bracket min over leader choices of the follower's LP value: a lower and an upper bound on the bilevel optimum. |
 | `bobi mkip MPS...` | Interdiction-cut loop with a HiGHS master (baseline). |

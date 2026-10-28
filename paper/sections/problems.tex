@@ -200,12 +200,15 @@ the literature left open, and a proof must show that no leader choice within the
 a fill that close.
 
 \textbf{What was known.} Exact algorithms for KIP go back to Caprara
-et~al.\cite{caprara2016bilevel} and Della Croce and Scatamacchia.\cite{dellacroce2020exact} BOBILib
+et~al.,\cite{caprara2016bilevel} Fischetti et~al.\cite{fischetti2016monotonicity,fischetti2019interdiction}
+and Della Croce and Scatamacchia.\cite{dellacroce2020exact} BOBILib
 lists \FamKipUnsolved{} KIP instances as not optimal, and at \NumKipBobiAbove{} of its KIP
 instances its value is above the optimum, by a median of \KipBobiExcessMedian\% and up to
 \KipBobiExcessMax\%. Weninger and Fukasawa's combinatorial branch and
 bound,\cite{weninger2023fast,weninger2025fast} the state of the art, solves \NumLitKip{} of the
-\FamKipUnsolved{}. The \NumNewKip{} it leaves open in runs with 16 threads and a one-hour
+\FamKipUnsolved{}; \NumLitCaprara{} of these optima were first published by Caprara et~al.,
+\NumLitFischettiSixteen{} by Fischetti et~al.\ and \NumLitWeningerFukasawa{} in Weninger and
+Fukasawa's answer files (Section~\ref{sec:literature}). The \NumNewKip{} it leaves open in runs with 16 threads and a one-hour
 limit\cite{weninger_bkpsolver,weninger2026approx} are all in classes~6 and~7, with \KipOpenItemsMin{} to \KipOpenItemsMax{} items. Weninger and
 Fukasawa's runs of Della Croce and Scatamacchia's algorithm leave them open too, and the best
 published lower bounds, in Weninger and Fukasawa's run records, lie \KipPubLbGapMin{} to
@@ -238,7 +241,8 @@ items; the follower then packs the most valuable set that fits both limits (valu
 \end{figure}
 
 \textbf{The instances.} Both sets come from Fischetti, Ljubi\'c, Monaci and
-Sinnl.\cite{fischetti2019interdiction} Each MKP gives three instances, which differ only in how
+Sinnl;\cite{fischetti2019interdiction} \code{imkp} is already in their technical report of
+2016.\cite{fischetti2016monotonicity} Each MKP gives three instances, which differ only in how
 its $K$ rows are split; the suffix \code{-0}, \code{-50} or \code{-100} names the split. In
 variant \code{-0} the leader has the first row and the follower the other $K-1$; in variant
 \code{-50} the leader has the first $\lceil K/2\rceil$ rows and the follower the rest; in variant
@@ -266,8 +270,9 @@ overestimate the follower's value by up to the profit of one item per follower r
 (Theorem~\ref{thm:bracket}). The largest OR instances have 500 items and 30 rows.
 
 \textbf{What was known.} Fischetti et~al.\ solved all \NumImkp{} imkp instances with
-interdiction cuts, but BOBILib lists \NumLitImkp{} of them as only feasible, with values up to
-\ImkpBobiExcessMax\% above the optimum. No OR instance is optimal in BOBILib. Lozano, Bergman and
+interdiction cuts in their report of 2016 (\NumLitImkpCaption{} of them with a longer time
+limit),\cite{fischetti2016monotonicity} but BOBILib lists \NumLitImkp{} of them as only feasible,
+with values up to \ImkpBobiExcessMax\% above the optimum. No OR instance is optimal in BOBILib. Lozano, Bergman and
 Cire\cite{lozano2026network} proved \NumLitOrClaimed{} of them optimal, one more is closed by their
 published point and a branch-and-cut bound in their run data (Section~\ref{sec:res-or}), and they
 published lower bounds and points for most of the others;\cite{lozano_dbo_repo} Lefebvre and
@@ -309,6 +314,7 @@ $\lfloor 8^2/4\rfloor$ edges, so by Mantel's theorem a triangle survives (Sectio
 Theorem~\ref{thm:clique}).}\label{fig:clique}
 \end{figure}
 
+\needspace{4\baselineskip}
 \textbf{The instances.} BOBILib has three sets of edge clique interdiction instances.
 \begin{itemize}\setlength{\emergencystretch}{3em}
 \item \code{clique} (\NumCliqueSet{} instances; Fischetti, Monaci and Sinnl\cite{fischetti2018dynamic}),

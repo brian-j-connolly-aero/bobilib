@@ -5,16 +5,25 @@ and what remains open. Writes results/summary.json and prints a table.
 usage: python3 -I summarize.py --meta collection.json --mkip-lit mkip_literature_status.csv
            --runs runs --results results [--miblp-lit miblp_literature_status.csv]
            [--lbc-optimal optimal.csv] [--other-lit other_published_optima.csv]
+           [--kip-lit kip_first_publication.csv] [--imkp-lit imkp_first_publication.csv]
 
-Each published optimum is credited to its first publication: for the general
-instances, the earliest source of miblp_literature_status.csv whose upper and
-lower bounds agree (column `sources`), ranked by the date of its first public
-version (FIRST_PUBLIC below); results/literature/other_published_optima.csv
+Each published optimum is credited to its first publication: for the KIP
+instances, the source named in results/literature/kip_first_publication.csv
+(the default of --kip-lit; column `first_source`, KIP_FIRST below); for the
+imkp instances, the one named in results/literature/imkp_first_publication.csv
+(the default of --imkp-lit; Fischetti et al.'s technical report of 2016); for the
+general instances, the earliest source of miblp_literature_status.csv whose
+upper and lower bounds agree (column `sources`), ranked by the date of its first
+public version (FIRST_PUBLIC below); results/literature/other_published_optima.csv
 (the default of --other-lit) holds the published optima that no other table
 has (two network instances and ex10_0_100).
 
 Inputs (all optional except --meta; missing ones are skipped):
-  results/kip/summary.csv         KIP optima from Weninger and Fukasawa (verified files)
+  results/kip/summary.csv         published KIP optima (files rebuilt from Weninger and Fukasawa's runs)
+  results/literature/kip_first_publication.csv  first publication of each of these optima (required
+                                   when kip/summary.csv lists a published optimum BOBILib does not)
+  results/literature/imkp_first_publication.csv first publication of the imkp optima of --mkip-lit
+                                   (required with --mkip-lit)
   results/literature/other_published_optima.csv  further published optima (network, ex10_0_100)
   results/ss/proofs.csv            our subset-sum optima (bobi ss-solve, verified files)
   runs/ss_*.tsv                    further local subset-sum runs (bobi ss-solve)
@@ -49,6 +58,13 @@ def load_csv(path):
 # proves the optimum.
 FIRST_PUBLIC = [("F17", "Fischetti et al. 2017"), ("LBC", "Lozano et al. 2026"), ("VLH", "Vasquez et al. 2025"),
                 ("BOBILib", "an earlier BOBILib release")]
+# First publications of the KIP optima (results/literature/kip_first_publication.csv, column first_source):
+# Caprara, Carvalho, Lodi and Woeginger, INFORMS J. Comput. 28(2), 2016 (cclw); Fischetti, Ljubić, Monaci and
+# Sinnl's technical report of 2016, the preprint of their 2019 paper (inter-kp and cclw 55-3); the answer files
+# of Weninger and Fukasawa's bkpsolver repository, public by 7 October 2022 (kp). The same report of Fischetti et
+# al. is the first publication of the imkp optima (results/literature/imkp_first_publication.csv, Tables 4-6).
+KIP_FIRST = {"CapraraEtAl2016": "Caprara et al. 2016", "FischettiEtAl2016Report": "Fischetti et al. 2016, technical report",
+             "WeningerFukasawa2022Code": "Weninger-Fukasawa 2022, answer files"}
 
 
 def proving_sources(sources):
@@ -73,10 +89,14 @@ def main():
     ap.add_argument("--miblp-lit")
     ap.add_argument("--lbc-optimal", help="solution_files/optimal.csv from Lozano et al.'s repository")
     ap.add_argument("--other-lit", help="default: RESULTS/literature/other_published_optima.csv")
+    ap.add_argument("--kip-lit", help="default: RESULTS/literature/kip_first_publication.csv")
+    ap.add_argument("--imkp-lit", help="default: RESULTS/literature/imkp_first_publication.csv")
     ap.add_argument("--runs", default="runs")
     ap.add_argument("--results", default="results")
     a = ap.parse_args()
     a.other_lit = a.other_lit or f"{a.results}/literature/other_published_optima.csv"
+    a.kip_lit = a.kip_lit or f"{a.results}/literature/kip_first_publication.csv"
+    a.imkp_lit = a.imkp_lit or f"{a.results}/literature/imkp_first_publication.csv"
     meta = json.load(open(a.meta))
 
     def family(v):
@@ -89,16 +109,34 @@ def main():
     for k, v in meta.items():
         status[k] = {"family": family(v), "bobilib": v["Status"], "outcome": None, "source": None}
 
-    # Literature: KIP optima (Weninger-Fukasawa), imkp (Fischetti et al. 2019), OR optima (Lozano et al.).
+    # Literature: KIP and imkp optima (each credited to its first publication), OR optima (Lozano et al.).
+    kip_first = {r["instance"]: r for r in load_csv(a.kip_lit)}
+    kip_lit = set()
     for r in load_csv(f"{a.results}/kip/summary.csv"):
-        if r.get("literature_optimum") not in ("", None) and r["name"] in status and status[r["name"]]["bobilib"] != "optimal":
-            status[r["name"]].update(outcome="optimal", source="literature (Weninger-Fukasawa 2025)")
+        n = r["name"]
+        if r.get("literature_optimum") not in ("", None) and n in status and status[n]["bobilib"] != "optimal":
+            f = kip_first.get(n)
+            assert f is not None, f"{n}: published KIP optimum without a row in {a.kip_lit}"
+            assert float(f["first_value"]) == float(r["literature_optimum"]), f"{n}: first_value != literature_optimum"
+            status[n].update(outcome="optimal", source=f"literature ({KIP_FIRST[f['first_source']]})")
+            kip_lit.add(n)
+    assert kip_lit == set(kip_first), f"{a.kip_lit} lists other instances than the published KIP optima"
     if a.mkip_lit:
+        imkp_first = {r["instance"]: r for r in load_csv(a.imkp_lit)}
+        imkp_lit = set()
         for r in load_csv(a.mkip_lit):
             n = r["name"]
             if n in status and status[n]["bobilib"] != "optimal" and r.get("proven_optimal_in_literature") == "True":
-                src = "literature (Fischetti et al. 2019)" if r.get("set") == "imkp" else "literature (Lozano et al. 2026)"
+                if r.get("set") == "imkp":
+                    f = imkp_first.get(n)
+                    assert f is not None, f"{n}: published imkp optimum without a row in {a.imkp_lit}"
+                    assert float(f["first_value"]) == float(r["flms2019_opt"]), f"{n}: first_value != flms2019_opt"
+                    src = f"literature ({KIP_FIRST[f['first_source']]})"
+                    imkp_lit.add(n)
+                else:
+                    src = "literature (Lozano et al. 2026)"
                 status[n].update(outcome="optimal", source=src)
+        assert imkp_lit == set(imkp_first), f"{a.imkp_lit} lists other instances than the published imkp optima"
     if a.miblp_lit:
         # General instances: the first publication among the sources that prove the optimum.
         for r in load_csv(a.miblp_lit):

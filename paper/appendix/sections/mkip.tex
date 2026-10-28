@@ -308,3 +308,37 @@ the point proves the value optimal. The instance is therefore counted among the
 published optima. This work's verified solution file at \OrClosureValue{}
 (checked also with SCIP) confirms that the bound \OrClosureLitLb{} is wrong.
 
+
+\subsection{Published optima of the imkp set}\label{app:mkip-imkp}
+
+BOBILib lists \NumLitImkp{} \texttt{imkp} instances as feasible whose optimum
+is published. Each is credited to its first publication by the rule of
+Section~\ref{app:first-pub}. All of them are first published in Tables~4--6 of
+Fischetti, Ljubi\'c, Monaci and Sinnl's technical report of
+2016,\cite{fischetti2016monotonicity} which introduced the 144 instances and is
+the preprint of their 2019 paper.\cite{fischetti2019interdiction} Of
+these optima, \NumLitImkpTable{} are in the columns of their branch and cut,
+with gap 0.00 within the time limit of one hour. The other \NumLitImkpCaption{}
+(\texttt{weish22}, \texttt{weish27} and \texttt{weish29} of type \texttt{-50},
+and \texttt{weish22}, \texttt{23}, \texttt{25}--\texttt{29} of type
+\texttt{-0}) hit that limit, and the captions of Tables~5 and~6 give ``the
+optimal solution value (obtained with a larger time limit)''; the text
+reports these runs as solved to optimality, those of type \texttt{-0} ``to
+proven optimality''. Both 2016 versions (30 August and 20 December) have the
+same rows and captions. The report's \texttt{weish22-0} is BOBILib's
+\texttt{weish22.dat-0}, and so on (the nine instances with two constraints,
+\texttt{pb4} and \texttt{weing1}--\texttt{weing8}, appear in the report only as
+type \texttt{-100} and are BOBILib's \texttt{.dat-50} files; all nine are among
+those BOBILib lists as optimal); for every one of the \NumLitImkp{} the numbers
+of items, leader rows and follower rows of BOBILib's file equal those of the
+report's row. The values are used as published, not re-proved here: no
+solution file is in the package, and the optimum used here is the report's
+value. Lozano, Bergman and Cire's solution files\cite{lozano_dbo_repo} prove
+\NumLitImkpLaterLozano{} of the \NumLitImkp{} again; no published point or
+bound contradicts any of the \NumLitImkp{}, and for the \NumBobiOptImkp{} \texttt{imkp}
+instances BOBILib lists as optimal, which keep BOBILib as their source, the
+report's value equals BOBILib's. The journal version and its supplement could
+not be read (Section~\ref{app:kip-lit}); its abstract mentions the 144
+instances but gives no values. The file
+\texttt{results/literature/imkp\_first\_publication.csv} gives, per
+instance, the table row or caption, the value and the later sources.

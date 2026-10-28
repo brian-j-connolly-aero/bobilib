@@ -83,6 +83,28 @@ them MIPLIB-derived).
   lists 376 of those as not optimal; at 335 of them its value is above the
   optimum (median 8%, up to 672%). `results/kip/` holds a verified solution
   file for each of the 583 (`bobi kip-import`, checked with `bobi verify`).
+  The 376 are credited to their first publications
+  (`results/literature/kip_first_publication.csv`): 14 `cclw` optima to
+  Caprara, Carvalho, Lodi and Woeginger (*INFORMS J. Comput.* 28, 2016;
+  among them interdiction55-4, which the 2016 report below counts as
+  previously unsolved, but whose proof Caprara et al.'s text reports),
+  the 25 `inter-kp` optima and interdiction55-3 to Fischetti, Ljubić,
+  Monaci and Sinnl's technical report of 2016 (the preprint of their
+  *INFORMS J. Comput.* paper of 2019), and the 336 `kp` optima to Weninger
+  and Fukasawa's answer files (the bkpsolver repository was public by
+  7 Oct 2022; their preprint of that day gives counts per class only).
+  Della Croce and Scatamacchia (*Math. Programming* 183, 2020) had reported
+  266 of the 336 solved, as counts per group without values (for 6 of
+  them this assumes that their misprinted "#Opt 6/18" means 6 of 6). Lozano, Bergman and
+  Cire's solution files prove 228 of the 376 again later. Three earlier
+  documents could not be read in full (the journal version of the 2016
+  report with its supplement, Della Croce and Scatamacchia's IPCO 2019
+  paper, and the version of record of Fischetti, Monaci and Sinnl's EJOR
+  2018 paper, which introduced the `kp` set); that they list no `kp`
+  values is inferred from their abstracts, from the accepted manuscript of
+  the EJOR paper ("the optimal solution value is not known") and from
+  Della Croce and Scatamacchia's own runs of the 2019 paper's code on the
+  80 `kp` instances with 100 items.
 * **The 16 left.** All have budget index 2 or 3 and 200-500 items; 8 are in
   the subset-sum class (profit equals weight) and 8 in the even-odd class.
   Weninger and Fukasawa (16 threads, 1 h), their reimplementation of Della
@@ -164,9 +186,14 @@ them MIPLIB-derived).
 
 ### Multidimensional knapsack interdiction (954; 862 not optimal)
 
-* **imkp (144).** Fischetti, Ljubić, Monaci and Sinnl (*INFORMS Journal on
-  Computing* 2019) solved all 144; BOBILib lists 52 as only feasible, with
-  values up to 23% above the optimum.
+* **imkp (144).** Fischetti, Ljubić, Monaci and Sinnl solved all 144 in
+  their technical report of 2016 (the preprint of their *INFORMS Journal on
+  Computing* paper of 2019), which introduced the set; BOBILib lists 52 as
+  only feasible, with values up to 23% above the optimum. The 52 are credited
+  to the report (`results/literature/imkp_first_publication.csv`): 42 are in
+  the branch-and-cut columns of its Tables 4-6, and 10 in the captions of
+  Tables 5 and 6 (runs with a longer time limit, reported solved in the
+  text).
 * **OR (810).** Built from Chu and Beasley's multidimensional knapsacks in
   the OR-Library (Operations Research Library): 100-500 items, 5-30 rows,
   budgets 25/50/75%, and three variants (-100: one follower knapsack; -0
@@ -430,13 +457,19 @@ Clique scripts and commands are in `results/clique/README.md`.
 ## Caveats
 
 * "Literature" counts use the per-instance data the authors publish
-  (Weninger and Fukasawa's answer files, Fischetti et al.'s tables and
-  online appendix, Lozano et al.'s solution files). For 449 of the 531
+  (Caprara et al.'s and Fischetti et al.'s tables, Weninger and Fukasawa's
+  answer files, Fischetti et al.'s online appendix, Lozano et al.'s
+  solution files). For 449 of the 531
   published optima a solution file at the published optimum is verified
   here (for the 376 knapsack interdiction optima rebuilt from Weninger and
   Fukasawa's leader choices); for the other 82, where only a value is
   published, the instance is counted as solved and no file is given.
-  Each optimum is credited to its first publication among these sources.
+  Each optimum is credited to its first publication among these sources
+  (for knapsack interdiction, `results/literature/kip_first_publication.csv`;
+  for imkp, `results/literature/imkp_first_publication.csv`). The rule
+  covers only instances BOBILib lists as feasible or open; the 207 KIP and
+  92 imkp instances it lists as optimal keep BOBILib as their source,
+  although earlier documents give the same values.
   Lefebvre and Schmidt's run files count for one optimum (ex10_0_100),
   which a verified point and the MIPLIB bound confirm; their other reported
   optima on unsolved instances (ex10_50_50, no point known;

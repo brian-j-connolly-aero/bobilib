@@ -19,9 +19,10 @@ optimum. `summary.csv` lists all 599, with columns `name`, `set`,
 
 ## Provenance
 
-The optimal values are Weninger and Fukasawa's: N. Weninger and R. Fukasawa,
-"A fast combinatorial algorithm for the bilevel knapsack problem with
-interdiction constraints", Mathematical Programming 210 (2025) 847-879,
+The optimal values are read from the answer files of Weninger and Fukasawa's
+code for N. Weninger and R. Fukasawa, "A fast combinatorial algorithm for the
+bilevel knapsack problem with interdiction constraints", Mathematical
+Programming 210 (2025) 847-879,
 doi [10.1007/s10107-024-02133-9](https://doi.org/10.1007/s10107-024-02133-9).
 Their code, instance files (`.ki`), optima (`.ans`) and run records
 (`full_results/all_results.json`) are at
@@ -29,6 +30,14 @@ Their code, instance files (`.ki`), optima (`.ans`) and run records
 (MIT licence; read at commit bc1d985). None of their code is used here: only
 the optimal values and the leader vectors of their runs (the decoder below
 restates their sort rule to read the vectors).
+
+The answer files are not the first publication of every optimum.
+`../literature/kip_first_publication.csv` credits each of the 376 optima that
+BOBILib lists as not optimal to its first publication: 14 `cclw` optima to
+Caprara, Carvalho, Lodi and Woeginger (2016), the 25 `inter-kp` optima and
+`interdiction55-3` to Fischetti, Ljubić, Monaci and Sinnl's technical report of
+2016, and the 336 `kp` optima to these answer files (the repository was public
+by 7 October 2022). Every value published there equals the answer file's.
 
 Each BOBILib instance is matched to their file by its capacities and the
 multiset of item triples (profit, follower weight, leader cost). Their files

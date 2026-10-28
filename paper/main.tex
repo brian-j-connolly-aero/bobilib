@@ -91,8 +91,8 @@
 
 \begin{abstract}
 The Bilevel Optimization (Benchmark) Instance Library (BOBILib) holds \NumInstances{}
-mixed-integer bilevel linear problems, and its metadata of 18~October~2026 lists \NumUnsolved{}
-of them as feasible or open (here: unsolved). This paper asks which of these instances can be settled, that is, proven optimal or proven
+mixed-integer bilevel linear problems, and its metadata, last modified on 27~May~2026 and
+downloaded on 18~October~2026, lists \NumUnsolved{} of them as feasible or open (here: unsolved). This paper asks which of these instances can be settled, that is, proven optimal or proven
 to have no bilevel feasible point. Most share structure that general solvers do not use:
 \NumPacking{} are packing interdiction games, \NumCliqueUnsolved{} are clique interdiction problems
 dense enough for extremal graph theory to apply, and most of the rest are built from models of the
@@ -143,8 +143,8 @@ for new methods. BOBILib, the Bilevel Optimization (Benchmark) Instance Library 
 Kleinert, Ljubi\'c, Ralphs and Schmidt,\cite{thurauf2026bobilib,bobilib_website} plays the same
 role for MIBLPs. It collects \NumInstances{} instances, most of them from the literature, in one
 file format,
-with solution files, a feasibility checker and a status per instance. Its metadata of
-18~October~2026 lists \NumBobiOptimal{} instances as optimal, \NumBobiInfeasible{} as infeasible,
+with solution files, a feasibility checker and a status per instance. Its metadata (last modified
+on 27~May~2026, downloaded on 18~October~2026) lists \NumBobiOptimal{} instances as optimal, \NumBobiInfeasible{} as infeasible,
 \NumBobiFeasible{} as feasible (a point is known, but not proven optimal) and \NumBobiOpen{} as
 open (no point is known). The statuses come from runs of two general-purpose bilevel solvers,
 MibS\cite{tahernejad2020mibs,mibs_software} and the solver of Fischetti et~al.\ in its setting
@@ -171,7 +171,8 @@ The main findings are these (Figure~\ref{fig:overview}).
 \begin{itemize}
 \item Published work had already solved \NumLitOptimal{} of the \NumUnsolved{} instances:
 \NumLitKnapsackMethods{} with methods built for knapsack
-interdiction,\cite{weninger2025fast,fischetti2019interdiction} \NumLitLozano{} with the
+interdiction,\cite{caprara2016bilevel,fischetti2016monotonicity,weninger_bkpsolver,fischetti2019interdiction}
+\NumLitLozano{} with the
 decision diagrams of Lozano, Bergman and Cire\cite{lozano2026network} and \NumLitOther{} by other
 methods (Section~\ref{sec:literature}). Reconciling the statuses with these results settles more instances
 than any method of this paper.
@@ -263,10 +264,29 @@ used in two ways: to decide whether a point of this work is the first one known
 (Section~\ref{sec:verify}), and as the published upper bounds of the OR comparison
 (Section~\ref{sec:res-or}). Lozano, Bergman and Cire's repository lists 344 instances as solved to
 optimality.\cite{lozano_dbo_repo} Of these, the KIP and \code{imkp} instances had been solved
-before\cite{weninger2025fast,fischetti2019interdiction} and \inst{p0201-0.100000} by Fischetti
-et~al.;\cite{fischetti2017new} Table~\ref{tab:lit} credits Lozano, Bergman and Cire with the
-others, with the OR optima that appear only in their table of solved instances and with one
-closure, \NumLitLozano{} in all.
+before\cite{caprara2016bilevel,fischetti2016monotonicity,weninger_bkpsolver,fischetti2019interdiction}
+and \inst{p0201-0.100000} by Fischetti et~al.;\cite{fischetti2017new} Table~\ref{tab:lit} credits
+Lozano, Bergman and Cire with the others, with the OR optima that appear only in their table of
+solved instances and with one closure, \NumLitLozano{} in all.
+
+The \NumLitKip{} KIP optima come from three first publications. Caprara, Carvalho, Lodi and Woeginger
+published \NumLitCaprara{} of the \code{cclw} optima.\cite{caprara2016bilevel} Fischetti,
+Ljubi\'c, Monaci and Sinnl's technical report of 2016, the preprint of their 2019 paper, published
+the \NumLitFischettiSixteenInterKp{} \code{inter-kp} optima and \inst{interdiction55-3}, whose
+value Caprara et~al.\ list without a proof.\cite{fischetti2016monotonicity,fischetti2019interdiction}
+The same report introduced the \code{imkp} set and is also the first publication of the
+\NumLitImkp{} \code{imkp} optima that BOBILib lists as feasible (Tables~4--6; \NumLitImkpCaption{} of them are given in two captions, from runs with
+a longer time limit; \supp{C.6}). The \NumLitWeningerFukasawa{} \code{kp} optima appear first in
+the answer files of Weninger and Fukasawa's code, whose repository was public by 7~October
+2022;\cite{weninger_bkpsolver} the preprint they posted that day gives counts per class
+only.\cite{weninger2022fast} Della Croce and Scatamacchia had reported
+\NumLitKipProvedEarlier{} of these \code{kp} instances solved, as counts per group without values
+(for 6 of them this assumes that a misprinted ``6/18'' means 6 of 6; \supp{B.9}).\cite{dellacroce2020exact} Three documents that came before the answer files could
+not be read in full: the journal version of Fischetti et~al.'s report with its online supplement,
+Della Croce and Scatamacchia's IPCO 2019 paper, and the version of record of the paper that
+introduced the \code{kp} set.\cite{fischetti2019interdiction,dellacroce2019lower,fischetti2018dynamic}
+That they list no \code{kp} values is inferred from their abstracts and from the accepted
+manuscript of the last, which says the optimal values are not known (\supp{B.9}).
 
 \begin{table}[b]
 \caption{Published optima of instances that BOBILib lists as feasible or open.}\label{tab:lit}
@@ -275,8 +295,10 @@ closure, \NumLitLozano{} in all.
 \toprule
 Source & Method & Instances & Optima\\
 \midrule
-Weninger and Fukasawa\cite{weninger2025fast} & combinatorial branch and bound & KIP & \NumLitKip\\
-Fischetti, Ljubi\'c, Monaci and Sinnl\cite{fischetti2019interdiction} & interdiction cuts & MKIP, set \code{imkp} & \NumLitImkp\\
+Weninger and Fukasawa, answer files\cite{weninger_bkpsolver} & combinatorial branch and bound & KIP, set \code{kp}$^{\|}$ & \NumLitWeningerFukasawa\\
+Fischetti, Ljubi\'c, Monaci and Sinnl, report\cite{fischetti2016monotonicity} & interdiction cuts & KIP, sets \code{inter-kp} and \code{cclw}$^{*}$ & \NumLitFischettiSixteen\\
+ & & MKIP, set \code{imkp} & \NumLitImkp\\
+Caprara, Carvalho, Lodi and Woeginger\cite{caprara2016bilevel} & a sequence of MILPs & KIP, set \code{cclw} & \NumLitCaprara\\
 Lozano, Bergman and Cire\cite{lozano2026network} & decision diagrams & MKIP, set \code{or} & \NumLitOr$^{\dagger}$\\
  & & generalized interdiction & \NumLitGeneralized\\
  & & MIPLIB~3 & \NumLitMiplibLozano\\
@@ -286,9 +308,17 @@ An earlier BOBILib release & solver runs & \inst{neos-950242\_0\_100}$^{\ddagger
 \midrule
 Total & & & \NumLitOptimal\\
 \bottomrule
-\multicolumn{4}{@{}p{6.4in}@{}}{\footnotesize Each optimum is credited to its first publication among
-the per-instance sources compiled here (Supp.\ Sec.~H); later proofs are named in the data package.
-$^{\dagger}$\NumLitOrClaimed{} listed as optimal in
+\multicolumn{4}{@{}p{6.4in}@{}}{\footnotesize Each optimum is credited to its first publication: the
+earliest public document (paper, appendix, thesis or code repository with result files) that reports
+it proved optimal and lists its value, among the per-instance sources compiled here (rule in Supp.\
+Sec.~H.2; KIP and \code{imkp} in Supp.\ Secs.~B.9 and~C.6). Earlier reports without values and later
+proofs are named in the data package. The rule covers only instances BOBILib lists as feasible or
+open; the \NumBobiOptKip{} KIP and \NumBobiOptImkp{} \code{imkp} instances it lists as optimal keep
+BOBILib as the source, although earlier documents give the same values.
+$^{\|}$The repository was public by 7~October 2022; \NumLitKipProvedEarlier{} of them were reported
+solved earlier, without values (for 6 of them this assumes that a misprinted ``6/18'' means 6 of 6;
+\supp{B.9}).\cite{dellacroce2020exact} $^{*}$\inst{interdiction55-3}, whose value Caprara
+et~al.\ list without a proof. $^{\dagger}$\NumLitOrClaimed{} listed as optimal in
 their published data (most in their collection of optimal solution files, the others only in
 their table of solved instances), and \inst{\OrClosureName}, closed by their published point and a
 branch-and-cut bound in their run data (Section~\ref{sec:res-or}). $^{\S}$\inst{air03-0.100000},
@@ -321,7 +351,9 @@ branch-and-cut bound in their run data closes the instance (Section~\ref{sec:res
 optimal and passes only BOBILib's tolerance, a published \cls{iii} point (below);
 their branch-and-cut run proves \PFiveFortyEightOptimum{}, the value used here. Each KIP instance was
 matched to Weninger and Fukasawa's file by its capacities and the
-multiset of item triples (profit, follower weight, leader cost); every match is unique. For
+multiset of item triples (profit, follower weight, leader cost); every match is unique. The other
+KIP sources use the same instance names; BOBILib's files were checked against the bkpsolver files and,
+for \code{cclw}, against Carvalho's instance file (\supp{B.9}). For
 \NumLitWithFile{} of the \NumLitOptimal{} published optima a verified solution file at the
 published optimum is in the data package (for all \NumLitKip{} KIP instances it was rebuilt from
 Weninger and Fukasawa's leader choices). For the other \NumLitNoFile{} (\NumLitNoFileImkp{} imkp,

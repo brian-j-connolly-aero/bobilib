@@ -23,7 +23,10 @@ MIPLIB-derived closures) come from the literature tables named by --mkip-lit,
 --miblp-lit and --lbc-optimal (the ones scripts/summarize.py reads); without
 them they are read back from the existing instances.csv as well. KIP and OR
 literature values always come from results/kip/summary.csv and
-results/or/compare.csv.
+results/or/compare.csv; the first publication of each KIP optimum, an earlier
+proof without a value and the later proofs come from
+results/literature/kip_first_publication.csv, and those of the imkp optima from
+results/literature/imkp_first_publication.csv.
 
 Every count the paper quotes for the package is asserted below.
 """
@@ -41,14 +44,17 @@ import tarfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BOBILIB = os.path.dirname(os.path.dirname(HERE))
-SNAPSHOT = "2026-10-18"  # date of the BOBILib metadata snapshot (collection.json)
+SNAPSHOT = "2026-10-18"  # date of the BOBILib metadata snapshot (collection.json): the day it was downloaded
+META_LAST_MODIFIED = "2026-05-27"  # its Last-Modified header (data-manifest/bobilib_snapshot.tsv)
 
 FAMILY_ORDER = ["knapsack", "multidim-knapsack", "clique", "network", "generalized", "assignment",
                 "general-pure", "general-mixed"]
 
 # Literature sources: summary.json label -> citation key used in instances.csv / README.
 LIT_KEYS = {
-    "literature (Weninger-Fukasawa 2025)": "WeningerFukasawa2025",
+    "literature (Weninger-Fukasawa 2022, answer files)": "WeningerFukasawa2022Code",
+    "literature (Fischetti et al. 2016, technical report)": "FischettiEtAl2016Report",
+    "literature (Caprara et al. 2016)": "CapraraEtAl2016",
     "literature (Lozano et al. 2026)": "LozanoBergmanCire2026",
     "literature (Fischetti et al. 2019)": "FischettiEtAl2019",
     "literature (Fischetti et al. 2017)": "FischettiEtAl2017",
@@ -57,7 +63,9 @@ LIT_KEYS = {
     "literature (an earlier BOBILib release)": "BOBILibEarlierRelease",
 }
 LIT_METHOD = {
-    "WeningerFukasawa2025": "combinatorial branch and bound (published optimum)",
+    "WeningerFukasawa2022Code": "combinatorial branch and bound (published optimum, answer file)",
+    "FischettiEtAl2016Report": "branch and cut with interdiction cuts (published optimum)",
+    "CapraraEtAl2016": "CCLW algorithm, a sequence of MILPs (published optimum)",
     "LozanoBergmanCire2026": "decision-diagram network relaxation (published optimum)",
     "FischettiEtAl2019": "branch and cut with interdiction cuts (published optimum)",
     "FischettiEtAl2017": "MIX++ branch and cut (published optimum)",
@@ -72,21 +80,73 @@ F17_METHOD = {"network": "MIX++ branch and cut (published optimum; online append
 # Later proofs of a published optimum of a general instance (prefixes of the column `sources` of
 # miblp_literature_status.csv; scripts/summarize.py credits the first one).
 LATER_PROOF = {"LBC": "Lozano, Bergman and Cire (2026)", "VLH": "Vasquez, Lozano and van Hoeve (2025)"}
+# KIP and imkp optima (literature/kip_first_publication.csv, literature/imkp_first_publication.csv): who published
+# each first, and the works that proved it later. A later source counts as a later proof if it is a document of a
+# proving work below; a work is named once, and never when it is the work of the first source (the journal version
+# of a report, the paper of a repository). FischettiMonaciSinnl2018 compares heuristics against known optima and
+# proves nothing here.
+KIP_WHO = {
+    "CapraraEtAl2016": "Caprara, Carvalho, Lodi and Woeginger (2016)",
+    "FischettiEtAl2016Report": "Fischetti, Ljubić, Monaci and Sinnl's technical report of 2016 (the preprint of "
+                               "Fischetti et al. 2019)",
+    "WeningerFukasawa2022Code": "Weninger and Fukasawa's bkpsolver repository (public by 7 October 2022; their "
+                                "preprint of that day gives counts per class only)",
+}
+KIP_WORK = {  # key of a document -> its work
+    "CapraraEtAl2016": "CCLW", "Carvalho2016": "CCLW",
+    "FischettiEtAl2016Report": "FLMS", "FischettiEtAl2019": "FLMS",
+    "DellaCroceScatamacchia2018": "DCS", "DellaCroceScatamacchia2020": "DCS",
+    "WeningerFukasawa2022": "WF", "WeningerFukasawa2022Code": "WF", "WeningerFukasawa2023": "WF",
+    "WeningerFukasawa2025": "WF", "Weninger2026": "WF",
+    "LozanoBergmanCire2026": "LBC",
+    "FischettiMonaciSinnl2018": None,
+}
+KIP_WORK_NAME = {"FLMS": "Fischetti et al. (2016 technical report)",
+                 "DCS": "Della Croce and Scatamacchia (2018 preprint, 2020)",
+                 "WF": "Weninger and Fukasawa (2022 preprint and answer files)",
+                 "LBC": "Lozano, Bergman and Cire (2026)"}
+# The documents a work's name in KIP_WORK_NAME rests on: each must be among the row's later sources.
+KIP_WORK_DOCS = {"FLMS": {"FischettiEtAl2016Report"}, "DCS": {"DellaCroceScatamacchia2018", "DellaCroceScatamacchia2020"},
+                 "WF": {"WeningerFukasawa2022", "WeningerFukasawa2022Code"}, "LBC": {"LozanoBergmanCire2026"}}
 BOBILIB_KEY = "ThuraufEtAl2026"
 REFERENCES = [
     ("ThuraufEtAl2026", "J. Thürauf, T. Kleinert, I. Ljubić, T. Ralphs and M. Schmidt, BOBILib: Bilevel "
      "Optimization (Benchmark) Instance Library, Mathematical Programming Computation 18(3) (2026) "
      "819-876, doi:10.1007/s12532-025-00294-y; https://bobilib.org"),
     ("BOBILibEarlierRelease", "an earlier release of the BOBILib metadata, which listed the instance as optimal"),
+    ("WeningerFukasawa2022Code", "N. Weninger and R. Fukasawa, bkpsolver: code, instances and answer files for "
+     "their bilevel knapsack algorithm, https://github.com/nwoeanhinnogaehr/bkpsolver; the answer files "
+     "instances/*/*.ans are in the initial commit d8c3b74 (authored 6 August 2022, committed 6 October 2022) and the "
+     "repository was public by 7 October 2022 (literature/README.md); the leader vectors of kip/ come from its run "
+     "records"),
+    ("FischettiEtAl2016Report", "M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, Interdiction games and "
+     "monotonicity, technical report, DEI, University of Padova (2016), "
+     "www.dei.unipd.it/~fisch/papers/interdiction_games_and_monotonicity.pdf (PDF of 20 December 2016; a version "
+     "of 30 August 2016 is at msinnl.github.io/pdfs/independentSystems-techreport.pdf); the preprint of "
+     "FischettiEtAl2019; Tables 1 and 3 for the KIP optima (also named in `notes`: a later proof of the other "
+     "cclw optima), Tables 4-6 and Section 5.6 for the imkp optima"),
+    ("CapraraEtAl2016", "A. Caprara, M. Carvalho, A. Lodi and G. J. Woeginger, Bilevel knapsack with interdiction "
+     "constraints, INFORMS Journal on Computing 28(2) (2016) 319-333, doi:10.1287/ijoc.2015.0676 (Tables 1 and 4)"),
+    ("DellaCroceScatamacchia2020", "F. Della Croce and R. Scatamacchia, An exact approach for the bilevel knapsack "
+     "problem with interdiction constraints and extensions, Mathematical Programming 183 (2020) 249-281, "
+     "doi:10.1007/s10107-020-01482-5 (named in `notes`: kp instances proved optimal earlier, as counts per group, "
+     "without values; a later proof of the cclw optima), and its preprint arXiv:1811.02822 (November 2018)"),
+    ("WeningerFukasawa2022", "N. Weninger and R. Fukasawa, A fast combinatorial algorithm for the bilevel knapsack "
+     "problem with interdiction constraints, Optimization Online preprint (7 October 2022), counts per class only "
+     "(named in `notes`, with their answer files WeningerFukasawa2022Code: later proofs of the cclw and inter-kp "
+     "optima)"),
     ("WeningerFukasawa2025", "N. Weninger and R. Fukasawa, A fast combinatorial algorithm for the bilevel "
      "knapsack problem with interdiction constraints, Mathematical Programming 210 (2025) 847-879, "
-     "doi:10.1007/s10107-024-02133-9"),
+     "doi:10.1007/s10107-024-02133-9 (the journal version of WeningerFukasawa2022)"),
     ("LozanoBergmanCire2026", "L. Lozano, D. Bergman and A. A. Cire, Network relaxations for combinatorial bilevel "
      "optimization under linear interactions, Operations Research (2026), Articles in Advance, "
-     "doi:10.1287/opre.2025.2457 (arXiv:2407.18193)"),
+     "doi:10.1287/opre.2025.2457 (arXiv:2407.18193), and their repository "
+     "https://github.com/andrecire/DiscreteBilevelOptimization (named in `notes`: later proofs of KIP, imkp and "
+     "general optima, from its solution_files/optimal.csv)"),
     ("FischettiEtAl2019", "M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, Interdiction games and "
      "monotonicity, with application to knapsack problems, INFORMS Journal on Computing 31(2) (2019) "
-     "390-410, doi:10.1287/ijoc.2018.0831"),
+     "390-410, doi:10.1287/ijoc.2018.0831 (no optimum is credited to it: its technical report of 2016, "
+     "FischettiEtAl2016Report, published them first; named in `notes` as the journal version of that report)"),
     ("FischettiEtAl2017", "M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, A new general-purpose algorithm "
      "for mixed-integer bilevel linear programs, Operations Research 65(6) (2017) 1615-1637, "
      "doi:10.1287/opre.2017.1650, and its online appendix of 29 June 2016 (www.dei.unipd.it/~fisch/appendix.pdf; "
@@ -104,6 +164,11 @@ REFERENCES = [
 # Hand-written notes that come from the text of REPORT.md or a results README
 # rather than from a table (prose only, never a value used elsewhere).
 EXTRA_NOTES = {
+    # Caprara et al.'s Table 4 and Section 5.1 (literature/kip_first_publication.csv, notes).
+    "interdiction55-3": "Caprara et al. (2016) list 778 in their Table 4 but do not prove it: their run hit the time "
+                        "limit, and their text says the instance was not solved to optimality",
+    "interdiction55-4": "Caprara et al.'s Table 4 shows the time limit for their standard algorithm; the proof is "
+                        "their run with pre-processing, reported in the text (2,796.20 CPU seconds)",
     "general20-30-20-20-20-2": "BOBILib's solution file has follower value 106899984.14 against the follower's "
                                "optimum 106899953 at the same leader choice (31 units, relative 2.9e-7) and row "
                                "violations up to 3.3e-4; BOBILib's checker accepts it (relative 1e-4 on the "
@@ -227,6 +292,49 @@ def res_objectives(res):
     return files
 
 
+def kip_notes(r):
+    """Notes of a published KIP or imkp optimum from its row of literature/kip_first_publication.csv or
+    literature/imkp_first_publication.csv: where it was first published, an earlier proof without a value, and the
+    works that proved it later."""
+    out = []
+    first, loc = r["first_source"], r["first_location"]
+    m = re.match(r"(answer file [^\s:]+|Table \d+)[ ,:]", loc)
+    check(m is not None and first in KIP_WHO, f"first_location of {r['instance']}")
+    sec = re.search(r"proof in the text of Section (\d+(?:\.\d+)*)", loc)
+    caption = re.match(r"Table \d+ \([^)]*\), caption: ", loc)
+    check(not caption or sec, f"first_location of {r['instance']}: a caption value without the proof in the text")
+    alt = re.search(r"proof in the text of Section [\d.]+ \((\d+(?:\.\d+)*) in the August version\)", loc)
+    where = m.group(1) + (", caption (value of a run with a longer time limit)" if caption else
+                          " (value)" if sec else "") + \
+        (f" and the text of Section {sec.group(1)} (proof" + (f"; Section {alt.group(1)} in the August 2016 version"
+                                                               if alt else "") + ")" if sec else "")
+    out.append(f"published optimum: {where} of {KIP_WHO[first]}" if where.startswith("answer file") else
+               f"published optimum: {KIP_WHO[first]}, {where}")
+    if r["proved_earlier_no_value"]:
+        m = re.match(r"(DellaCroceScatamacchia2020), (Table \d), row [^:]*: (.*)$", r["proved_earlier_no_value"])
+        check(m is not None, f"proved_earlier_no_value of {r['instance']}")
+        how = m.group(3)
+        whole = (re.match(r"#Opt 10 \(the group is INS 1-10 ", how) or re.match(r"#Opt (\d+) of \1$", how)
+                 or re.match(r"#Opt (\d+)/\1$", how))
+        printed = re.match(r'"#Opt 6/18" as printed; the group \(classes 3-8, INS 4\) has 6 instances', how)
+        check(whole or printed, f"group count of {r['instance']}")
+        out.append(f"proved optimal earlier, value not listed: Della Croce and Scatamacchia (2020), {m.group(2)}, every "
+                   f"instance of its group solved" + (" (printed as 6/18; the group has 6 instances)" if printed else ""))
+    docs = re.findall(r"(?:^|; )([A-Z][A-Za-z]+\d{4}[A-Za-z]*) \(", r["later_sources"])
+    check(docs and all(d in KIP_WORK for d in docs), f"later_sources of {r['instance']}: {docs}")
+    works = []
+    for d in docs:
+        w = KIP_WORK[d]
+        if w is not None and w != KIP_WORK[first] and w not in works:
+            check(KIP_WORK_DOCS[w] <= set(docs), f"{r['instance']}: {KIP_WORK_NAME[w]} without its documents")
+            works.append(w)
+    if works:
+        names = [KIP_WORK_NAME[w] for w in works]
+        out.append("also proved optimal later by " + (", by ".join(names[:-1]) + " and by " if len(names) > 1 else "")
+                   + names[-1])
+    return out
+
+
 def collection_of(name, v):
     tags = [t.strip() for t in v["Tags"].split(",")]
     if len(tags) >= 2 and not tags[-1].startswith("interdiction class"):
@@ -246,6 +354,11 @@ def main():
     ap.add_argument("--lbc-optimal")
     a = ap.parse_args()
     R = os.path.abspath(a.results)
+    manifest = os.path.join(BOBILIB, "data-manifest", "bobilib_snapshot.tsv")
+    if os.path.exists(manifest):
+        head = "".join(open(manifest, encoding="utf-8").readlines()[:12])
+        check(f"(Last-Modified {META_LAST_MODIFIED}), downloaded {SNAPSHOT}" in head,
+              "metadata dates differ from data-manifest/bobilib_snapshot.tsv")
     prev_path = os.path.join(R, "instances.csv")
     prev = {r["instance"]: r for r in load_csv(prev_path)} if os.path.exists(prev_path) else {}
 
@@ -284,6 +397,8 @@ def main():
     for rel, (n, obj, st) in objs.items():
         by_name[n][rel] = (obj, st)
     kip = {r["name"]: r for r in load_csv(f"{R}/kip/summary.csv")}
+    kip_first = {r["instance"]: r for r in load_csv(f"{R}/literature/kip_first_publication.csv")}
+    imkp_first = {r["instance"]: r for r in load_csv(f"{R}/literature/imkp_first_publication.csv")}
     ss = {r["name"]: r for r in load_csv(f"{R}/ss/proofs.csv")}
     orc = {r["name"]: r for r in load_csv(f"{R}/or/compare.csv")}
     clq = {r["name"]: r for r in load_csv(f"{R}/clique/summary.csv")}
@@ -426,6 +541,13 @@ def main():
         check(summary[n]["source"] == f"literature ({r['source']})", f"source of {n} in summary.json")
         lit.setdefault(n, (num(r["optimum"]), ""))
     lit_sources.append("literature/other_published_optima.csv")
+    # First publication of the KIP optima (literature/kip_first_publication.csv, also read by scripts/summarize.py).
+    for n, r in kip_first.items():
+        check(LIT_KEYS.get(summary[n]["source"]) == r["first_source"], f"source of {n} in summary.json")
+        check(num(r["first_value"]) == lit[n][0], f"{n}: first_value != the published KIP optimum")
+        check(summary[n]["family"] == "knapsack" and summary[n]["bobilib"] in ("feasible", "open"), f"KIP row {n}")
+    check(set(kip_first) == {n for n, s in summary.items() if s["family"] == "knapsack" and s["source"] in LIT_KEYS},
+          "kip_first_publication.csv lists exactly the published KIP optima")
     # Later proofs of the published optima of general instances (miblp_literature_status.csv, column sources)
     later_proofs = {}
     if a.miblp_lit:
@@ -454,6 +576,15 @@ def main():
             lit[n] = (num(p["primal_value"]), pnotes[0] if pnotes else "")
             if "previous instances.csv" not in lit_sources:
                 lit_sources.append("previous instances.csv")
+    # First publication of the imkp optima (literature/imkp_first_publication.csv, also read by scripts/summarize.py).
+    for n, r in imkp_first.items():
+        check(LIT_KEYS.get(summary[n]["source"]) == r["first_source"], f"source of {n} in summary.json")
+        check(num(r["first_value"]) == lit[n][0], f"{n}: first_value != the published imkp optimum")
+        check(summary[n]["family"] == "multidim-knapsack" and r["collection"] == "imkp"
+              and summary[n]["bobilib"] in ("feasible", "open"), f"imkp row {n}")
+    check(set(imkp_first) == {n for n, s in summary.items() if s["family"] == "multidim-knapsack"
+                              and s["source"] in LIT_KEYS and not n.startswith("OR")},
+          "imkp_first_publication.csv lists exactly the published imkp optima")
 
     # ---- rows ------------------------------------------------------------------------------
     rows = []
@@ -509,7 +640,8 @@ def main():
                 check(abs(obj - bval) <= 1e-6 * max(1, abs(bval)), f"{n}: file value {obj} != BOBILib optimum {bval}")
                 cert(rel)
             if fam == "knapsack":
-                notes.append("optimum also published by Weninger and Fukasawa (2025); file rebuilt from their leader vector")
+                notes.append("optimum also in Weninger and Fukasawa's answer files (bkpsolver repository); file rebuilt "
+                             "from their leader vector")
                 if src:
                     notes.append("lower bound also re-proved by bobi ss-solve")
             elif fam == "network" and n in net:
@@ -544,13 +676,18 @@ def main():
                 notes.append(lnote)
             if n in other_lit and key == "FischettiEtAl2017":
                 notes.append("published optimum: Fischetti et al. (2017), " + other_lit[n]["where"].split(", row ")[0])
+            if fam == "knapsack":
+                notes.extend(kip_notes(kip_first[n]))
+            elif n in imkp_first:
+                notes.extend(kip_notes(imkp_first[n]))
             if later_proofs.get(n) and key != "LozanoBergmanCire2026":
                 notes.append("also proved optimal later by " + " and by ".join(later_proofs[n]))
             obj, rel = own_file()
             if rel and abs(obj - val) <= 1e-6 * max(1, abs(val)):
                 cert(rel)
                 if fam == "knapsack":
-                    notes.append("file rebuilt from the published leader vector, follower re-solved exactly")
+                    notes.append("file rebuilt from Weninger and Fukasawa's leader vector (their run records), follower "
+                                 "re-solved exactly")
                 if fam == "network" and n in net:
                     # An exact re-proof in this package (every attack, exact tree DP): class (i).
                     r = net[n]
@@ -780,9 +917,10 @@ def main():
     check(round(100 * got["settled"] / got["unsolved"]) == 41, "settled share 41%")
     by = C((r["family"], r["new_status"], r["source"]) for r in unsolved)
     want = {
-        ("knapsack", "optimal", "WeningerFukasawa2025"): 376, ("knapsack", "optimal", "this work"): 16,
+        ("knapsack", "optimal", "WeningerFukasawa2022Code"): 336, ("knapsack", "optimal", "FischettiEtAl2016Report"): 26,
+        ("knapsack", "optimal", "CapraraEtAl2016"): 14, ("knapsack", "optimal", "this work"): 16,
         ("multidim-knapsack", "optimal", "LozanoBergmanCire2026"): 88,
-        ("multidim-knapsack", "optimal", "FischettiEtAl2019"): 52,
+        ("multidim-knapsack", "optimal", "FischettiEtAl2016Report"): 52,
         ("multidim-knapsack", "optimal", "this work"): 0, ("multidim-knapsack", "feasible", "this work"): 140,
         ("clique", "optimal", "this work"): 57, ("network", "optimal", "FischettiEtAl2017"): 2,
         ("network", "optimal", "this work"): 0,
@@ -791,6 +929,17 @@ def main():
     }
     for k, v in want.items():
         check(by[k] == v, f"{k}: {by[k]} != {v}")
+    # First publication of the KIP optima by sub-collection (literature/kip_first_publication.csv).
+    kip_by = C((r["collection"], r["source"]) for r in lit_rows if r["family"] == "knapsack")
+    check(kip_by == {("kp", "WeningerFukasawa2022Code"): 336, ("inter-kp", "FischettiEtAl2016Report"): 25,
+                     ("cclw", "CapraraEtAl2016"): 14, ("cclw", "FischettiEtAl2016Report"): 1}, f"KIP first sources {kip_by}")
+    check(C((r["collection"], r["source"]) for r in lit_rows if r["family"] == "multidim-knapsack"
+            and r["collection"] != "or") == {("imkp", "FischettiEtAl2016Report"): 52}, "imkp first sources")
+    check(sum("caption (value of a run with a longer time limit)" in "; ".join(r["notes"]) for r in lit_rows
+              if r["collection"] == "imkp") == 10, "imkp optima first published in a table caption")
+    kip_earlier = [r for r in lit_rows if "proved optimal earlier, value not listed" in "; ".join(r["notes"])]
+    check(len(kip_earlier) == 266 and all(r["collection"] == "kp" for r in kip_earlier),
+          "266 kp optima proved earlier without a value (Della Croce and Scatamacchia 2020)")
     fam_unch = C(r["family"] for r in unsolved if r["new_status"] == "unchanged")
     check(fam_unch["multidim-knapsack"] == 582 and fam_unch["clique"] == 3 and fam_unch["generalized"] == 8
           and fam_unch["general-pure"] + fam_unch["general-mixed"] == 123, f"unchanged per family {fam_unch}")
@@ -851,6 +1000,13 @@ def main():
     got["class_kinds"] = sorted(C((kind(r), r["certificate_class"]) for r in rows if r["certificate_class"] != "na").items(),
                                 key=lambda kv: (CLASSES.index(kv[0][1]), -kv[1]))
     got["lit_no_file"] = sum(1 for r in lit_rows if r["verified"] == "na")
+    # The first-publication rule covers only the instances BOBILib lists as feasible or open; those it lists as
+    # optimal keep BOBILib's key, even where a publication had the value earlier.
+    bobi_opt = [r for r in rows if r["bobilib_status"] == "optimal"]
+    check(all(r["source"] == BOBILIB_KEY for r in bobi_opt), "BOBILib-optimal rows keep BOBILib's key")
+    got["bobi_opt_kip"] = sum(r["family"] == "knapsack" for r in bobi_opt)
+    got["bobi_opt_imkp"] = sum(r["collection"] == "imkp" for r in bobi_opt)
+    check((got["bobi_opt_kip"], got["bobi_opt_imkp"]) == (207, 92), "207 KIP and 92 imkp BOBILib-optimal rows")
     got["or_inconsistent"] = sum(1 for r in orc.values() if num(r["lit_lb"]) is not None and num(r["lit_ub"]) is not None
                                  and num(r["lit_lb"]) > num(r["lit_ub"]))
     check(sum(1 for rel in objs if rel.startswith("or/")) == 690, "690 OR files")
@@ -907,7 +1063,7 @@ def main():
     header = [
         "# bobilib_update.solu: status update for BOBILib (https://bobilib.org) in the MIPLIB/SCIP .solu format.",
         "# Generated by paper/scripts/build_data_package.py together with results/instances.csv; do not edit by hand.",
-        f"# Reference: BOBILib metadata (collection.json) snapshot of {SNAPSHOT}.",
+        f"# Reference: BOBILib metadata (collection.json, Last-Modified {META_LAST_MODIFIED}), downloaded {SNAPSHOT}.",
         "#",
         "# Sense: BOBILib minimises the upper-level (leader) objective c^T x + d^T y under the optimistic",
         "# convention; every VALUE is that objective. A dual bound is a lower bound on the bilevel optimum.",
@@ -1013,7 +1169,8 @@ To cite this material, please cite both the paper and the data package:
 BOBILib lists {got['bobilib_optimal']:,} instances as optimal, {got['bobilib_infeasible']} as infeasible,
 {got['bobilib_feasible']:,} as feasible (a point is known, no proof) and {got['bobilib_open']} as open
 (no point known), from two general-purpose bilevel solvers run for one hour each
-(metadata snapshot of {SNAPSHOT}). Of the {got['unsolved']:,} feasible or open instances:
+(metadata `collection.json`, last modified {META_LAST_MODIFIED}, downloaded {SNAPSHOT}).
+Of the {got['unsolved']:,} feasible or open instances:
 
 | Outcome | Instances |
 | --- | ---: |
@@ -1051,7 +1208,7 @@ results/
   bobilib_update.solu   status changes and improved values, MIPLIB/SCIP .solu format
   SHA256SUMS            sha256 of every other file here
   summary.json          per-instance outcome and per-family counts (scripts/summarize.py)
-  kip/                  {folder_counts['kip']} knapsack interdiction solutions at published optima (Weninger-Fukasawa)
+  kip/                  {folder_counts['kip']} knapsack interdiction solutions at published optima (Weninger and Fukasawa's runs)
   ss/                   {folder_counts['ss']} subset-sum knapsack interdiction optima proven here; proofs.csv
   or/                   {folder_counts['or']} verified points for the 810 OR instances; bounds and compare.csv
   clique/               {folder_counts['clique']} clique-interdiction certificates, solver logs, separate review
@@ -1060,7 +1217,9 @@ results/
   general/              {folder_counts['general']} points for MIPLIB-derived instances without coupling rows; HPR-bound optima
   general-coupled/      {folder_counts['general-coupled']} points for MIPLIB-derived instances with coupling rows
   */tolerance/          superseded points (follower within BOBILib's tolerance only), replaced by tight ones
-  literature/           published bounds and optima per instance (inputs of compare.csv and of this index)
+  literature/           published bounds and optima per instance (inputs of compare.csv and of this index);
+                        kip_first_publication.csv and imkp_first_publication.csv: the first publication
+                        of each KIP and imkp optimum
   notes/                tight re-verification of every file, Lefebvre and Schmidt's run files checked against
                         this package, BOBILib's general20-30-20-20-20-2 file, instance structure of the general sets
 ```
@@ -1112,7 +1271,7 @@ and proof in `clique/certificates/README.md`).
 | `new_status` | `optimal` (proven, published or here), `infeasible_bilevel` (no bilevel feasible point), `feasible` (verified point here; BOBILib had none; `notes` says whether it is the first point anywhere), `unchanged`, `bobilib_optimal`, `bobilib_infeasible` |
 | `primal_value` | best upper-level value backed by a verified solution file (this package or BOBILib's) or a published optimum |
 | `dual_bound` | best proven lower bound (the upper level is minimised), if any |
-| `source` | citation key of the published result (see below), `this work`, or `{BOBILIB_KEY}` (BOBILib's own value) |
+| `source` | citation key of the published result (see below), `this work`, or `{BOBILIB_KEY}` (BOBILib's own value). A published optimum is credited to its first publication only for the instances BOBILib lists as feasible or open; every instance BOBILib lists as optimal keeps `{BOBILIB_KEY}`, even where a publication had the value earlier (for example the {got['bobi_opt_kip']} KIP and {got['bobi_opt_imkp']} imkp instances it lists as optimal, `literature/README.md`) |
 | `method` | how the status or value was obtained |
 | `certificate` | path, relative to `results/`, of the solution or certificate file; `ARCHIVE.tar.gz:FILE` names an archive member |
 | `verified` | `yes`: the certificate passed its check (`bobi verify`, or the exact ray check); `no`: it did not; `na`: no certificate. It says whether a check passed, not how rigorous it is (see `certificate_class`) |
@@ -1262,7 +1421,8 @@ results/literature/miblp_literature_status.csv --lbc-optimal optimal.csv
 `solution_files/optimal.csv` of Lozano, Bergman and Cire's repository; it reads
 the OR bounds, the ray checks and `literature/other_published_optima.csv` from this
 package and the `bobi general` runs from `runs/`; each published optimum is credited to
-its first publication among these sources).
+its first publication among these sources, the KIP optima by `literature/kip_first_publication.csv`
+and the imkp optima by `literature/imkp_first_publication.csv`).
 `notes/instance_structure.csv` (the structure of the general and assignment
 instances that the paper describes: variable and row split, coupling rows,
 continuous linking variables, follower objective against the leader's) is

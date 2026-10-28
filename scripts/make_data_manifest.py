@@ -101,7 +101,7 @@ def main():
     with open(args.manifest, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(
             "# BOBILib snapshot: every file that scripts/fetch_data.py can put in data/.\n"
-            "# BOBILib (https://bobilib.org) by J. Thurauf, T. Kleinert, I. Ljubic, T. K. Ralphs and\n"
+            "# BOBILib (https://bobilib.org) by J. Thürauf, T. Kleinert, I. Ljubić, T. K. Ralphs and\n"
             "# M. Schmidt; instances and solution files under CC BY-SA 4.0.\n"
             f"# Instance and solution files: {GITLAB},\n"
             f"# branch master, commit {COMMIT} (2025-06-10), downloaded\n"

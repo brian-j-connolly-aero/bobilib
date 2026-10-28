@@ -11,7 +11,8 @@ replication). The index, \texttt{instances.csv},
 \texttt{paper/scripts/build\_data\_package.py}; \texttt{make data} in
 \texttt{bobilib/paper/} regenerates them, together with the macros of every
 number quoted in the paper and the tables of Section~\ref{app:tables}. BOBILib's
-statuses are those of its metadata snapshot of 18~October~2026.
+statuses are those of its metadata (\texttt{collection.json}, last modified on
+27~May~2026, downloaded on 18~October~2026).
 
 \subsection{Layout}
 
@@ -25,7 +26,7 @@ Path & Contents\\
 \texttt{bobilib\_update.solu} & status changes and improved values in the MIPLIB/SCIP \texttt{.solu} format; Section~\ref{app:data-solu}\\
 \texttt{SHA256SUMS} & SHA-256 checksum of every other file of the package\\
 \texttt{summary.json} & per-instance outcome and per-family counts\\
-\texttt{kip/} & \NumKipFiles{} knapsack interdiction solution files at the published optima of Weninger and Fukasawa\cite{weninger2025fast}\\
+\texttt{kip/} & \NumKipFiles{} knapsack interdiction solution files at the published optima, rebuilt from the runs of Weninger and Fukasawa's code\cite{weninger_bkpsolver}\\
 \texttt{ss/} & the \NumNewKip{} subset-sum optima proven here; \texttt{proofs.csv} (optimum, nodes, CPU seconds, nodes of the second prover, budget and capacity)\\
 \texttt{or/} & \NumOrPoints{} verified points for the \NumOr{} OR instances; the bounds of each instance; \texttt{compare.csv} (published bounds, BOBILib's value, ours, gaps)\\
 \texttt{clique/} & \NumCliqueSet{} partition certificates, branch-and-bound certificates of the \CliqueCertCases{} part-size cases (\texttt{certificates/}, with the checker's \texttt{check.log}), solver logs of the part-size proofs, the separate review\\
@@ -34,6 +35,7 @@ Path & Contents\\
 \texttt{general/} & \NumGeneralFiles{} points for MIPLIB-derived instances without coupling rows (nine files over 1\,MB in \texttt{large\_points.tar.gz}); \texttt{hpr\_optimal.csv}; \texttt{points.csv}\\
 \texttt{general-coupled/} & \NumCoupledFiles{} points for MIPLIB-derived instances with coupling rows; \texttt{summary.csv}\\
 \texttt{*/tolerance/} & the \NumTightSuperseded{} superseded files of \texttt{general/} and \texttt{general-coupled/} (\NumTightSupersededBench{} of them benchmark-accepted), replaced by points with the follower within $10^{-9}$ of its optimum, and the checks of the new files\\
+\texttt{literature/} & published bounds and optima per instance, each with its source; the first publication of each KIP optimum is in \texttt{kip\_first\_publication.csv} (Section~\ref{app:kip-lit}), and of each \texttt{imkp} optimum in \texttt{imkp\_first\_publication.csv} (Section~\ref{app:mkip-imkp})\\
 \texttt{notes/} & \texttt{bobi verify -{}-tight} on every file (\texttt{tight\_verify.md}, \texttt{.tsv}); Lefebvre and Schmidt's run files checked against this package; BOBILib's file of \texttt{general20-30-20-20-20-2}; \texttt{instance\_structure.csv}, the structure of the general and assignment instances that the paper describes\\
 \bottomrule
 \end{tabular}
@@ -43,6 +45,7 @@ Path & Contents\\
 columns of its tables, the commands that produced it and, where one was done,
 its separate review.
 
+\needspace{10\baselineskip}
 \subsection{The instance table \texttt{instances.csv}}\label{app:data-csv}
 
 The file is UTF-8, comma separated, with one header row and one row per
@@ -84,8 +87,29 @@ re-proved here by enumeration, and the \NumNoFeasible{} recession
 directions), \NumClassNumerical{} \texttt{numerical} (the other \NumClassNumericalLit{}
 published optima, the \NumNewHpr{} optima at the MIPLIB bound and the
 \NumFirstPoint{} verified points, all of which pass \texttt{bobi verify -{}-tight})
-and \NumClassBenchmark{} \texttt{benchmark}. The keys of the \texttt{source}
-column map to the references as follows.
+and \NumClassBenchmark{} \texttt{benchmark}.
+
+\paragraph{First publication.}\label{app:first-pub} Each published optimum is
+credited to its first publication among the per-instance sources compiled
+here: the earliest public document (paper, online appendix or supplement,
+thesis, or code repository with result files, dated by its first public
+availability) that reports the instance solved to proven optimality and lists
+its optimal value. An earlier document that reports the instance proved
+optimal without its value, for example as one of a group of instances all
+solved, is named in the notes but does not get the credit; later proofs are
+named in the notes too. The sources of the KIP and \texttt{imkp} optima are
+compared in Sections~\ref{app:kip-lit}
+and~\ref{app:mkip-imkp}; for the general instances the sources are taken in the
+order of their first public versions (\texttt{literature/README.md}). The rule
+covers only the instances BOBILib lists as feasible or open. The
+\NumBobiOptimal{} instances it lists as optimal keep BOBILib
+(\texttt{ThuraufEtAl2026}) as their source, even where a publication had the
+value earlier; among them are \NumBobiOptKnapsack{} knapsack interdiction
+instances (\NumBobiOptKip{} KIP and \NumBobiOptImkp{} \texttt{imkp}) whose values
+the online appendix of MIX++, Caprara et al., Fischetti et al.'s report of 2016
+or Weninger and Fukasawa's answer files give
+earlier.\cite{fischetti2016appendix,caprara2016bilevel,fischetti2016monotonicity,weninger_bkpsolver}
+The keys of the \texttt{source} column map to the references as follows.
 
 \begin{table}[ht]
 \centering
@@ -95,10 +119,11 @@ column map to the references as follows.
 \toprule
 Key in \texttt{source} & Reference & Optima\\
 \midrule
-\texttt{ThuraufEtAl2026} & BOBILib's own value\cite{thurauf2026bobilib} & \\
-\texttt{WeningerFukasawa2025} & Weninger and Fukasawa\cite{weninger2025fast} & \NumLitKip{}\\
+\texttt{ThuraufEtAl2026} & BOBILib's own value\cite{thurauf2026bobilib} (the source of every instance it lists as optimal) & \\
+\texttt{WeningerFukasawa2022Code} & Weninger and Fukasawa's answer files\cite{weninger_bkpsolver} & \NumLitWeningerFukasawa{}\\
 \texttt{LozanoBergmanCire2026} & Lozano, Bergman and Cire\cite{lozano2026network} & \NumLitLozano{}\\
-\texttt{FischettiEtAl2019} & Fischetti, Ljubi\'c, Monaci and Sinnl\cite{fischetti2019interdiction} & \NumLitImkp{}\\
+\texttt{FischettiEtAl2016Report} & Fischetti, Ljubi\'c, Monaci and Sinnl's technical report of 2016\cite{fischetti2016monotonicity} & \NumLitFischettiSixteenAll{}\\
+\texttt{CapraraEtAl2016} & Caprara, Carvalho, Lodi and Woeginger\cite{caprara2016bilevel} & \NumLitCaprara{}\\
 \texttt{FischettiEtAl2017} & Fischetti, Ljubi\'c, Monaci and Sinnl\cite{fischetti2017new,fischetti2016appendix} & \NumLitFischettiSeventeen{}\\
 \texttt{LefebvreSchmidt2025} & Lefebvre and Schmidt's run files\cite{lefebvre2025dantzig} & \NumLitLefebvreSchmidt{}\\
 \texttt{BOBILibEarlierRelease} & an earlier release of BOBILib's metadata\cite{bobilib_website} & \NumLitEarlierRelease{}\\

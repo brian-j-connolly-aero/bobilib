@@ -33,12 +33,24 @@
 \newcommand{\NumGeneralizedInstances}{90}% BOBILib generalized instances
 \newcommand{\NumAssignmentInstances}{24}% BOBILib assignment instances
 \newcommand{\NumGeneralInstances}{695}% BOBILib general (MIPLIB-derived and other) instances
-\newcommand{\NumLitKip}{376}% KIP optima of Weninger and Fukasawa
+\newcommand{\NumLitKip}{376}% KIP optima in published work (all first publications)
+\newcommand{\NumLitWeningerFukasawa}{336}% kp optima first published in Weninger and Fukasawa's answer files (bkpsolver repository, public by 7 Oct 2022)
+\newcommand{\NumLitFischettiSixteen}{26}% KIP optima first published in Fischetti et al.'s 2016 technical report (inter-kp and cclw 55-3)
+\newcommand{\NumLitFischettiSixteenAll}{78}% optima first published in Fischetti et al.'s 2016 technical report (KIP and imkp)
+\newcommand{\NumLitFischettiSixteenInterKp}{25}% of them inter-kp (Table 3 of the report)
+\newcommand{\NumLitFischettiSixteenCclw}{1}% of them cclw (interdiction55-3, Table 1 of the report)
+\newcommand{\NumLitCaprara}{14}% cclw optima first published by Caprara et al. 2016
+\newcommand{\NumLitKipProvedEarlier}{266}% kp optima that Della Croce and Scatamacchia (2020) report solved earlier as counts per group, without values
+\newcommand{\NumLitKipNotProvedEarlier}{70}% kp optima with no earlier proof found
 \newcommand{\NumLitLozano}{96}% optima of Lozano, Bergman and Cire (all families)
 \newcommand{\NumLitOr}{88}% OR optima of Lozano et al.
 \newcommand{\NumLitGeneralized}{4}% generalized optima of Lozano et al.
 \newcommand{\NumLitMiplibLozano}{4}% MIPLIB 3 optima of Lozano et al.
-\newcommand{\NumLitImkp}{52}% imkp optima of Fischetti et al. 2019
+\newcommand{\NumLitImkp}{52}% imkp optima, first published in Fischetti et al.'s 2016 report
+\newcommand{\NumLitImkpTable}{42}% of them in the branch-and-cut columns of Tables 4-6
+\newcommand{\NumLitImkpCaption}{10}% of them given in the caption of Table 5 or 6 (a run with a longer time limit; proof in the text)
+\newcommand{\NumLitKipLaterLozano}{228}% KIP optima proved again later by Lozano, Bergman and Cire (their solution files)
+\newcommand{\NumLitImkpLaterLozano}{26}% imkp optima proved again later by Lozano, Bergman and Cire (their solution files)
 \newcommand{\NumLitMkip}{140}% MKIP literature optima (OR + imkp)
 \newcommand{\NumLitMiplib}{9}% MIPLIB-derived literature optima
 \newcommand{\NumLitFischettiSeventeen}{5}% Fischetti et al. 2017: air03, p0201, p0282 (Table 6) and the two network optima (online appendix, Table 9)
@@ -46,6 +58,9 @@
 \newcommand{\NumLitVasquez}{0}% optima credited to Vasquez, Lozano and van Hoeve (their two are first published by Fischetti et al. 2017)
 \newcommand{\NumLitLefebvreSchmidt}{1}% ex10_0_100 (Lefebvre and Schmidt's run file)
 \newcommand{\NumLitEarlierRelease}{1}% neos-950242_0_100
+\newcommand{\NumBobiOptKip}{207}% KIP instances BOBILib lists as optimal (source stays BOBILib)
+\newcommand{\NumBobiOptImkp}{92}% imkp instances BOBILib lists as optimal (source stays BOBILib)
+\newcommand{\NumBobiOptKnapsack}{299}% KIP and imkp instances BOBILib lists as optimal
 \newcommand{\NumKipFiles}{583}% KIP files at published optima
 \newcommand{\NumKipBobiAbove}{335}% KIP with BOBILib value above the published optimum
 \newcommand{\KipBobiExcessMedian}{8}% median excess, percent
@@ -386,7 +401,7 @@ neos-1445765\_0\_100 & open & \ensuremath{-}17{,}783 & \texttt{bobi general} \\
 \newcommand{\NumLitNoFileOr}{18}% of them OR
 \newcommand{\NumLitNoFileMiplib}{8}% of them MIPLIB-derived
 \newcommand{\NumLitNoFileGeneralized}{4}% of them generalized
-\newcommand{\NumLitKnapsackMethods}{428}% published optima from knapsack interdiction methods (Weninger-Fukasawa, Fischetti et al. 2019)
+\newcommand{\NumLitKnapsackMethods}{428}% published optima from knapsack interdiction methods (the KIP sources; the 2016 report also for imkp)
 \newcommand{\NumLitOther}{7}% published optima from other sources (Fischetti et al. 2017, Lefebvre and Schmidt, an earlier BOBILib release)
 \newcommand{\PFiveFortyEightOptimum}{48{,}853}% p0548-0.900000: published optimum used (exact follower)
 \newcommand{\PFiveFortyEightDd}{48{,}851}% p0548-0.900000: decision-diagram value, follower optimal only within BOBILib's tolerance

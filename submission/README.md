@@ -29,11 +29,16 @@ one row each; the same in MIPLIB/SCIP form in `bobilib_update.solu`):
 * New optima: 16 subset-sum knapsack interdiction, 57 clique interdiction and 6 general instances
   whose HPR is a MIPLIB model with a published optimum. For 52 of the 610 optima BOBILib's value was
   already optimal and only the status changes.
-* Published optima: 376 Weninger and Fukasawa (2025), 96 Lozano, Bergman and Cire (2026), 52
-  Fischetti et al. (2019), 5 Fischetti et al. (2017), 1 Lefebvre and Schmidt (2025, run file), 1 an
-  earlier BOBILib release (full references in `status_changes.csv`, column `citation`), each
-  credited to its first publication among the sources we compiled (later proofs are named in
-  `notes`). For 82 of them there is no solution file here; only the published value is used. The 2
+* Published optima: 336 Weninger and Fukasawa (2022, answer files), 96 Lozano, Bergman and Cire
+  (2026), 78 Fischetti et al. (2016, technical report), 14 Caprara et al. (2016), 5 Fischetti et al.
+  (2017), 1 Lefebvre and Schmidt (2025, run file), 1 an earlier BOBILib release (full references in
+  `status_changes.csv`, column `citation`), each credited to its first publication among the sources
+  we compiled (later proofs are named in `notes`). For the 376 knapsack interdiction optima,
+  `results/literature/kip_first_publication.csv` names the table or answer file of each first
+  publication; for 266 of them Della Croce and Scatamacchia (2020) had reported the instance's group
+  solved, without values. The 52 `imkp` optima are first published in Tables 4-6 of Fischetti et
+  al.'s technical report of 2016 (`results/literature/imkp_first_publication.csv`). For 82 of the
+  531 published optima there is no solution file here; only the published value is used. The 2
   attack-protect games (`inter-fire`) tree-50_1-5-5_006 and tree-50_1-5-5_010, which Fischetti et
   al.'s MIX++ solved (online appendix of their 2017 paper, Table 9), are re-proved here exactly by
   enumeration (class `exact`). ex10_0_100 is optimal in Lefebvre and Schmidt's run file

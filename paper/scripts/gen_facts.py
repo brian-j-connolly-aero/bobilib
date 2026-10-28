@@ -128,13 +128,47 @@ def main():
 
     # ---- literature closures ------------------------------------------------------------------
     ls = C(r["source"] for r in lit)
-    fact("NumLitKip", ls["WeningerFukasawa2025"], "KIP optima of Weninger and Fukasawa", expect=376)
+    fact("NumLitKip", len(fam(lit, "knapsack")), "KIP optima in published work (all first publications)", expect=376)
+    # First publications of the KIP optima (literature/kip_first_publication.csv).
+    kipsrc = C((r["collection"], r["source"]) for r in fam(lit, "knapsack"))
+    assert kipsrc == {("kp", "WeningerFukasawa2022Code"): 336, ("inter-kp", "FischettiEtAl2016Report"): 25,
+                      ("cclw", "CapraraEtAl2016"): 14, ("cclw", "FischettiEtAl2016Report"): 1}, kipsrc
+    fact("NumLitWeningerFukasawa", ls["WeningerFukasawa2022Code"], "kp optima first published in Weninger and "
+         "Fukasawa's answer files (bkpsolver repository, public by 7 Oct 2022)", expect=336)
+    fact("NumLitFischettiSixteen", kipsrc[("inter-kp", "FischettiEtAl2016Report")] + kipsrc[("cclw", "FischettiEtAl2016Report")],
+         "KIP optima first published in Fischetti et al.'s 2016 technical report (inter-kp and cclw 55-3)", expect=26)
+    fact("NumLitFischettiSixteenAll", ls["FischettiEtAl2016Report"], "optima first published in Fischetti et al.'s "
+         "2016 technical report (KIP and imkp)", expect=78)
+    fact("NumLitFischettiSixteenInterKp", kipsrc[("inter-kp", "FischettiEtAl2016Report")],
+         "of them inter-kp (Table 3 of the report)", expect=25)
+    fact("NumLitFischettiSixteenCclw", kipsrc[("cclw", "FischettiEtAl2016Report")],
+         "of them cclw (interdiction55-3, Table 1 of the report)", expect=1)
+    fact("NumLitCaprara", ls["CapraraEtAl2016"], "cclw optima first published by Caprara et al. 2016", expect=14)
+    kp_earlier = [r for r in lit if r["collection"] == "kp" and "proved optimal earlier, value not listed" in r["notes"]]
+    assert all("Della Croce and Scatamacchia (2020)" in r["notes"] for r in kp_earlier)
+    assert not [r for r in lit if r["collection"] != "kp" and "proved optimal earlier, value not listed" in r["notes"]]
+    fact("NumLitKipProvedEarlier", len(kp_earlier), "kp optima that Della Croce and Scatamacchia (2020) report "
+         "solved earlier as counts per group, without values", expect=266)
+    fact("NumLitKipNotProvedEarlier", ls["WeningerFukasawa2022Code"] - len(kp_earlier),
+         "kp optima with no earlier proof found", expect=70)
     fact("NumLitLozano", ls["LozanoBergmanCire2026"], "optima of Lozano, Bergman and Cire (all families)", expect=96)
     fact("NumLitOr", sum(1 for r in lit if r["collection"] == "or"), "OR optima of Lozano et al.", expect=88)
     fact("NumLitGeneralized", len(fam(lit, "generalized")), "generalized optima of Lozano et al.", expect=4)
     fact("NumLitMiplibLozano", sum(1 for r in gen(lit) if r["source"] == "LozanoBergmanCire2026"),
          "MIPLIB 3 optima of Lozano et al.", expect=4)
-    fact("NumLitImkp", ls["FischettiEtAl2019"], "imkp optima of Fischetti et al. 2019", expect=52)
+    # The imkp optima: Tables 4-6 of Fischetti et al.'s 2016 report (literature/imkp_first_publication.csv).
+    imkp_lit = [r for r in lit if r["collection"] == "imkp"]
+    assert all(r["source"] == "FischettiEtAl2016Report" for r in imkp_lit) and ls["FischettiEtAl2019"] == 0
+    fact("NumLitImkp", len(imkp_lit), "imkp optima, first published in Fischetti et al.'s 2016 report", expect=52)
+    imkp_cap = sum("caption (value of a run with a longer time limit)" in r["notes"] for r in imkp_lit)
+    fact("NumLitImkpTable", len(imkp_lit) - imkp_cap, "of them in the branch-and-cut columns of Tables 4-6", expect=42)
+    fact("NumLitImkpCaption", imkp_cap, "of them given in the caption of Table 5 or 6 (a run with a longer time "
+         "limit; proof in the text)", expect=10)
+    later_lbc = "Lozano, Bergman and Cire (2026)"
+    fact("NumLitKipLaterLozano", sum(later_lbc in r["notes"] for r in fam(lit, "knapsack")),
+         "KIP optima proved again later by Lozano, Bergman and Cire (their solution files)", expect=228)
+    fact("NumLitImkpLaterLozano", sum(later_lbc in r["notes"] for r in imkp_lit),
+         "imkp optima proved again later by Lozano, Bergman and Cire (their solution files)", expect=26)
     fact("NumLitMkip", len(fam(lit, "multidim-knapsack")), "MKIP literature optima (OR + imkp)", expect=140)
     fact("NumLitMiplib", len(gen(lit)), "MIPLIB-derived literature optima", expect=9)
     # Each published optimum is credited to its first publication (scripts/summarize.py).
@@ -149,6 +183,19 @@ def main():
          "(their two are first published by Fischetti et al. 2017)", expect=0)
     fact("NumLitLefebvreSchmidt", ls["LefebvreSchmidt2025"], "ex10_0_100 (Lefebvre and Schmidt's run file)", expect=1)
     fact("NumLitEarlierRelease", ls["BOBILibEarlierRelease"], "neos-950242_0_100", expect=1)
+    # The first-publication rule covers only the instances BOBILib lists as feasible or open; those it lists as
+    # optimal keep BOBILib as their source, even where a publication had the value earlier.
+    bobi_opt = [r for r in ins if r["bobilib_status"] == "optimal"]
+    assert all(r["source"] == "ThuraufEtAl2026" for r in bobi_opt)
+    bobi_opt_kip = fam(bobi_opt, "knapsack")
+    assert C(r["collection"] for r in bobi_opt_kip) == {"kp": 98, "inter-kp": 74, "cclw": 35}
+    bobi_opt_imkp = [r for r in bobi_opt if r["collection"] == "imkp"]
+    fact("NumBobiOptKip", len(bobi_opt_kip), "KIP instances BOBILib lists as optimal (source stays BOBILib)",
+         expect=207)
+    fact("NumBobiOptImkp", len(bobi_opt_imkp), "imkp instances BOBILib lists as optimal (source stays BOBILib)",
+         expect=92)
+    fact("NumBobiOptKnapsack", len(bobi_opt_kip) + len(bobi_opt_imkp), "KIP and imkp instances BOBILib lists as "
+         "optimal", expect=299)
     kipsum = load(f"{R}/kip/summary.csv")
     fact("NumKipFiles", sum(1 for r in kipsum if r["literature_optimum"]), "KIP files at published optima", expect=583)
     excess = [(float(r["bobilib_value"]) - float(r["literature_optimum"])) / float(r["literature_optimum"])
@@ -158,7 +205,7 @@ def main():
     fact("KipBobiExcessMedian", round(100 * statistics.median(excess)), "median excess, percent", expect=8)
     fact("KipBobiExcessMax", round(100 * max(excess)), "largest excess, percent", expect=672)
     imkp = [(num(r["bobilib_value"]) - num(r["primal_value"])) / num(r["primal_value"])
-            for r in lit if r["source"] == "FischettiEtAl2019"]
+            for r in imkp_lit]
     fact("ImkpBobiExcessMax", round(100 * max(imkp)), "largest imkp excess over the optimum, percent", expect=23)
 
     # ---- new optima ---------------------------------------------------------------------------
@@ -588,13 +635,15 @@ def main():
     fact("NumLitNoFileOr", sum(r["collection"] == "or" for r in lit_nofile), "of them OR", expect=18)
     fact("NumLitNoFileMiplib", sum(r["family"].startswith("general-") for r in lit_nofile), "of them MIPLIB-derived", expect=8)
     fact("NumLitNoFileGeneralized", sum(r["family"] == "generalized" for r in lit_nofile), "of them generalized", expect=4)
-    fact("NumLitKnapsackMethods", ls["WeningerFukasawa2025"] + ls["FischettiEtAl2019"],
-         "published optima from knapsack interdiction methods (Weninger-Fukasawa, Fischetti et al. 2019)", expect=428)
+    kip_keys = ("WeningerFukasawa2022Code", "FischettiEtAl2016Report", "CapraraEtAl2016")
+    fact("NumLitKnapsackMethods", sum(ls[k] for k in kip_keys),
+         "published optima from knapsack interdiction methods (the KIP sources; the 2016 report also for imkp)",
+         expect=428)
     other_src = ("FischettiEtAl2017", "VasquezLozanoVanHoeve2025", "LefebvreSchmidt2025", "BOBILibEarlierRelease")
     fact("NumLitOther", sum(ls[k] for k in other_src),
          "published optima from other sources (Fischetti et al. 2017, Lefebvre and Schmidt, an earlier BOBILib "
          "release)", expect=7)
-    assert len(lit) == ls["WeningerFukasawa2025"] + ls["FischettiEtAl2019"] + ls["LozanoBergmanCire2026"] + \
+    assert len(lit) == sum(ls[k] for k in kip_keys) + ls["LozanoBergmanCire2026"] + \
         sum(ls[k] for k in other_src)
     p548 = next(r for r in ins if r["instance"] == "p0548-0.900000")
     m548 = re.search(r"published: (\d+) with an exactly optimal follower \((\d+) only within BOBILib's 1e-4", p548["notes"])

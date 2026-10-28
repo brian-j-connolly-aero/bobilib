@@ -605,3 +605,90 @@ applies them, like the two integer-only provers that repeat it
 (Section~\ref{app:verification}), is an exhaustive computation in integer
 arithmetic whose code is tested but not verified. In the terms of
 Section~\ref{app:classes} they are exact certificates (class~(i)).
+
+\subsection{Published optima of the other KIP instances}\label{app:kip-lit}
+
+BOBILib lists \NumLitKip{} KIP instances as feasible or open whose optimum is
+published. Each is credited to its first publication by the rule of
+Section~\ref{app:first-pub}: the earliest public document that reports the
+instance solved to proven optimality and lists its optimal value. A listed
+value counts only if it equals the optimum used here, which for every KIP
+instance is the value of a verified solution file in this package; all
+\NumLitKip{} do. The rule covers only the instances BOBILib lists as feasible or
+open: the \NumBobiOptKip{} KIP instances it lists as optimal keep BOBILib as the
+source, although the online appendix of MIX++,\cite{fischetti2016appendix}
+Caprara et al.\ and the answer files give the same values earlier. The file \texttt{results/literature/kip\_first\_publication.csv}
+gives, per instance, the source and its date, the table row or file, the
+value, an earlier report without the value, the later sources (among them
+Lozano, Bergman and Cire's solution files,\cite{lozano_dbo_repo} which prove
+\NumLitKipLaterLozano{} of the \NumLitKip{} again) and how the row was checked.
+\begin{itemize}
+\item \texttt{cclw}: \NumLitCaprara{} optima are in Tables~1 and~4 of Caprara,
+Carvalho, Lodi and Woeginger.\cite{caprara2016bilevel} For
+\texttt{interdiction55-4} their Table~4 gives the value with a time-out, and
+their text reports the proof (a run with pre-processing, 2,796.20 CPU
+seconds). Fischetti, Ljubi\'c, Monaci and Sinnl's technical report of
+2016,\cite{fischetti2016monotonicity} the preprint of their 2019
+paper,\cite{fischetti2019interdiction} counts \texttt{interdiction55-4} among
+its 27 previously unsolved instances, after the time-out in Caprara et al.'s
+table; the credit goes to Caprara et al.\ because their text reports the proof.
+For \texttt{interdiction55-3} Caprara et al.\ list 778 without a proof; the
+first proof with the value is in Table~1 of the same report.
+\item \texttt{inter-kp}: all \NumLitFischettiSixteenInterKp{} optima are in
+Table~3 of the same report (its set~D). The online appendix of MIX++, dated
+June 2016, lists all of them as open at the time limit.\cite{fischetti2016appendix}
+\item \texttt{kp}: the \NumLitWeningerFukasawa{} optima are first listed in the
+answer files of Weninger and Fukasawa's code, all of them in its first
+commit.\cite{weninger_bkpsolver} The repository was public by 7~October 2022
+and very probably from that day: the public event log of GitHub (GH Archive)
+records a public push that evening, when the first commit was already in the
+main branch, and no event while the history was pushed earlier that day. The
+preprint the authors posted that day gives counts per class
+only.\cite{weninger2022fast} No earlier document that could be read lists the
+values either: Fischetti, Monaci and Sinnl, who introduced the set, state that
+its optimal values are not known,\cite{fischetti2018dynamic} and Della Croce and
+Scatamacchia report results per group of instances.\cite{dellacroce2020exact} For
+\NumLitKipProvedEarlier{} of the \NumLitWeningerFukasawa{} their Tables~3--5
+report every instance of the group solved; for 6 of these the table prints
+``6/18'' for a group of 6 instances, and reading it as 6 of 6 is an inference.
+The other \NumLitKipNotProvedEarlier{} are in groups they solved only in part
+or not at all.
+\end{itemize}
+The names were matched on the instance data, not only on the names: for every
+instance, the capacities, weights, costs and profits of BOBILib's files equal
+those of the bkpsolver files (for \texttt{kp}, the bkpsolver files leave out
+the items of zero leader cost, which the leader always blocks) and, for
+\texttt{cclw}, those of Carvalho's instance file.
+
+\textbf{What could not be read.} The publisher's site refused access to the
+typeset version of Caprara et al.'s paper and to the journal version of
+Fischetti et al.'s report with its online supplement; the accepted manuscript
+and the report were read instead. Three documents that are earlier than the
+\texttt{kp} answer files could not be read in full: that journal version and its
+supplement,\cite{fischetti2019interdiction} Della Croce and Scatamacchia's IPCO
+2019 paper\cite{dellacroce2019lower} and the version of record of Fischetti,
+Monaci and Sinnl's paper.\cite{fischetti2018dynamic} That none of them lists
+\texttt{kp} values is inferred. The abstract of the first counts the report's
+360 KIP instances (the sets of Caprara et al., of
+DeNegre\cite{denegre2011thesis} and of Tang, Richard and
+Smith;\cite{tang2016class} none of them \texttt{kp}) and 144 MKIP instances.
+Della Croce and Scatamacchia later ran its code themselves on the 80
+\texttt{kp} instances with 100 items, which suggests that the journal version
+reports none of them. The abstract of the second is that of their arXiv preprint, which
+has no \texttt{kp} instances. The accepted manuscript of the third states that
+the optimal values are not known. When the August 2016 version of Fischetti et
+al.'s report was first posted could not be checked: the web archive lists
+captures of the authors' former home pages from November and December 2016, but
+the archived copies could not be opened. The copy of 20 December 2016 on
+Fischetti's page has the server date 21 December 2016, the report is cited as a
+technical report of 2016 in January and February 2017, and the earliest archive
+capture of it is of May 2018. Even that capture is earlier than every other
+document that proves these optima and lists their values. Before the August
+version Sinnl gave talks on interdiction problems at ISCO 2016 and EURO 2016; no
+slides or proceedings paper of these talks could be found. Three papers with knapsack interdiction or
+bilevel experiments were not opened: Tang, Richard and Smith's,\cite{tang2016class}
+Xu and Wang's\cite{xu2014exact} and Caramia and Mari's.\cite{caramia2015enhanced}
+As the report, the MIX++ paper and the intersection-cut paper of 2018 describe
+them,\cite{fischetti2017new,fischetti2018intersection} they test their own
+instances, not these: Tang, Richard and Smith's knapsack interdiction instances
+have at most 30 items, and the other two are general bilevel instances.

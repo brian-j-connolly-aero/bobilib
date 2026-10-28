@@ -50,16 +50,24 @@ TITLE = (f"Settling 650 unsolved BOBILib instances: {EXPECT['published optimum']
 
 CITATION = {
     "this work": f"B. J. Connolly, {TITLE}, preprint (2026); " + REPO,
-    "WeningerFukasawa2025": "N. Weninger and R. Fukasawa, Math. Program. 210 (2025) 847-879, "
-                            "doi:10.1007/s10107-024-02133-9",
+    "WeningerFukasawa2022Code": "N. Weninger and R. Fukasawa, bkpsolver repository, answer files instances/*/*.ans "
+                                "(initial commit d8c3b74, repository public by 7 October 2022), "
+                                "https://github.com/nwoeanhinnogaehr/bkpsolver; the code of their paper in "
+                                "Math. Program. 210 (2025) 847-879, doi:10.1007/s10107-024-02133-9",
+    "FischettiEtAl2016Report": "M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, Interdiction games and monotonicity, "
+                               "technical report, DEI, University of Padova (2016), "
+                               "www.dei.unipd.it/~fisch/papers/interdiction_games_and_monotonicity.pdf; preprint of "
+                               "INFORMS J. Comput. 31(2) (2019) 390-410, doi:10.1287/ijoc.2018.0831",
+    "CapraraEtAl2016": "A. Caprara, M. Carvalho, A. Lodi and G. J. Woeginger, INFORMS J. Comput. 28(2) (2016) "
+                       "319-333, doi:10.1287/ijoc.2015.0676",
     "LozanoBergmanCire2026": "L. Lozano, D. Bergman and A. A. Cire, Oper. Res. (2026), Articles in Advance, "
                              "doi:10.1287/opre.2025.2457",
-    "FischettiEtAl2019": "M. Fischetti, I. Ljubic, M. Monaci and M. Sinnl, INFORMS J. Comput. 31(2) (2019) "
+    "FischettiEtAl2019": "M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, INFORMS J. Comput. 31(2) (2019) "
                          "390-410, doi:10.1287/ijoc.2018.0831",
-    "FischettiEtAl2017": "M. Fischetti, I. Ljubic, M. Monaci and M. Sinnl, Oper. Res. 65(6) (2017) 1615-1637, "
+    "FischettiEtAl2017": "M. Fischetti, I. Ljubić, M. Monaci and M. Sinnl, Oper. Res. 65(6) (2017) 1615-1637, "
                          "doi:10.1287/opre.2017.1650, and its online appendix of 29 June 2016 "
                          "(www.dei.unipd.it/~fisch/appendix.pdf)",
-    "VasquezLozanoVanHoeve2025": "S. Vasquez, L. Lozano and W.-J. van Hoeve, Math. Program. (2025), "
+    "VasquezLozanoVanHoeve2025": "S. Vásquez, L. Lozano and W.-J. van Hoeve, Math. Program. (2025), "
                                  "doi:10.1007/s10107-025-02294-1",
     "LefebvreSchmidt2025": "H. Lefebvre and M. Schmidt, A Dantzig-Wolfe single-level reformulation for "
                            "mixed-integer linear bilevel optimization: exact and heuristic approaches, Optimization "
@@ -68,7 +76,9 @@ CITATION = {
     "BOBILibEarlierRelease": "an earlier release of the BOBILib metadata, which listed the instance as optimal",
 }
 
-SHORT = {"WeningerFukasawa2025": "Weninger and Fukasawa (2025)", "LozanoBergmanCire2026": "Lozano, Bergman and Cire (2026)",
+SHORT = {"WeningerFukasawa2022Code": "Weninger and Fukasawa (2022, answer files)",
+         "FischettiEtAl2016Report": "Fischetti et al. (2016, technical report)", "CapraraEtAl2016": "Caprara et al. (2016)",
+         "LozanoBergmanCire2026": "Lozano, Bergman and Cire (2026)",
          "FischettiEtAl2019": "Fischetti et al. (2019)", "FischettiEtAl2017": "Fischetti et al. (2017)",
          "VasquezLozanoVanHoeve2025": "Vasquez, Lozano and van Hoeve (2025)",
          "LefebvreSchmidt2025": "Lefebvre and Schmidt (2025, run file)",
@@ -439,6 +449,13 @@ def main():
     check(pub_hpr_conf == ["ex10_0_100"] and pub_hpr_bob == ["neos-950242_0_100"], "MIPLIB-bound published optima")
     clique_brouwer = sum("Brouwer" in r["how_to_check"] for r in by("new optimum proven"))
     pub_src = Counter(r["source"] for r in by("published optimum"))
+    kip_pub = sum(r["family"] == "knapsack" for r in by("published optimum"))
+    kip_earlier = sum("proved optimal earlier, value not listed" in r["notes"] for r in by("published optimum"))
+    check(kip_pub == 376 and kip_earlier == 266 and pub_src["WeningerFukasawa2022Code"] == 336
+          and pub_src["FischettiEtAl2016Report"] == 78 and pub_src["CapraraEtAl2016"] == 14, "KIP first publications")
+    imkp_pub = [r for r in by("published optimum") if r["collection"] == "imkp"]
+    check(len(imkp_pub) == 52 and all(r["source"] == "FischettiEtAl2016Report" for r in imkp_pub)
+          and "FischettiEtAl2019" not in pub_src, "imkp first publications")
     n_pass = offc.get("pass", 0)
     n_skip = sum(v for k, v in offc.items() if k.startswith("MIPLIB"))
     n_hpr_bob = sum(r["solution_file"] == "-" for r in by("new optimum proven"))
@@ -489,8 +506,13 @@ Reference: {snapshot_text}
   already optimal and only the status changes.
 * Published optima: {', '.join(f'{v} {SHORT[k]}' for k, v in pub_src.most_common())} (full references in
   `status_changes.csv`, column `citation`), each credited to its first publication among the sources
-  we compiled (later proofs are named in `notes`). For {nofile_pub} of them there is no solution file
-  here; only the published value is used. The {len(pub_exact)} attack-protect games (`inter-fire`)
+  we compiled (later proofs are named in `notes`). For the {kip_pub} knapsack interdiction optima,
+  `results/literature/kip_first_publication.csv` names the table or answer file of each first
+  publication; for {kip_earlier} of them Della Croce and Scatamacchia (2020) had reported the
+  instance's group solved, without values. The {len(imkp_pub)} `imkp` optima are first published in
+  Tables 4-6 of Fischetti et al.'s technical report of 2016
+  (`results/literature/imkp_first_publication.csv`). For {nofile_pub} of the {kinds['published optimum']} published
+  optima there is no solution file here; only the published value is used. The {len(pub_exact)} attack-protect games (`inter-fire`)
   {' and '.join(r['instance'] for r in pub_exact)}, which Fischetti et al.'s MIX++ solved (online
   appendix of their 2017 paper, Table 9), are re-proved here exactly by enumeration (class `exact`).
   ex10_0_100 is optimal in Lefebvre and Schmidt's run file `results-MILP.csv` (a run that ended
