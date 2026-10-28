@@ -100,3 +100,9 @@ formulation, window extension and the stall test, Weninger and Fukasawa's
 online lower bound, the soundness of the robust online table and of its
 threshold form, and the per-node tables with an arbitrary end set. See
 `lean/README.md` for how each theorem maps to the code and how to build it.
+
+## License
+
+Code: MIT (`LICENSE`). Data package (`results/`): CC BY 4.0 (`results/LICENSE`).
+BOBILib's instances and the published results the data package cites remain
+under their own terms.

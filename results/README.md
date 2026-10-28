@@ -286,8 +286,10 @@ computations behind each folder are listed in its README and in
 
 ## License
 
-LICENSE PLACEHOLDER (to be chosen by the author). BOBILib's instances and
-the published results cited above remain under their own terms.
+The data in this folder are licensed under the Creative Commons Attribution
+4.0 International License (CC BY 4.0; full text in `LICENSE`). The code of the
+repository is under the MIT License (`../LICENSE`). BOBILib's instances and the
+published results cited above remain under their own terms.
 
 ## Contact
 
