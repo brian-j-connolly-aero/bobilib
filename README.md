@@ -14,10 +14,34 @@ knapsacks. This crate exploits that structure.
 ## Build
 
 ```sh
-cd bobilib
 cargo build --release      # builds HiGHS from source the first time (about 2 minutes)
-ln -s /path/to/bobilib-data data   # collection/ and collection-solutions/ from bobilib.org
+make fetch-data            # data/: BOBILib's files that the results use (see below)
 ```
+
+## Getting the data
+
+The code and scripts read BOBILib's files from `data/` (not in git), in
+BOBILib's layout: `data/collection/...` (`.mps.gz`, `.aux`),
+`data/collection-solutions/...` (BOBILib's `.res.json`) and
+`data/collection.json` (its metadata).
+
+* `instances/` (in git, 38 MB, CC BY-SA 4.0) holds unmodified copies of the
+  1,367 knapsack, multidimensional knapsack, clique and network interdiction
+  instances with results here: enough to check those results with no
+  download (`instances/README.md`).
+* `make fetch-data` (`scripts/fetch_data.py`; Python 3.10 or later, standard
+  library only) builds `data/`: it copies `instances/`, downloads the rest from
+  BOBILib's GitLab and checks the size and sha256 of every file against
+  `data-manifest/bobilib_snapshot.tsv`, the snapshot of 2026-10-18 used here.
+  `SUBSET=used` (default) takes the 1,503 instances with a certificate or
+  solution file in `results/` (about 285 MB), `SUBSET=unsolved` the 1,594 that
+  BOBILib lists as feasible or open (about 970 MB), `SUBSET=all` all 2,654
+  (1.45 GB). `LOCAL=DIR` copies from an existing BOBILib download first (for
+  example `collection.tar.gz` and `collection-solutions.tar.gz` from
+  bobilib.org, unpacked), and `make verify-data` only checks. A file that
+  changed upstream is reported and not installed. `collection.json` comes from
+  https://bobilib.org/subpages/collection.json; if the site is down, the rest
+  is still fetched and the script names the missing file.
 
 ## Commands
 
@@ -104,5 +128,7 @@ threshold form, and the per-node tables with an arbitrary end set. See
 ## License
 
 Code: MIT (`LICENSE`). Data package (`results/`): CC BY 4.0 (`results/LICENSE`).
-BOBILib's instances and the published results the data package cites remain
+The copies of BOBILib's instances in `instances/`: CC BY-SA 4.0, BOBILib's own
+license (`instances/LICENSE`; cite BOBILib as `instances/README.md` says).
+BOBILib's other files and the published results the data package cites remain
 under their own terms.

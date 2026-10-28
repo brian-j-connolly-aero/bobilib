@@ -43,10 +43,20 @@ from bobilib.org; without it the BOBILib columns are read back from
 unchanged. The scripts stop with an error if a count differs from the one the
 paper quotes.
 
+BOBILib's files are not needed for `make data`, `make figures`, `make paper` or
+`make appendix`. To re-check the results or rerun the scripts that read them, run
+`make fetch-data` in the repository root (`../Makefile`, `../scripts/fetch_data.py`):
+it builds `../data/` from the instance copies in `../instances/` and BOBILib's
+GitLab, checks every file against `../data-manifest/bobilib_snapshot.tsv` (the
+snapshot of 2026-10-18), and puts the metadata in `../data/collection.json`, so
+`make data META=../data/collection.json` works from here. See `../README.md`,
+section "Getting the data".
+
 Two inputs of `make data` are produced outside it, from BOBILib's instance files
 and metadata, and kept in the package: `../results/summary.json` (per-instance
 outcomes, `../scripts/summarize.py`) and `../results/notes/instance_structure.csv`
-(the structural counts of the problem descriptions, `../scripts/instance_structure.py`);
+(the structural counts of the problem descriptions, `../scripts/instance_structure.py`,
+which needs all of BOBILib: `make fetch-data SUBSET=all` in the repository root);
 `../results/README.md`, section Replicating, gives both command lines.
 
 The paper takes every number from `generated/facts.tex`, so run `make data` before

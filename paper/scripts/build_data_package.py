@@ -1112,7 +1112,9 @@ Citation keys in `source`:
 ## Verification
 
 From `bobilib/`, with BOBILib's instance files in `data/collection`
-(bobilib.org) and the crate built (`cargo build --release`):
+(`make fetch-data`, see Replicating; the knapsack, multidimensional knapsack,
+clique and network instances are also in `instances/collection`) and the crate
+built (`cargo build --release`):
 
 ```sh
 (cd results && sha256sum -c SHA256SUMS)
@@ -1163,16 +1165,29 @@ instance{'s' if got['or_inconsistent'] != 1 else ''} a published lower bound exc
 ## Replicating
 
 ```sh
-cd bobilib/paper
-make data META=/path/to/collection.json   # this package, generated/facts.tex, appendix tables
-make all                                  # also figures, paper and appendix
+cd bobilib
+make fetch-data                          # data/: BOBILib's files for this package (below)
+cd paper
+make data META=../data/collection.json   # this package, generated/facts.tex, appendix tables
+make all                                 # also figures, paper and appendix
 ```
+
+BOBILib's files: `instances/` holds unmodified copies (under BOBILib's license,
+CC BY-SA 4.0) of the 1,367 knapsack, multidimensional knapsack, clique and
+network interdiction instances that have a file in this package.
+`make fetch-data` (`scripts/fetch_data.py`, run from `bobilib/`) builds `data/` in
+BOBILib's layout from them and from BOBILib's GitLab, and checks the size and
+sha256 of every file against `data-manifest/bobilib_snapshot.tsv`, the snapshot
+of {SNAPSHOT} used here. By default it takes the 1,503 instances that have a file
+in this package (about 285 MB, with BOBILib's solution files and
+`collection.json`); `SUBSET=all` takes all 2,654. A file that changed upstream
+is reported and not installed.
 
 `make data` runs `scripts/build_data_package.py` (add `MKIP_LIT=`, `MIBLP_LIT=`
 and `LBC_OPTIMAL=` to re-read the published optima from the literature tables;
 without them, and without `META=`, they are read back from `instances.csv`),
 then `scripts/gen_facts.py` and `scripts/gen_appendix_tables.py`.
-`summary.json` is written by `python3 -I scripts/summarize.py --meta collection.json
+`summary.json` is written by `python3 -I scripts/summarize.py --meta data/collection.json
 --mkip-lit results/literature/mkip_literature_status.csv --miblp-lit
 results/literature/miblp_literature_status.csv --lbc-optimal optimal.csv
 --runs runs --results results` (from `bobilib/`; `optimal.csv` is
@@ -1182,8 +1197,9 @@ the OR bounds and ray checks from this package and the `bobi general` runs from 
 instances that the paper describes: variable and row split, coupling rows,
 continuous linking variables, follower objective against the leader's) is
 read from BOBILib's instance files by
-`python3 -I scripts/instance_structure.py --meta collection.json --collection data/collection
---out results/notes/instance_structure.csv` (run from `bobilib/`; about 4 minutes on 2 threads). The
+`python3 -I scripts/instance_structure.py --meta data/collection.json --collection data/collection
+--out results/notes/instance_structure.csv` (run from `bobilib/` after `make fetch-data SUBSET=all`;
+about 4 minutes on 2 threads). The
 computations behind each folder are listed in its README and in
 `bobilib/REPORT.md`; times were measured on a shared, often oversubscribed
 4-core machine and are indicative only.
