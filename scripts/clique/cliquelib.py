@@ -18,7 +18,7 @@ SOL_DIR = os.path.join(DATA, "collection-solutions/interdiction-solutions/clique
 RESULTS = os.path.join(BOBILIB, "results/clique")
 META = os.environ.get(
     "BOBILIB_META",
-    "/tmp/claude-0/-home-user-flyover-country/954d7e75-24ef-5fff-8cf4-9c9d3794ab78/scratchpad/dl/collection.json",
+    os.path.join(DATA, "collection.json"),  # BOBILib metadata, downloaded with the data
 )
 
 

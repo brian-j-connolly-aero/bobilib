@@ -1,8 +1,9 @@
 # bobi: solvers for BOBILib interdiction instances
 
 Research code for the [BOBILib](https://bobilib.org) bilevel instance library
-(Bilevel Optimization (Benchmark) Instance Library). It is a separate Cargo
-workspace and does not touch the game in the rest of this repository.
+(Bilevel Optimization (Benchmark) Instance Library), with the paper, its
+supplement and the data package (`results/`). Start with `REPORT.md` for the
+findings and `paper/README.md` to build the paper.
 
 BOBILib's statuses come from two general-purpose bilevel solvers run for one
 hour each. About 79% of the instances it does not list as optimal are
