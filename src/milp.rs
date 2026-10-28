@@ -1,0 +1,203 @@
+//! A thin wrapper over HiGHS for the small MILPs the interdiction solvers
+//! need (follower subproblems, master problems).
+
+use highs::{HighsModelStatus, RowProblem, Sense};
+use std::ffi::CString;
+
+#[derive(Clone, Debug)]
+pub struct Milp {
+    pub obj: Vec<f64>,
+    pub lb: Vec<f64>,
+    pub ub: Vec<f64>,
+    pub integer: Vec<bool>,
+    pub rows: Vec<(Vec<(usize, f64)>, f64, f64)>,
+    pub maximize: bool,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum MilpStatus {
+    Optimal,
+    /// Stopped by the time limit with a feasible point.
+    Feasible,
+    Infeasible,
+    /// Feasible with an unbounded objective.
+    Unbounded,
+    /// HiGHS proved one of infeasible or unbounded without saying which.
+    InfeasibleOrUnbounded,
+    /// Stopped without a feasible point, or another failure.
+    Unknown,
+}
+
+#[derive(Clone, Debug)]
+pub struct MilpResult {
+    pub status: MilpStatus,
+    pub obj: f64,
+    /// Proven bound on the optimum (upper for max, lower for min).
+    pub bound: f64,
+    pub x: Vec<f64>,
+    /// Row and column duals of an LP solved to optimality (empty otherwise).
+    pub row_duals: Vec<f64>,
+    pub col_duals: Vec<f64>,
+}
+
+/// Solver settings beyond the time limit.
+#[derive(Clone, Debug)]
+pub struct SolveOpts {
+    pub time_limit: f64,
+    pub threads: i32,
+    pub rel_gap: f64,
+    pub abs_gap: f64,
+    /// Primal and MIP feasibility tolerance; HiGHS's defaults when None.
+    pub feas_tol: Option<f64>,
+    /// Stop after this many improving MIP solutions.
+    pub max_sols: Option<i32>,
+    /// A starting point for the MIP (one value per column).
+    pub start: Option<Vec<f64>>,
+}
+
+impl SolveOpts {
+    pub fn new(time_limit: f64) -> Self {
+        SolveOpts {
+            time_limit,
+            threads: 1,
+            rel_gap: 0.0,
+            abs_gap: 1e-6,
+            feas_tol: None,
+            max_sols: None,
+            start: None,
+        }
+    }
+}
+
+impl Milp {
+    pub fn new(maximize: bool) -> Self {
+        Milp {
+            obj: vec![],
+            lb: vec![],
+            ub: vec![],
+            integer: vec![],
+            rows: vec![],
+            maximize,
+        }
+    }
+
+    pub fn add_var(&mut self, obj: f64, lb: f64, ub: f64, integer: bool) -> usize {
+        self.obj.push(obj);
+        self.lb.push(lb);
+        self.ub.push(ub);
+        self.integer.push(integer);
+        self.obj.len() - 1
+    }
+
+    pub fn add_row(&mut self, coefs: Vec<(usize, f64)>, lo: f64, hi: f64) {
+        self.rows.push((coefs, lo, hi));
+    }
+
+    pub fn solve(&self, time_limit: f64, threads: i32) -> MilpResult {
+        let mut o = SolveOpts::new(time_limit);
+        o.threads = threads;
+        self.solve_with(&o)
+    }
+
+    pub fn solve_with(&self, o: &SolveOpts) -> MilpResult {
+        let mut pb = RowProblem::new();
+        let cols: Vec<_> = (0..self.obj.len())
+            .map(|j| {
+                pb.add_column_with_integrality(
+                    self.obj[j],
+                    self.lb[j]..=self.ub[j],
+                    self.integer[j],
+                )
+            })
+            .collect();
+        for (coefs, lo, hi) in &self.rows {
+            let f: Vec<_> = coefs.iter().map(|&(j, c)| (cols[j], c)).collect();
+            // HiGHS reads infinite bounds as free.
+            pb.add_row(*lo..=*hi, f);
+        }
+        let sense = if self.maximize {
+            Sense::Maximise
+        } else {
+            Sense::Minimise
+        };
+        let mut model = pb.optimise(sense);
+        model.make_quiet();
+        model.set_option("time_limit", o.time_limit.max(0.01));
+        model.set_option("threads", o.threads);
+        model.set_option("mip_rel_gap", o.rel_gap);
+        model.set_option("mip_abs_gap", o.abs_gap);
+        if let Some(t) = o.feas_tol {
+            model.set_option("primal_feasibility_tolerance", t);
+            model.set_option("mip_feasibility_tolerance", t);
+        }
+        if let Some(n) = o.max_sols {
+            model.set_option("mip_max_improving_sols", n);
+        }
+        if let Some(start) = &o.start {
+            if start.len() == self.obj.len() {
+                // HiGHS ignores a start it cannot use, so an error is harmless.
+                let _ = model.try_set_solution(Some(start), None, None, None);
+            }
+        }
+        // An error (an inconsistent model, say) is reported, not a panic:
+        // the verifier runs this on whatever the instance files contain.
+        let Ok(solved) = model.try_solve() else {
+            return MilpResult {
+                status: MilpStatus::Unknown,
+                obj: f64::NAN,
+                bound: f64::NAN,
+                x: vec![],
+                row_duals: vec![],
+                col_duals: vec![],
+            };
+        };
+        let status = solved.status();
+        let mut bound = f64::NAN;
+        let key = CString::new("mip_dual_bound").unwrap();
+        unsafe {
+            highs_sys::Highs_getDoubleInfoValue(solved.as_ptr(), key.as_ptr(), &mut bound);
+        }
+        let sol = solved.get_solution();
+        let x = sol.columns().to_vec();
+        let lp = !self.integer.iter().any(|&i| i);
+        let (row_duals, col_duals) = if lp && status == HighsModelStatus::Optimal {
+            (sol.dual_rows().to_vec(), sol.dual_columns().to_vec())
+        } else {
+            (vec![], vec![])
+        };
+        let has_x = x.len() == self.obj.len() && x.iter().all(|v| v.is_finite());
+        let obj = if has_x {
+            self.obj.iter().zip(&x).map(|(c, v)| c * v).sum()
+        } else {
+            f64::NAN
+        };
+        let status = match status {
+            HighsModelStatus::Optimal => MilpStatus::Optimal,
+            HighsModelStatus::Infeasible => MilpStatus::Infeasible,
+            HighsModelStatus::Unbounded => MilpStatus::Unbounded,
+            HighsModelStatus::UnboundedOrInfeasible => MilpStatus::InfeasibleOrUnbounded,
+            _ if has_x && self.feasible(&x) => MilpStatus::Feasible,
+            _ => MilpStatus::Unknown,
+        };
+        if status == MilpStatus::Optimal && (lp || !bound.is_finite()) {
+            bound = obj;
+        }
+        MilpResult {
+            status,
+            obj,
+            bound,
+            x,
+            row_duals,
+            col_duals,
+        }
+    }
+
+    pub fn feasible(&self, x: &[f64]) -> bool {
+        let tol = 1e-6;
+        (0..x.len()).all(|j| x[j] >= self.lb[j] - tol && x[j] <= self.ub[j] + tol)
+            && self.rows.iter().all(|(c, lo, hi)| {
+                let a: f64 = c.iter().map(|&(j, v)| v * x[j]).sum();
+                a >= lo - tol * (1.0 + lo.abs()) && a <= hi + tol * (1.0 + hi.abs())
+            })
+    }
+}

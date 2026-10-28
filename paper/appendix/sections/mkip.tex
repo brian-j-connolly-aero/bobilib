@@ -1,0 +1,302 @@
+% Multidimensional knapsack interdiction: the dualised follower LP, the
+% integrality-gap bracket, the merged-row online bound, certified points.
+\section{Multidimensional knapsack interdiction proofs}\label{app:mkip}
+
+We use the packing interdiction notation of Section~\ref{app:notation}: leader
+rows $Gx\le g$, follower rows $Wy\le c$ with $m$ rows, $p,G,g,W,c\ge 0$ integral,
+and $\Phi(x)$ the follower's optimum. Let
+\[
+  U(x)=\max\bigl\{p^{\top}y : Wy\le c,\ 0\le y\le\mathbf{1}-x\bigr\}
+\]
+be the value of the follower's linear programming (LP) relaxation, and
+$p_{\max}=\max_jp_j$.
+
+\subsection{The dualised follower LP}
+
+\begin{lemma}[Dual form of $U$]\label{lem:mkip-dual}
+For $x\in\{0,1\}^n$,
+\[
+  U(x)=\min_{\lambda\in\mathbf{R}^m_{\ge 0}}D(x,\lambda),\qquad
+  D(x,\lambda)=c^{\top}\lambda+\sum_{j=1}^n\max\bigl(0,\,p_j-(W^{\top}\lambda)_j\bigr)(1-x_j),
+\]
+and the minimum is attained by some $\lambda$ with $0\le\lambda_k\le p_{\max}/w^{\min}_k$
+for every row $k$, where $w^{\min}_k$ is the smallest positive entry of row $k$
+of $W$ ($w^{\min}_k=1$ if the row is zero).
+\end{lemma}
+\begin{proof}
+The LP is feasible ($y=0$, since $c\ge 0$) and bounded ($0\le y\le\mathbf{1}$), so by
+LP duality $U(x)=\min\{c^{\top}\lambda+\sum_j(1-x_j)\nu_j : W^{\top}\lambda+\nu\ge p,\ \lambda,\nu\ge 0\}$,
+and the minimum is attained. For fixed $\lambda$ the best feasible $\nu_j$ with
+$x_j=0$ is $\max(0,p_j-(W^{\top}\lambda)_j)$; for $x_j=1$ the term has coefficient
+$0$. This gives $U(x)=\min_\lambda D(x,\lambda)$. For the box: if
+$\lambda_k>p_{\max}/w^{\min}_k$, lower $\lambda_k$ to $p_{\max}/w^{\min}_k$. Every
+item $j$ with $W_{kj}>0$ still has $(W^{\top}\lambda)_j\ge\lambda_kW_{kj}\ge p_{\max}\ge p_j$,
+so its term stays $0$; items with $W_{kj}=0$ are unaffected; and $c_k\lambda_k$
+does not increase because $c_k\ge 0$. So $D$ does not increase.
+\end{proof}
+\noindent Not formalised.
+
+\begin{proposition}[Exact linearisation]\label{prop:mkip-milp}
+Let $U^{*}=\min\{U(x): Gx\le g,\ x\in\{0,1\}^n\}$. Then $U^{*}$ is the optimal
+value of the MILP
+\begin{align*}
+  \min\quad & c^{\top}\lambda+\sum_{j:\,p_j>0}v_j\\
+  \text{s.t.}\quad & v_j\ge p_j-(W^{\top}\lambda)_j-p_jx_j,\quad v_j\ge 0\quad (p_j>0),\\
+  & 0\le\lambda_k\le p_{\max}/w^{\min}_k\quad (k=1,\dots,m),\qquad Gx\le g,\quad x\in\{0,1\}^n.
+\end{align*}
+\end{proposition}
+\begin{proof}
+For $x_j\in\{0,1\}$ and $(W^{\top}\lambda)_j\ge 0$,
+\[
+  \max\bigl(0,p_j-(W^{\top}\lambda)_j\bigr)(1-x_j)=\max\bigl(0,\,p_j-(W^{\top}\lambda)_j-p_jx_j\bigr):
+\]
+both sides equal $\max(0,p_j-(W^{\top}\lambda)_j)$ when $x_j=0$, and both are $0$
+when $x_j=1$.
+For fixed $(x,\lambda)$ the smallest feasible $v_j$ is this maximum, and items
+with $p_j=0$ contribute $0$. So the MILP's value is the minimum of
+$D(x,\lambda)$ over leader-feasible $x$ and $\lambda$ in the box, which is
+$\min_xU(x)=U^{*}$ by Lemma~\ref{lem:mkip-dual}.
+\end{proof}
+\noindent Not formalised.
+
+\subsection{The integrality-gap bracket}
+
+\begin{lemma}[Integrality gap of a packing problem with $m$ rows]\label{lem:mkip-gap}
+For every $x\in\{0,1\}^n$, with $p_{\max}(x)=\max\{p_j: x_j=0\}$ ($0$ if there is
+no such $j$),
+\[
+  U(x)-m\,p_{\max}(x)\ \le\ \Phi(x)\ \le\ U(x).
+\]
+\end{lemma}
+\begin{proof}
+$\Phi(x)\le U(x)$ because the LP is a relaxation. The LP's feasible region
+$P=\{y: Wy\le c,\ 0\le y_j\le 1-x_j\}$ is a nonempty polytope, so the LP has
+an optimal vertex $y^{*}$. A vertex of $P\subseteq\mathbf{R}^n$ satisfies $n$
+linearly independent constraints of $P$ with equality. Let
+$F=\{j: 0<y^{*}_j<1\}$; these coordinates have $x_j=0$ and neither bound
+tight. The bound constraints of coordinate $j$ are $y_j\ge 0$ and
+$y_j\le 1-x_j$, with normals $\pm e_j$, so a linearly independent family of
+tight constraints contains at most one bound constraint per coordinate
+outside $F$ and none for coordinates in $F$. Hence at least $|F|$ of the $n$
+independent tight constraints are rows of $W$, and $|F|\le m$. Let
+$\tilde y_j=1$ if $y^{*}_j=1$ and $\tilde y_j=0$ otherwise. Then
+$\tilde y\le y^{*}$, so $W\tilde y\le Wy^{*}\le c$ (as $W\ge 0$) and
+$\tilde y\le\mathbf{1}-x$; $\tilde y$ is a binary follower response, and
+$\Phi(x)\ge p^{\top}\tilde y=U(x)-\sum_{j\in F}p_jy^{*}_j\ge U(x)-m\,p_{\max}(x)$.
+\end{proof}
+\noindent Not formalised.
+
+\begin{theorem}[Bracket]\label{thm:mkip-bracket}
+Let $L\le U^{*}$ be any lower bound on $U^{*}$ (for example a MILP solver's
+proven dual bound for the MILP of Proposition~\ref{prop:mkip-milp}) and let
+$\hat x$ be any leader-feasible choice. Then
+\[
+  \lceil L-m\,p_{\max}\rceil\ \le\ \mathrm{OPT}\ \le\ \Phi(\hat x)\ \le\ U(\hat x).
+\]
+\end{theorem}
+\begin{proof}
+For every leader-feasible $x$, Lemma~\ref{lem:mkip-gap} gives
+$\Phi(x)\ge U(x)-m\,p_{\max}(x)\ge U^{*}-m\,p_{\max}\ge L-m\,p_{\max}$, so
+$\mathrm{OPT}\ge L-m\,p_{\max}$, and $\mathrm{OPT}$ is an integer because $p$ is.
+The upper bounds hold because the leader may play $\hat x$ and the game is
+zero-sum.
+\end{proof}
+\noindent Not formalised.
+
+For the OR instances with one follower knapsack (variant $-100$, $m=1$) the
+lower bound is $\lceil L-p_{\max}-10^{-6}\max(1,|L|)\rceil$, where $L$ is HiGHS's
+proven dual bound for the MILP of Proposition~\ref{prop:mkip-milp}. The code
+(\texttt{mkip::bracket\_lower\_bound}) uses $L$ only when it is finite; otherwise
+there is no bracket bound (the solver's incumbent value is an upper bound on
+$U^{*}$, not a lower one). The margin $10^{-6}\max(1,|L|)$ keeps the
+floating-point error of $L$ from rounding the bound up past an integer: a dual
+bound such as $13{,}322.000000000024$ gives $13{,}322-p_{\max}$, not one more.
+A unit test checks the bound by brute force on random instances. The bracket's
+lower bound is solver-certified (class~(ii), Section~\ref{app:classes}): it rests
+on HiGHS's dual bound within that margin. It is the reported lower bound for
+\SuppOrLbMilp{} of the \NumOrOneKnapsack{} instances, all re-run with this code and
+a 120~s limit: every run had a finite dual bound, and \SuppOrBracketOptimal{} of
+the MILPs were solved to optimality. For the other \SuppOrLbOmega{} the merged-row
+online bound below is at least as strong. With several follower rows the width
+$m\,p_{\max}$ makes the lower bound weak, and only the upper bounds are used.
+
+\subsection{The merged-row online bound}
+
+Theorem~\ref{thm:online} needs one leader row and one follower row. For one
+follower row ($m=1$, weights $w_j=W_{1j}$, capacity $c=c_1$) and several leader
+rows, \texttt{mkip::omega\_root} merges the leader rows into one surrogate row
+and rescales both rows to small integers. Its inputs are multipliers
+$\mu\in\mathbf{R}^{m_u}_{\ge 0}$ and scales $s_u,s_l>0$, all double-precision
+numbers. For these numbers let
+\[
+  a_j=s_u\sum_{i=1}^{m_u}\mu_iG_{ij}\quad(j\in N),\qquad b=s_u\sum_{i=1}^{m_u}\mu_ig_i
+\]
+be the exact real values. The code computes them in IEEE double precision
+(rounding to nearest): it forms the products $\mu_iG_{ij}$, adds them in the
+order of the rows and multiplies the sum by $s_u$; we write $\hat a_j$ and
+$\hat b$ for the computed values, and $\widehat{s_lw_j}$, $\widehat{s_lc}$ for
+the computed products of the follower data with $s_l$. It then sets
+\[
+  \gamma'_j=\lfloor\hat a_j\rfloor,\qquad
+  \beta'=\lceil\hat b\,\rceil,\qquad
+  w'_j=\lceil\widehat{s_lw_j}\rceil,\qquad
+  c'=\lfloor\widehat{s_lc}\rfloor,
+\]
+which are nonnegative integers for every $\mu\ge 0$ and $s_u,s_l>0$, since
+all the data are nonnegative: leader costs and follower capacity are rounded
+down, the leader budget and follower weights up. Finally it evaluates the
+online game of Theorem~\ref{thm:online} with profits $p$, leader costs
+$\gamma'$, budget $\beta'$, follower weights $w'$ and capacity $c'$ on the
+list $o$ of the items with $p_j>0$ in decreasing order of $p_j/w_j$ (ties:
+larger profit first), by the backward recursion of Section~\ref{app:kip} over
+a table of $(\beta'+1)(c'+1)$ entries per item in 64-bit integer arithmetic.
+Let $\Omega'=\Omega(o,\beta',c')$ be its value. Below,
+$u=2^{-53}$ is the unit roundoff of double precision and
+$\varepsilon_k=(1+u)^k-1$ (so $\varepsilon_k\le ku/(1-ku)$).
+
+\begin{theorem}[Merged-row online bound]\label{thm:mkip-omega}
+Let $p$, $G$, $g$, $w$ and $c$ be nonnegative integers, and $\mu\ge 0$,
+$s_u,s_l>0$.
+\begin{enumerate}
+\item[(a)] If the four rounded quantities are computed exactly
+($\hat a_j=a_j$, $\hat b=b$, $\widehat{s_lw_j}=s_lw_j$, $\widehat{s_lc}=s_lc$), then
+$\Omega'\le\mathrm{OPT}$.
+\item[(b)] If every entry of $G$, $g$, $w$ and $c$ is below $2^{53}$ (so it
+is a double), no product underflows, and
+\[
+  2\,\varepsilon_{m_u+1}\,b<1\qquad\text{and}\qquad 2uc<1-u,
+\]
+then $\Omega'\le\mathrm{OPT}$ for the data computed in double precision.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\emph{Two properties suffice.} Suppose the integer data satisfy
+\begin{enumerate}
+\item[(L)] $\gamma'(X)\le\beta'$ for every leader-feasible $X$ (that is,
+$G\mathbf{1}_X\le g$), and
+\item[(F)] $w(Y)\le c$ for every $Y\subseteq N$ with $w'(Y)\le c'$.
+\end{enumerate}
+By~(F) every packing for $(w',c')$ is a packing for $(w,c)$, so the best
+packings satisfy $K'(T)\le K(T)$ for every $T\subseteq N$. Let $X$ be
+leader-feasible. By~(L), $X$ fits the merged budget, so
+Theorem~\ref{thm:online} for the data $(p,\gamma',\beta',w',c')$ gives
+$\Omega'\le K'(o\setminus X)\le K(o\setminus X)\le K(N\setminus X)=\Phi(X)$.
+Minimising over $X$ gives $\Omega'\le\mathrm{OPT}$. Both properties use
+\begin{equation}\label{eq:merged-relax}
+  a(X)=s_u\sum_i\mu_i(G\mathbf{1}_X)_i\le s_u\sum_i\mu_ig_i=b\qquad\text{for leader-feasible }X,
+\end{equation}
+which holds because $\mu\ge 0$ and $s_u>0$, and the fact that $w(Y)$ and $c$
+are integers.
+
+\emph{(a)} By~\eqref{eq:merged-relax},
+$\gamma'(X)=\sum_{j\in X}\lfloor a_j\rfloor\le a(X)\le b\le\lceil b\rceil=\beta'$,
+which is~(L). If $w'(Y)\le c'$, then
+$s_lw(Y)\le\sum_{j\in Y}\lceil s_lw_j\rceil=w'(Y)\le c'=\lfloor s_lc\rfloor\le s_lc$,
+so $w(Y)\le c$, which is~(F).
+
+\emph{(b)} Each operation on doubles returns the exact result times a factor
+in $[1-u,1+u]$, and every quantity involved is nonnegative. A term
+$\mu_iG_{ij}$ of $a_j$ passes through at most $m_u+1$ roundings (its product,
+at most $m_u-1$ additions, the final product with $s_u$; adding the first
+term to zero is exact), so
+$(1-\varepsilon_{m_u+1})a_j\le\hat a_j\le(1+\varepsilon_{m_u+1})a_j$, using
+$1-(1-u)^k\le ku\le\varepsilon_k$; the same holds for $\hat b$ and $b$. The
+follower's products have one rounding each:
+$\widehat{s_lw_j}\ge(1-u)s_lw_j$ and $\widehat{s_lc}\le(1+u)s_lc$.
+For~(L), let $X$ be leader-feasible. By~\eqref{eq:merged-relax},
+$\gamma'(X)\le\sum_{j\in X}\hat a_j\le(1+\varepsilon_{m_u+1})\,a(X)\le(1+\varepsilon_{m_u+1})\,b$,
+and $\beta'\ge\hat b\ge(1-\varepsilon_{m_u+1})\,b$. If $\gamma'(X)\ge\beta'+1$,
+these inequalities give $2\varepsilon_{m_u+1}b\ge 1$, contrary to the
+hypothesis; as both sides are integers, $\gamma'(X)\le\beta'$. For~(F), if
+$w'(Y)\le c'$ then
+$(1-u)\,s_lw(Y)\le\sum_{j\in Y}\widehat{s_lw_j}\le w'(Y)\le c'\le\widehat{s_lc}\le(1+u)\,s_lc$,
+so $w(Y)\le c+2uc/(1-u)<c+1$, and $w(Y)\le c$ because both are integers.
+\end{proof}
+\noindent The online bound itself is formalised (Theorem~\ref{thm:online});
+properties~(L) and~(F), the rounding analysis and the code are not.
+
+The proof needs only the directions of the roundings, not the size of the
+scales: lowering leader costs and raising the leader's budget enlarge the
+leader's options in the relaxed game, raising follower weights and lowering
+its capacity shrink the follower's options, and both moves can only lower the
+value of the game. In exact arithmetic $\beta'=\lfloor b\rfloor$ would also
+give~(L), because $\gamma'(X)$ is an integer; rounding the budget up leaves
+the margin that part~(b) uses when $b$ is computed as a number just below an
+integer.
+
+What the code chooses affects only the strength of the bound.
+\texttt{bobi bounds} starts from $\mu_i=1/g_i$ and improves $\mu$ by
+coordinate ascent (\texttt{mkip::tune\_mu}: each $\mu_i$ in turn is
+multiplied by $0$, $0.5$, $0.8$, $1.25$ or $2$ while the bound on a coarse
+table improves; at most two sweeps). With its default of $4\cdot 10^6$ table
+entries per item, \texttt{mkip::omega\_scales} gives $s_u=1000/\hat\sigma$,
+where $\hat\sigma$ is the computed value of $\sum_i\mu_ig_i$, and $s_l=4000/c$;
+so $b$ differs from $1000$ by less than $10^{-11}$, $\beta'\in\{1000,1001\}$
+and $c'\in\{3999,4000\}$. In the \NumOrOneKnapsack{} OR instances with one
+follower knapsack all data are integers (read from the instance files: the
+largest coefficient is $1{,}366$ and the largest right-hand side $200{,}032$),
+$m_u\le 29$ and no nonzero product comes near the underflow range, so
+$2\varepsilon_{m_u+1}b<10^{-11}$ and $2uc<10^{-10}$: the hypotheses of
+part~(b) hold with a wide margin, and every merged-row bound reported for
+them is a valid lower bound in exact arithmetic: a mathematical proof plus an
+integer computation, so an exact certificate (class~(i),
+Section~\ref{app:classes}). It gives \SuppOrBetterLbOmega{} of the
+\NumOrBetterLb{} lower bounds that improve on the published ones; the other
+\SuppOrBetterLbMilp{} come from the LP bracket.
+
+\subsection{Certified points}
+
+\begin{proposition}[Certified point]\label{prop:mkip-point}
+Let $\hat x$ satisfy $G\hat x\le g$, and let $\hat y$ be a follower response at
+$\hat x$ proven optimal (by the exact knapsack oracle when $m=1$, or by a MILP
+solver whose dual bound meets $p^{\top}\hat y$). Then $(\hat x,\hat y)$ is bilevel
+feasible with value $\Phi(\hat x)$, so $\mathrm{OPT}\le\Phi(\hat x)$. Without an
+exact follower solve, $\mathrm{OPT}\le\lfloor U(\hat x)\rfloor$ still holds.
+\end{proposition}
+\begin{proof}
+$\hat y\in S(\hat x)$ by definition; the game is zero-sum, so every element of
+$S(\hat x)$ gives the leader the value $\Phi(\hat x)$. The last claim is
+Lemma~\ref{lem:mkip-gap} and integrality of $\Phi$.
+\end{proof}
+\noindent Not formalised.
+
+For several follower knapsacks the leader choice $\hat x$ is the minimiser
+found for the MILP of Proposition~\ref{prop:mkip-milp}; when HiGHS proves the
+follower's optimum at $\hat x$, the point is certified. For one follower
+knapsack, a first-improvement local search on the leader's choice (add an
+item the follower uses, or swap a blocked item for one it uses, keeping
+every budget row) evaluates each candidate with the exact knapsack oracle, so
+every incumbent it reports is a certified point. Every point reported is
+checked again from its file by \texttt{bobi verify}
+(Section~\ref{app:verification}). The data are integers and the points are
+0/1 vectors, so the leader's rows hold exactly. With one follower knapsack the
+follower's optimum comes from the exact knapsack oracle, which works in
+integer arithmetic, and the \NumOrOneKnapsackPoints{} points are exact
+certificates (class~(i), Section~\ref{app:classes}); with several, it rests on
+HiGHS's dual bound, and the \NumOrSeveralPoints{} points are solver-certified
+(class~(ii)). The follower LP bound $U(\hat x)$, an upper bound in the gaps of
+Table~\ref{tab:or}, is a floating-point LP value (class~(ii)).
+
+\subsection{Published bounds of the OR set}\label{app:mkip-or}
+
+The paper compares this work's bounds with the published ones. The published
+lower bounds of the OR instances are Lozano, Bergman and
+Cire's;\cite{lozano2026network} the best published point of an instance is the
+best of theirs (with a solution file in their repository\cite{lozano_dbo_repo}),
+Lefebvre and Schmidt's\cite{lefebvre2025dantzig} and BOBILib's. Lefebvre and
+Schmidt's values count only from runs that ended before the time limit, the
+rule of their own analysis (Section~\ref{app:ls}); for \NumOrLsTimeLimitBest{}
+OR instances a value from a run stopped at the limit would otherwise be the best
+published point, and for \NumOrLsTimeLimitBelowLb{} of them it lies below Lozano,
+Bergman and Cire's lower bound (Table~\ref{tab:or-conflicts}). The published
+points are not verified here.
+
+For one instance a published lower bound exceeds the best published point.
+\texttt{\OrClosureName} is closed in the published data. Lozano et
+al.\ publish a point of value \OrClosureValue{} and a lower bound of
+\OrClosureLitLb{} from runs they flag as numerically inconsistent; their
+repository also records a branch-and-cut bound of \OrClosureValue{}, which with
+the point proves the value optimal. The instance is therefore counted among the
+published optima. This work's verified solution file at \OrClosureValue{}
+(checked also with SCIP) confirms that the bound \OrClosureLitLb{} is wrong.
+
